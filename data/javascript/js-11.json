@@ -1,0 +1,79 @@
+{
+  "id": "js-11",
+  "title": "النصوص Strings",
+  "intro": "التعامل مع النصوص يومي في أي برنامج: قص، بحث، استبدال، تنظيف. تتعلم هنا خصائص النص ودواله الأهم، والقوالب النصية Template Literals التي غيرت طريقة بناء النصوص.",
+  "sections": [
+    {
+      "title": "أساسيات النص والوصول للحروف",
+      "text": [
+        "النص String سلسلة حروف بين علامتي تنصيص مزدوجتين أو مفردتين. خاصية length عدد حروفه، والوصول لحرف بفهرسه (من الصفر) بالأقواس المربعة، أو بدالة at التي تقبل فهرسًا سالبًا للعد من النهاية.",
+        "النصوص غير قابلة للتغيير (Immutable): دوال النصوص كلها تعيد نصًا جديدًا ولا تعدل الأصل — احفظ الناتج في متغير."
+      ],
+      "examples": [
+        {
+          "title": "طول وحروف",
+          "lang": "js",
+          "source": "const msg = \"JavaScript\";\nconsole.log(msg.length);   // 10\nconsole.log(msg[0]);       // J\nconsole.log(msg.at(-1));   // t آخر حرف",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "دوال التحويل والتنظيف",
+      "text": [
+        "toUpperCase و toLowerCase لتحويل حالة الأحرف اللاتينية، وtrim تحذف المسافات من الطرفين (لا من الوسط) — لا غنى عنها لتنظيف مدخلات المستخدم قبل التحقق، وrepeat تكرر النص، وpadStart/padEnd تحشوان النص لطول محدد (مفيدة لأصفار الساعات 09:05)."
+      ],
+      "examples": [
+        {
+          "title": "تنظيف مدخل مستخدم",
+          "lang": "js",
+          "source": "const input = \"   Ahmad@Mail.COM  \";\nconst clean = input.trim().toLowerCase();\nconsole.log(clean);              // ahmad@mail.com\nconsole.log(String(7).padStart(2, \"0\")); // \"07\"",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "البحث والاستخراج والاستبدال",
+      "text": [
+        "البحث: includes هل يحتوي؟ وstartsWith/endsWith هل يبدأ/ينتهي بـ؟ وindexOf فهرس أول ظهور أو -1.",
+        "الاستخراج: slice(بداية, نهاية) تقتطع جزءًا (وتقبل فهارس سالبة). والاستبدال: replace تستبدل أول ظهور فقط، وreplaceAll كل الظهورات. والتقسيم: split تحول النص مصفوفة بفاصل تحدده — عكسها join."
+      ],
+      "examples": [
+        {
+          "title": "بحث واستبدال وتقسيم",
+          "lang": "js",
+          "source": "const text = \"تعلم HTML ثم تعلم CSS\";\n\nconsole.log(text.includes(\"CSS\"));       // true\nconsole.log(text.replace(\"تعلم\", \"أتقن\"));    // أول واحدة فقط\nconsole.log(text.replaceAll(\"تعلم\", \"أتقن\")); // كلها\n\nconst words = text.split(\" \");\nconsole.log(words, \"عدد الكلمات:\", words.length);",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "توقع أن replace تستبدل كل الظهورات — الأولى فقط؛ استخدم replaceAll."
+      ]
+    },
+    {
+      "title": "القوالب النصية Template Literals",
+      "text": [
+        "بين علامتي backtick ` ` تكتب نصوصًا تدمج المتغيرات مباشرة بصيغة ${التعبير} بلا تكسير علامات التنصيص وعلامات الجمع، وتقبل أسطرًا متعددة حقيقية. هذه هي الطريقة الحديثة المفضلة لبناء أي نص مركب."
+      ],
+      "examples": [
+        {
+          "title": "دمج أنيق",
+          "lang": "js",
+          "source": "const name = \"سارة\";\nconst score = 95;\n\n// الطريقة القديمة المتعبة:\nconsole.log(\"الطالبة \" + name + \" حصلت على \" + score);\n\n// القالب النصي الحديث:\nconsole.log(`الطالبة ${name} حصلت على ${score}`);\nconsole.log(`الناتج المحسوب: ${score * 2}`);",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "علامة backtick ` ليست علامة التنصيص المفردة ' — تجدها في لوحة المفاتيح فوق زر Tab غالبًا."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-11-q1", "type": "mcq", "diff": "easy", "q": "خاصية معرفة عدد حروف النص:", "options": ["size", "count", "length", "chars"], "a": 2, "exp": "text.length مثل المصفوفات." },
+    { "id": "js-11-q2", "type": "mcq", "diff": "easy", "q": "أي دالة تحذف المسافات الزائدة من طرفي النص؟", "options": ["clean", "trim", "strip", "cut"], "a": 1, "exp": "trim ضرورية لتنظيف مدخلات المستخدم." },
+    { "id": "js-11-q3", "type": "mcq", "diff": "medium", "q": "الفرق بين replace و replaceAll:", "options": ["لا فرق", "replace أول ظهور فقط وreplaceAll كل الظهورات", "replaceAll أول ظهور", "replace للأرقام"], "a": 1, "exp": "خطأ شائع توقع أن replace تستبدل الكل." },
+    { "id": "js-11-q4", "type": "fill", "diff": "medium", "q": "داخل القوالب النصية بين علامتي backtick ندمج المتغير بالصيغة $__{...}__ أي علامة ____ ثم قوسين معقوصين.", "a": ["$", "دولار"], "exp": "`مرحبا ${name}` — علامة الدولار مع قوسين معقوصين." },
+    { "id": "js-11-q5", "type": "mcq", "diff": "medium", "q": "\"a,b,c\".split(\",\") تعيد:", "options": ["\"abc\"", "[\"a\", \"b\", \"c\"]", "3", "خطأ"], "a": 1, "exp": "split تقسم النص إلى مصفوفة بالفاصل المحدد." },
+    { "id": "js-11-q6", "type": "tf", "diff": "hard", "q": "دوال النصوص مثل toUpperCase تعدل النص الأصلي مباشرة.", "a": false, "exp": "النصوص Immutable — الدوال تعيد نصًا جديدًا ويجب حفظ الناتج." }
+  ]
+}

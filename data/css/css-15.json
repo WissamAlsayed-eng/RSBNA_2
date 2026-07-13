@@ -1,0 +1,73 @@
+{
+  "id": "css-15",
+  "title": "الانتقالات Transitions والتأثيرات",
+  "intro": "الدرس الأخير في CSS: كيف تجعل التغييرات ناعمة بدل القفز المفاجئ. خاصية transition تحرك القيم تدريجيًا، وtransform تحرك وتدور وتكبر العناصر — ومعًا يصنعان كل التأثيرات الأنيقة التي تراها في المواقع الحديثة.",
+  "sections": [
+    {
+      "title": "الانتقال transition",
+      "text": [
+        "بدون transition يقفز التغيير فورًا (لون الزر عند التحويم مثلًا). الخاصية transition تجعل التغيير يحدث تدريجيًا عبر زمن: تكتب على العنصر نفسه (لا على حالة hover) وتحدد: الخاصية المتحركة، والمدة، ومنحنى التسارع، والتأخير الاختياري.",
+        "مثال: transition: background-color 0.3s ease; — أو حرك كل الخصائص القابلة للتحريك معًا: transition: all 0.3s ease;"
+      ],
+      "examples": [
+        {
+          "title": "زر يتغير بنعومة",
+          "lang": "css",
+          "source": ".btn {\n  background: #6366f1;\n  color: white;\n  padding: 10px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  transition: all 0.3s ease;\n}\n.btn:hover {\n  background: #4338ca;\n  box-shadow: 0 6px 16px rgba(0,0,0,0.3);\n}",
+          "preview": true,
+          "previewHtml": "<button class=\"btn\">مرر الفأرة فوقي بهدوء</button>"
+        }
+      ],
+      "notes": [
+        "منحنيات التسارع: ease بداية ونهاية ناعمتان (الافتراضي)، وlinear سرعة ثابتة، وease-in بداية بطيئة، وease-out نهاية بطيئة.",
+        "المدة المريحة للتأثيرات الصغيرة بين 0.2s و0.4s — أطول من ذلك يشعر المستخدم بالبطء."
+      ],
+      "mistakes": [
+        "كتابة transition داخل :hover — يعمل عند الدخول فقط ويقفز عند الخروج؛ ضعها على العنصر الأصلي."
+      ]
+    },
+    {
+      "title": "التحويل transform: تحريك وتدوير وتكبير",
+      "text": [
+        "الخاصية transform تحول شكل العنصر دون التأثير على مواضع جيرانه: translate(x, y) إزاحة، وscale(n) تكبير أو تصغير، وrotate(deg) دوران بالدرجات، وskew إمالة. ويمكن دمج عدة تحويلات في قيمة واحدة بمسافات.",
+        "ميزة كبرى: تحريك transform (وopacity) أخف على المعالج من تحريك width أو margin — لذا هما أساس التأثيرات السلسة."
+      ],
+      "examples": [
+        {
+          "title": "بطاقة ترتفع وتكبر عند التحويم",
+          "lang": "css",
+          "source": ".card {\n  width: 160px;\n  background: white;\n  border: 1px solid #e2e8f0;\n  border-radius: 10px;\n  padding: 14px;\n  transition: transform 0.3s ease, box-shadow 0.3s ease;\n}\n.card:hover {\n  transform: translateY(-8px) scale(1.03);\n  box-shadow: 0 12px 24px rgba(0,0,0,0.18);\n}",
+          "preview": true,
+          "previewHtml": "<br><div class=\"card\">✨ بطاقة تفاعلية<br><small>مرر الفأرة فوقي</small></div>",
+          "previewCss": "body{background:#f8fafc;padding:10px}"
+        }
+      ]
+    },
+    {
+      "title": "تأثيرات جاهزة شائعة",
+      "text": [
+        "وصفات تحفظها وتعيد استخدامها: تكبير الصور داخل إطار مقصوص (الأب overflow: hidden والصورة تكبر بالتحويم)، ودوران أيقونة، وتأثير الضغط على الزر بتصغيره لحظة النقر عبر :active."
+      ],
+      "examples": [
+        {
+          "title": "ثلاثة تأثيرات دفعة واحدة",
+          "lang": "css",
+          "source": ".frame { width: 140px; height: 90px; overflow: hidden; border-radius: 10px; display:inline-block; }\n.frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }\n.frame:hover img { transform: scale(1.15); }\n\n.spin { display: inline-block; font-size: 1.6rem; transition: transform 0.4s ease; }\n.spin:hover { transform: rotate(180deg); }\n\n.press { padding: 8px 20px; cursor: pointer; transition: transform 0.1s; }\n.press:active { transform: scale(0.94); }",
+          "preview": true,
+          "previewHtml": "<div class=\"frame\"><img src=\"https://picsum.photos/id/1018/140/90\" alt=\"\"></div>\n<span class=\"spin\">⚙️</span>\n<button class=\"press\">اضغطني</button>"
+        }
+      ],
+      "notes": [
+        "object-fit: cover على الصور تجعلها تملأ إطارها دون تشوه — رفيقة دائمة لهذه التأثيرات."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-15-q1", "type": "mcq", "diff": "easy", "q": "أي خاصية تجعل تغير لون الزر عند التحويم تدريجيًا ناعمًا؟", "options": ["animation-delay", "transition", "transform", "opacity"], "a": 1, "exp": "transition تحرك تغير القيم عبر مدة زمنية." },
+    { "id": "css-15-q2", "type": "mcq", "diff": "medium", "q": "أين توضع خاصية transition لتعمل عند الدخول والخروج معًا؟", "options": ["داخل :hover", "على العنصر الأصلي خارج :hover", "في وسم html", "لا يهم مكانها"], "a": 1, "exp": "على العنصر الأصلي كي تسري في الاتجاهين." },
+    { "id": "css-15-q3", "type": "fill", "diff": "medium", "q": "الدالة ____(-8px) داخل transform ترفع العنصر 8 بكسل للأعلى عموديًا.", "a": ["translateY", "translatey"], "exp": "translateY للإزاحة العمودية وtranslateX للأفقية." },
+    { "id": "css-15-q4", "type": "mcq", "diff": "medium", "q": "لتدوير أيقونة نصف دورة نستخدم transform بقيمة:", "options": ["spin(0.5)", "rotate(180deg)", "turn(half)", "flip(180)"], "a": 1, "exp": "rotate بالدرجات: 180deg نصف دورة كاملة." },
+    { "id": "css-15-q5", "type": "tf", "diff": "hard", "q": "تحريك transform و opacity أخف على أداء المتصفح من تحريك width و margin.", "a": true, "exp": "لأنهما لا يعيدان حساب التخطيط بل يرسمان على طبقة مستقلة." },
+    { "id": "css-15-q6", "type": "mcq", "diff": "medium", "q": "في transition: background 0.3s ease — ماذا يعني ease؟", "options": ["اسم اللون النهائي", "منحنى تسارع بداية ونهاية ناعمتين", "تأخير البدء", "عدد التكرارات"], "a": 1, "exp": "ease منحنى التوقيت الافتراضي: يبدأ وينتهي بهدوء." }
+  ]
+}

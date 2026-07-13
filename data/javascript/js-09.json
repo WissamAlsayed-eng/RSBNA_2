@@ -1,0 +1,82 @@
+{
+  "id": "js-09",
+  "title": "دوال المصفوفات الحديثة",
+  "intro": "قوة JavaScript الحديثة في دوال المصفوفات عالية المستوى: مرر دالة فتتكفل هي بالحلقة. تتعلم هنا forEach للتنفيذ، وmap للتحويل، وfilter للتصفية، وfind للعثور، وsome و every للفحص، وreduce للاختزال.",
+  "sections": [
+    {
+      "title": "المرور والتنفيذ: forEach",
+      "text": [
+        "الدالة forEach تستدعي دالتك مرة لكل عنصر — بديل أنظف عن حلقة for حين تريد تنفيذًا فقط دون ناتج جديد. تستقبل دالتك: العنصر ثم فهرسه (اختياري)."
+      ],
+      "examples": [
+        {
+          "title": "طباعة مرقمة",
+          "lang": "js",
+          "source": "const tasks = [\"مذاكرة\", \"رياضة\", \"قراءة\"];\ntasks.forEach((task, i) => {\n  console.log((i + 1) + \". \" + task);\n});",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "forEach لا تعيد شيئًا ولا يمكن كسرها بـ break — إن احتجت الخروج المبكر فاستخدم حلقة for عادية."
+      ]
+    },
+    {
+      "title": "التحويل: map",
+      "text": [
+        "الدالة map تنشئ مصفوفة جديدة بنفس الطول، كل عنصر فيها ناتج تطبيق دالتك على العنصر المقابل — الأداة الأولى لتحويل البيانات (أسعار بعد الضريبة، أسماء منسقة، عناصر HTML من بيانات)."
+      ],
+      "examples": [
+        {
+          "title": "تحويل قيم",
+          "lang": "js",
+          "source": "const prices = [100, 250, 80];\nconst withTax = prices.map(p => p * 1.05);\nconsole.log(withTax);  // [105, 262.5, 84]\n\nconst names = [\"سالم\", \"ليلى\"];\nconst greetings = names.map(n => \"أهلًا \" + n);\nconsole.log(greetings);",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "التصفية والعثور: filter و find",
+      "text": [
+        "الدالة filter تعيد مصفوفة جديدة بالعناصر التي صحّت عليها دالة الشرط فقط. أما find فتعيد أول عنصر واحد يطابق الشرط (أو undefined) — وشقيقتها findIndex تعيد فهرسه.",
+        "قاعدة: تريد كل المطابقين؟ filter. تريد أول مطابق واحد؟ find."
+      ],
+      "examples": [
+        {
+          "title": "تصفية وعثور",
+          "lang": "js",
+          "source": "const scores = [45, 88, 62, 95, 30];\n\nconst passed = scores.filter(s => s >= 60);\nconsole.log(\"الناجحون:\", passed);   // [88, 62, 95]\n\nconst firstHigh = scores.find(s => s > 90);\nconsole.log(\"أول درجة فوق 90:\", firstHigh); // 95",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "الفحص والاختزال: some و every و reduce",
+      "text": [
+        "الدالة some تعيد true إن طابق عنصر واحد على الأقل الشرط، وevery تشترط مطابقة الجميع. تذكرها: some (بعضهم يكفي) وevery (كلهم بلا استثناء).",
+        "والدالة reduce تختزل المصفوفة إلى قيمة واحدة: تستقبل دالة (المجمّع, العنصر) وقيمة بداية، وتمرر ناتج كل دورة للدورة التالية — أشهر استخدام: جمع الأرقام وحساب المجاميع."
+      ],
+      "examples": [
+        {
+          "title": "فحص واختزال",
+          "lang": "js",
+          "source": "const ages = [17, 22, 30, 15];\n\nconsole.log(ages.some(a => a >= 18));   // true يوجد بالغ\nconsole.log(ages.every(a => a >= 18));  // false ليس الجميع\n\nconst total = ages.reduce((sum, age) => sum + age, 0);\nconsole.log(\"المجموع:\", total);        // 84",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "هذه الدوال كلها لا تعدل المصفوفة الأصلية (ما عدا ما تفعله دالتك أنت) — أسلوب برمجي آمن ونظيف."
+      ],
+      "mistakes": [
+        "نسيان قيمة البداية في reduce — مع مصفوفة فارغة يرمي خطأ، ومع كائنات يخلط الأنواع."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-09-q1", "type": "mcq", "diff": "medium", "q": "أي دالة تنشئ مصفوفة جديدة بتحويل كل عنصر عبر دالتك؟", "options": ["forEach", "map", "find", "some"], "a": 1, "exp": "map = تحويل عنصر بعنصر إلى مصفوفة جديدة بنفس الطول." },
+    { "id": "js-09-q2", "type": "mcq", "diff": "medium", "q": "لاستخراج كل الطلاب الناجحين (درجة ≥ 50) من مصفوفة نستخدم:", "options": ["find", "filter", "reduce", "join"], "a": 1, "exp": "filter تعيد كل العناصر المطابقة للشرط." },
+    { "id": "js-09-q3", "type": "mcq", "diff": "medium", "q": "الفرق بين find و filter:", "options": ["لا فرق", "find تعيد أول مطابق واحد وfilter تعيد كل المطابقين في مصفوفة", "filter أسرع دائمًا", "find للنصوص فقط"], "a": 1, "exp": "find عنصر واحد (أو undefined)؛ filter مصفوفة." },
+    { "id": "js-09-q4", "type": "fill", "diff": "hard", "q": "الدالة ____ تختزل المصفوفة كلها إلى قيمة واحدة مثل حساب المجموع.", "a": ["reduce"], "exp": "reduce((sum, x) => sum + x, 0)." },
+    { "id": "js-09-q5", "type": "mcq", "diff": "medium", "q": "دالة every تعيد true عندما:", "options": ["يطابق عنصر واحد الشرط", "يطابق كل العناصر الشرط", "تكون المصفوفة فارغة فقط", "يطابق نصف العناصر"], "a": 1, "exp": "every كلهم بلا استثناء؛ وsome يكفي واحد." },
+    { "id": "js-09-q6", "type": "tf", "diff": "medium", "q": "الدالة map تعدل عناصر المصفوفة الأصلية مباشرة.", "a": false, "exp": "map تنشئ مصفوفة جديدة وتترك الأصل سليمًا." }
+  ]
+}

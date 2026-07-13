@@ -1,0 +1,66 @@
+{
+  "id": "js-10",
+  "title": "الكائنات Objects",
+  "intro": "الكائن (Object) يجمع بيانات مترابطة في وحدة واحدة كأزواج مفتاح-قيمة: المستخدم باسمه وعمره وبريده. تتعلم هنا الإنشاء والوصول بالنقطة والأقواس، والدوال داخل الكائن Methods، وكلمة this، وأدوات Object المساعدة.",
+  "sections": [
+    {
+      "title": "إنشاء الكائن والوصول لخصائصه",
+      "text": [
+        "ينشأ الكائن بأقواس معقوصة تضم أزواج خاصية: قيمة مفصولة بفواصل. الوصول للخاصية بطريقتين: النقطة user.name الأشهر، أو الأقواس المربعة user[\"name\"] الضرورية حين يكون اسم الخاصية في متغير أو يحوي مسافات.",
+        "التعديل بالإسناد المباشر، وإضافة خاصية جديدة بنفس الطريقة، والحذف بالأمر delete."
+      ],
+      "examples": [
+        {
+          "title": "كائن مستخدم",
+          "lang": "js",
+          "source": "const user = {\n  name: \"سالم\",\n  age: 25,\n  city: \"دمشق\"\n};\n\nconsole.log(user.name);       // سالم\nconsole.log(user[\"age\"]);   // 25\n\nuser.age = 26;                 // تعديل\nuser.email = \"s@mail.com\";  // إضافة\ndelete user.city;              // حذف\nconsole.log(user);",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الوصول لخاصية غير موجودة يعيد undefined دون خطأ."
+      ]
+    },
+    {
+      "title": "الدوال داخل الكائن Methods وكلمة this",
+      "text": [
+        "حين تكون قيمة الخاصية دالة تسمى Method (تابعًا). وداخلها تشير الكلمة this إلى الكائن نفسه صاحب الاستدعاء — فتصل بها إلى بقية خصائصه.",
+        "تنبيه: الدوال السهمية لا تملك this خاصًا بها — استخدم الصيغة العادية للتوابع داخل الكائنات."
+      ],
+      "examples": [
+        {
+          "title": "تابع يستخدم this",
+          "lang": "js",
+          "source": "const student = {\n  name: \"ليلى\",\n  grades: [90, 85, 95],\n  average() {\n    const sum = this.grades.reduce((s, g) => s + g, 0);\n    return sum / this.grades.length;\n  }\n};\n\nconsole.log(student.name + \": متوسطها \" + student.average());",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "الكائنات المتداخلة والمرور على الخصائص",
+      "text": [
+        "قيم الخصائص قد تكون كائنات أو مصفوفات بدورها — فنصل إليها بسلسلة نقاط: user.address.city. وقبل الغوص في متداخل قد يغيب، استخدم التسلسل الاختياري ?. الذي يعيد undefined بدل رمي خطأ.",
+        "أدوات المرور: حلقة for...in على المفاتيح، أو الدوال المساعدة: Object.keys تعيد المفاتيح مصفوفة، وObject.values القيم، وObject.entries أزواج [مفتاح، قيمة]."
+      ],
+      "examples": [
+        {
+          "title": "تداخل ومرور",
+          "lang": "js",
+          "source": "const product = {\n  title: \"حاسوب\",\n  specs: { ram: \"16GB\", cpu: \"i7\" }\n};\n\nconsole.log(product.specs.ram);       // 16GB\nconsole.log(product.seller?.name);    // undefined بلا خطأ\n\nconsole.log(Object.keys(product));    // [\"title\", \"specs\"]\nfor (const key in product.specs) {\n  console.log(key, \"=>\", product.specs[key]);\n}",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "الوصول المتسلسل لخاصية داخل خاصية غائبة بلا ?. يرمي TypeError ويوقف الكود."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-10-q1", "type": "mcq", "diff": "easy", "q": "الكائن في JavaScript يخزن البيانات على شكل:", "options": ["قائمة مرتبة بفهارس", "أزواج مفتاح-قيمة", "نص واحد طويل", "أرقام فقط"], "a": 1, "exp": "خصائص مسماة وقيمها — بعكس المصفوفة المفهرسة رقميًا." },
+    { "id": "js-10-q2", "type": "mcq", "diff": "easy", "q": "للوصول إلى خاصية name في الكائن user نكتب:", "options": ["user->name", "user.name", "user(name)", "name.user"], "a": 1, "exp": "النقطة أشهر طريقة، أو user[\"name\"] بالأقواس." },
+    { "id": "js-10-q3", "type": "fill", "diff": "medium", "q": "داخل تابع الكائن، الكلمة ____ تشير إلى الكائن نفسه.", "a": ["this"], "exp": "بها يصل التابع لبقية خصائص كائنه." },
+    { "id": "js-10-q4", "type": "mcq", "diff": "medium", "q": "Object.keys(obj) تعيد:", "options": ["قيم الكائن", "مصفوفة بأسماء خصائص الكائن", "عدد الخصائص", "نسخة من الكائن"], "a": 1, "exp": "keys للمفاتيح وvalues للقيم وentries للأزواج." },
+    { "id": "js-10-q5", "type": "mcq", "diff": "hard", "q": "ما فائدة التسلسل الاختياري ?. في user?.address?.city؟", "options": ["أسرع في التنفيذ", "يعيد undefined بدل رمي خطأ إن غاب جزء من السلسلة", "يحذف الخاصية", "ينشئ الخصائص الغائبة"], "a": 1, "exp": "حماية من TypeError عند الوصول المتداخل لقيم قد تغيب." },
+    { "id": "js-10-q6", "type": "tf", "diff": "medium", "q": "الوصول لخاصية غير موجودة في كائن يرمي خطأ فورًا.", "a": false, "exp": "يعيد undefined بهدوء — الخطأ يقع فقط عند التعمق داخل الغائب." }
+  ]
+}

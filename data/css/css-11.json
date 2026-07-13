@@ -1,0 +1,88 @@
+{
+  "id": "css-11",
+  "title": "الخطوط Typography",
+  "intro": "الخط هو 90% من تصميم أي صفحة نصية. تتعلم هنا عائلات الخطوط font-family، والحجم font-size، والوزن font-weight، والإمالة، وارتفاع السطر line-height، واستخدام خطوط الويب مثل Google Fonts.",
+  "sections": [
+    {
+      "title": "عائلة الخط font-family",
+      "text": [
+        "الخاصية font-family تحدد الخط، وتكتب كقائمة احتياطية (Font Stack): يجرب المتصفح الأول فإن لم يجده انتقل للتالي، وتنتهي القائمة بعائلة عامة: serif بزوائد، أو sans-serif بلا زوائد (الأنسب للشاشات)، أو monospace أحادي المسافة للأكواد.",
+        "أسماء الخطوط المكونة من عدة كلمات توضع بين علامتي تنصيص مثل \"Times New Roman\"."
+      ],
+      "examples": [
+        {
+          "title": "عائلات مختلفة",
+          "lang": "css",
+          "source": ".serif { font-family: Georgia, \"Times New Roman\", serif; }\n.sans  { font-family: Tahoma, Arial, sans-serif; }\n.mono  { font-family: Consolas, \"Courier New\", monospace; }",
+          "preview": true,
+          "previewHtml": "<p class=\"serif\">خط بزوائد Serif للطباعة.</p><p class=\"sans\">خط بلا زوائد Sans-serif للشاشات.</p><p class=\"mono\">Monospace code font 123</p>"
+        }
+      ]
+    },
+    {
+      "title": "الحجم font-size والوزن font-weight",
+      "text": [
+        "الخاصية font-size تحدد حجم الخط: بالبكسل px للدقة، أو rem للمرونة (تتكيف مع إعدادات المستخدم — 1rem تساوي 16px افتراضيًا). حجم النص الأساسي المريح 16px وما دونه يرهق القارئ.",
+        "الخاصية font-weight تحدد سماكة الخط: normal تساوي 400، وbold تساوي 700، وتقبل أرقامًا من 100 (رفيع جدًا) إلى 900 (أسمك) إذا كان الخط يوفر هذه الأوزان."
+      ],
+      "examples": [
+        {
+          "title": "أحجام وأوزان",
+          "lang": "css",
+          "source": ".s1 { font-size: 0.85rem; font-weight: 300; }\n.s2 { font-size: 1rem;    font-weight: 400; }\n.s3 { font-size: 1.4rem;  font-weight: 700; }\n.s4 { font-size: 2rem;    font-weight: 900; }",
+          "preview": true,
+          "previewHtml": "<p class=\"s1\">صغير رفيع 300</p><p class=\"s2\">عادي 400</p><p class=\"s3\">كبير غامق 700</p><p class=\"s4\">ضخم أسمك 900</p>"
+        }
+      ],
+      "notes": [
+        "استخدم rem للأحجام بدل px حين تريد احترام تكبير الخط الذي يضبطه المستخدم في متصفحه."
+      ]
+    },
+    {
+      "title": "الإمالة والارتفاع: font-style و line-height والاختصار font",
+      "text": [
+        "الخاصية font-style بقيمة italic تميل الخط، وfont-variant: small-caps تعرض الأحرف الصغيرة اللاتينية كأحرف كبيرة مصغرة.",
+        "الخاصية line-height تضبط ارتفاع السطر — الأهم لراحة القراءة: القيمة المثلى للنصوص بين 1.5 و1.8 (رقم بلا وحدة يعني مضاعف حجم الخط). النص العربي خصوصًا يحتاج ارتفاع سطر مريحًا.",
+        "الاختصار font يجمع: النمط والوزن والحجم/ارتفاع السطر والعائلة، مثل: font: bold 16px/1.6 Tahoma, sans-serif;"
+      ],
+      "examples": [
+        {
+          "title": "أثر ارتفاع السطر",
+          "lang": "css",
+          "source": ".tight { line-height: 1.1; background: #fee2e2; }\n.comfy { line-height: 1.8; background: #dcfce7; }",
+          "preview": true,
+          "previewHtml": "<p class=\"tight\">سطر ضيق مرهق للقراءة. سطر ضيق مرهق للقراءة. سطر ضيق مرهق للقراءة. سطر ضيق مرهق للقراءة.</p><p class=\"comfy\">سطر مريح فسيح للقراءة. سطر مريح فسيح للقراءة. سطر مريح فسيح للقراءة. سطر مريح فسيح للقراءة.</p>"
+        }
+      ]
+    },
+    {
+      "title": "خطوط الويب: Google Fonts",
+      "text": [
+        "خطوط الويب (Web Fonts) تحمل مع الصفحة فتظهر لكل الزوار حتى لو لم تكن مثبتة على أجهزتهم. أشهر مصدر مجاني هو Google Fonts: تختار الخط فيعطيك وسم <link> تضعه في head ثم تستخدم اسم الخط في font-family.",
+        "من أشهر الخطوط العربية الجيدة عليه: Tajawal و Cairo و Almarai و Amiri."
+      ],
+      "examples": [
+        {
+          "title": "استيراد خط Tajawal",
+          "lang": "html",
+          "source": "<!-- في head -->\n<link href=\"https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap\" rel=\"stylesheet\">\n\n<!-- في CSS -->\n<style>\n  body { font-family: \"Tajawal\", Tahoma, sans-serif; }\n</style>",
+          "preview": false
+        }
+      ],
+      "notes": [
+        "حمّل الأوزان التي تحتاجها فقط (400 و700 مثلًا) — كل وزن إضافي يبطئ التحميل."
+      ],
+      "mistakes": [
+        "استخدام اسم الخط في CSS دون إضافة وسم link — سيظهر الخط الاحتياطي فقط."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-11-q1", "type": "mcq", "diff": "easy", "q": "لماذا نكتب عدة خطوط في font-family؟", "options": ["لعرضها كلها معًا", "قائمة احتياطية: إن غاب الأول استخدم التالي", "لتسريع التحميل", "إلزام من المعيار"], "a": 1, "exp": "Font Stack: يجرب المتصفح بالترتيب حتى يجد خطًا متاحًا." },
+    { "id": "css-11-q2", "type": "mcq", "diff": "easy", "q": "قيمة font-weight المكافئة لـ bold هي:", "options": ["400", "500", "700", "900"], "a": 2, "exp": "normal = 400 و bold = 700." },
+    { "id": "css-11-q3", "type": "fill", "diff": "medium", "q": "الخاصية ____-height تضبط ارتفاع السطر وقيمتها المريحة للنصوص بين 1.5 و 1.8.", "a": ["line"], "exp": "line-height بلا وحدة تعني مضاعف حجم الخط." },
+    { "id": "css-11-q4", "type": "mcq", "diff": "medium", "q": "العائلة العامة الأنسب لعرض الأكواد البرمجية:", "options": ["serif", "sans-serif", "monospace", "cursive"], "a": 2, "exp": "monospace أحادي المسافة: كل الحروف بنفس العرض." },
+    { "id": "css-11-q5", "type": "tf", "diff": "medium", "q": "1rem تساوي حجم خط جذر الصفحة، وهو 16px افتراضيًا.", "a": true, "exp": "لهذا rem مفضلة للأحجام المرنة التي تحترم إعدادات المستخدم." },
+    { "id": "css-11-q6", "type": "mcq", "diff": "medium", "q": "لاستخدام خط من Google Fonts يجب:", "options": ["تثبيته على جهاز كل زائر", "إضافة وسم link للخط ثم استخدام اسمه في font-family", "شراء ترخيص دائمًا", "تحويله لصورة"], "a": 1, "exp": "خطوط الويب تحمل مع الصفحة فتظهر للجميع." }
+  ]
+}

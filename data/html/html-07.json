@@ -1,0 +1,73 @@
+{
+  "id": "html-07",
+  "title": "الجداول Tables",
+  "intro": "الجداول تعرض البيانات في صفوف وأعمدة: جداول الدرجات، الأسعار، والمواعيد. تتعلم هنا بنية الجدول الكاملة: table و tr و td و th، والأقسام thead و tbody و tfoot، ودمج الخلايا بـ colspan و rowspan.",
+  "sections": [
+    {
+      "title": "بنية الجدول الأساسية: table و tr و td و th",
+      "text": [
+        "يبدأ الجدول بوسم <table>، وكل صف فيه يمثله وسم <tr> (اختصار Table Row)، وكل خلية بيانات داخل الصف وسم <td> (اختصار Table Data)، أما خلايا الرؤوس فوسم <th> (اختصار Table Header) وتظهر غامقة وفي المنتصف افتراضيًا.",
+        "الجدول بلا حدود مرئية افتراضيًا — الحدود تضاف عبر CSS بخاصية border، وتدمج الحدود المزدوجة بـ border-collapse: collapse."
+      ],
+      "examples": [
+        {
+          "title": "جدول درجات بسيط",
+          "lang": "html",
+          "source": "<table>\n  <tr>\n    <th>الاسم</th>\n    <th>المادة</th>\n    <th>الدرجة</th>\n  </tr>\n  <tr>\n    <td>أحمد</td>\n    <td>رياضيات</td>\n    <td>95</td>\n  </tr>\n  <tr>\n    <td>سارة</td>\n    <td>فيزياء</td>\n    <td>88</td>\n  </tr>\n</table>",
+          "preview": true,
+          "previewCss": "table{border-collapse:collapse;width:100%} th,td{border:1px solid #999;padding:8px;text-align:center} th{background:#eef}"
+        }
+      ],
+      "notes": [
+        "عدد خلايا كل صف يجب أن يتساوى مع باقي الصفوف (ما لم تستخدم الدمج)."
+      ],
+      "mistakes": [
+        "وضع <td> مباشرة داخل <table> دون تغليفها بصف <tr>.",
+        "استخدام الجداول لتصميم تخطيط الصفحة كاملة — أسلوب قديم؛ التخطيط الحديث بـ CSS و Flexbox."
+      ]
+    },
+    {
+      "title": "أقسام الجدول: thead و tbody و tfoot و caption",
+      "text": [
+        "لتنظيم الجداول الكبيرة تقسم دلاليًا: <thead> لصف الرؤوس، و<tbody> لجسم البيانات، و<tfoot> لصف الختام (كالمجاميع). و<caption> يضيف عنوانًا للجدول يظهر فوقه.",
+        "هذا التقسيم يفيد قارئات الشاشة، ويتيح للطباعة تكرار الرؤوس في كل صفحة، ويسهل تنسيق كل قسم على حدة في CSS."
+      ],
+      "examples": [
+        {
+          "title": "جدول مكتمل الأقسام",
+          "lang": "html",
+          "source": "<table>\n  <caption>مبيعات الربع الأول</caption>\n  <thead>\n    <tr><th>الشهر</th><th>المبيعات</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>كانون الثاني</td><td>1200$</td></tr>\n    <tr><td>شباط</td><td>1550$</td></tr>\n  </tbody>\n  <tfoot>\n    <tr><th>المجموع</th><th>2750$</th></tr>\n  </tfoot>\n</table>",
+          "preview": true,
+          "previewCss": "table{border-collapse:collapse;width:100%} th,td{border:1px solid #999;padding:8px;text-align:center} thead th{background:#dde} tfoot th{background:#efe} caption{font-weight:bold;margin-bottom:6px}"
+        }
+      ]
+    },
+    {
+      "title": "دمج الخلايا: colspan و rowspan",
+      "text": [
+        "السمة colspan تجعل الخلية تمتد أفقيًا عبر عدة أعمدة (Column Span)، والسمة rowspan تجعلها تمتد عموديًا عبر عدة صفوف (Row Span). عند الدمج يجب حذف الخلايا التي حلت الخلية المدموجة محلها من الصفوف المجاورة."
+      ],
+      "examples": [
+        {
+          "title": "دمج أفقي وعمودي",
+          "lang": "html",
+          "source": "<table>\n  <tr>\n    <th colspan=\"2\">جدول الدوام</th>\n  </tr>\n  <tr>\n    <td rowspan=\"2\">الفترة الصباحية</td>\n    <td>رياضيات</td>\n  </tr>\n  <tr>\n    <td>علوم</td>\n  </tr>\n</table>",
+          "preview": true,
+          "previewCss": "table{border-collapse:collapse;width:100%} th,td{border:1px solid #999;padding:8px;text-align:center} th{background:#eef}"
+        }
+      ],
+      "mistakes": [
+        "نسيان حذف الخلايا الزائدة بعد الدمج فيختل شكل الجدول وتظهر خلايا خارج الإطار.",
+        "الخلط بين الاتجاهين: colspan يمتد عبر الأعمدة (أفقيًا) وrowspan عبر الصفوف (عموديًا)."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-07-q1", "type": "mcq", "diff": "easy", "q": "أي وسم يمثل صفًا داخل الجدول؟", "options": ["<td>", "<tr>", "<th>", "<row>"], "a": 1, "exp": "<tr> اختصار Table Row." },
+    { "id": "html-07-q2", "type": "mcq", "diff": "easy", "q": "ما الفرق بين <td> و <th>؟", "options": ["لا فرق", "td خلية بيانات و th خلية رأس تظهر غامقة", "th أكبر حجمًا فقط", "td للأرقام و th للنصوص"], "a": 1, "exp": "Table Header خلية رأس العمود أو الصف، وTable Data خلية البيانات." },
+    { "id": "html-07-q3", "type": "fill", "diff": "medium", "q": "لدمج خلية عبر ثلاثة أعمدة أفقيًا نستخدم السمة ____ بقيمة 3.", "a": ["colspan"], "exp": "colspan للدمج الأفقي عبر الأعمدة، وrowspan للدمج العمودي عبر الصفوف." },
+    { "id": "html-07-q4", "type": "mcq", "diff": "medium", "q": "أي قسم من الجدول يخصص لصف المجاميع الختامية؟", "options": ["<thead>", "<tbody>", "<tfoot>", "<caption>"], "a": 2, "exp": "tfoot لذيل الجدول (المجاميع والخلاصات)." },
+    { "id": "html-07-q5", "type": "tf", "diff": "medium", "q": "وسم <caption> يضيف عنوانًا للجدول ويكتب مباشرة بعد وسم <table>.", "a": true, "exp": "caption عنوان الجدول ويجب أن يكون أول عنصر داخل table." },
+    { "id": "html-07-q6", "type": "tf", "diff": "hard", "q": "من الممارسات الجيدة استخدام الجداول لبناء تخطيط الصفحة الكامل (Layout).", "a": false, "exp": "الجداول للبيانات الجدولية فقط؛ التخطيط الحديث يبنى بـ CSS مثل Flexbox." }
+  ]
+}

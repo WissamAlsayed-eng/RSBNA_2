@@ -1,0 +1,69 @@
+{
+  "id": "js-03",
+  "title": "أنواع البيانات Data Types",
+  "intro": "كل قيمة في JavaScript لها نوع: نص، رقم، منطقي، غير معرف، فارغ، كائن... تتعلم هنا الأنواع الأساسية، ومعرفة النوع بـ typeof، والتحويل بين الأنواع.",
+  "sections": [
+    {
+      "title": "الأنواع البدائية Primitive Types",
+      "text": [
+        "النص String: أي محتوى بين علامات تنصيص مزدوجة أو مفردة، حتى \"123\" نص لا رقم. الرقم Number: صحيح أو عشري، موجب أو سالب. المنطقي Boolean: قيمتان فقط true صحيح أو false خطأ — أساس كل الشروط.",
+        "غير المعرف undefined: قيمة متغير أعلن ولم يُسند له شيء. والفارغ null: قيمة فارغة يسندها المبرمج قصدًا للدلالة على (لا شيء). الفرق: undefined غياب تلقائي، وnull فراغ مقصود."
+      ],
+      "examples": [
+        {
+          "title": "الأنواع الخمسة الأساسية",
+          "lang": "js",
+          "source": "const name = \"ليلى\";        // String\nconst age = 21;               // Number\nconst price = 49.99;          // Number عشري\nconst isStudent = true;       // Boolean\nlet city;                     // undefined\nconst car = null;             // null فراغ مقصود\nconsole.log(name, age, price, isStudent, city, car);",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "معرفة النوع: typeof",
+      "text": [
+        "العامل typeof يعيد اسم نوع القيمة كنص — أداتك لفحص الأنواع. ولديه غرابة تاريخية شهيرة: typeof null يعيد \"object\" وهو خطأ قديم في اللغة بقي للتوافق."
+      ],
+      "examples": [
+        {
+          "title": "فحص الأنواع",
+          "lang": "js",
+          "source": "console.log(typeof \"مرحبا\");   // string\nconsole.log(typeof 42);          // number\nconsole.log(typeof true);        // boolean\nconsole.log(typeof undefined);   // undefined\nconsole.log(typeof null);        // object (غرابة تاريخية!)\nconsole.log(typeof [1,2,3]);     // object — المصفوفات كائنات\nconsole.log(typeof \"123\");     // string وليس number!",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الأنواع المركبة: الكائن Object والمصفوفة Array والدالة Function — لها دروس مخصصة قادمة."
+      ]
+    },
+    {
+      "title": "التحويل بين الأنواع Type Conversion",
+      "text": [
+        "التحويل الصريح: Number(\"42\") يحول النص لرقم (وإن فشل يعيد NaN أي Not a Number)، وString(42) يحول لأي نص، وparseInt يستخرج عددًا صحيحًا من بداية نص وparseFloat للعشري.",
+        "التحويل الضمني الخطير: عامل الجمع + مع نص يلصق لا يجمع: \"5\" + 3 يعطي \"53\"! بينما الطرح والضرب يحولان لأرقام: \"5\" - 3 يعطي 2. لهذا حوّل مدخلات المستخدم (وهي نصوص دائمًا) قبل الحساب."
+      ],
+      "examples": [
+        {
+          "title": "مطبات التحويل",
+          "lang": "js",
+          "source": "console.log(\"5\" + 3);        // \"53\" لصق نصي!\nconsole.log(\"5\" - 3);        // 2 تحويل ضمني\nconsole.log(Number(\"7\") + 3); // 10 صحيح\nconsole.log(parseInt(\"12px\"));  // 12\nconsole.log(Number(\"abc\"));   // NaN\nconsole.log(Boolean(0), Boolean(\"\"), Boolean(\"نص\")); // false false true",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "القيم الكاذبة (Falsy) التي تتحول إلى false: الصفر 0 والنص الفارغ \"\" و null و undefined و NaN — وكل ما عداها صادق Truthy."
+      ],
+      "mistakes": [
+        "جمع مدخل مستخدم مع رقم دون تحويل فيلتصقان نصيًا بدل أن يجمعا حسابيًا."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-03-q1", "type": "mcq", "diff": "easy", "q": "القيمة \"250\" بين علامتي تنصيص نوعها:", "options": ["Number", "String", "Boolean", "null"], "a": 1, "exp": "كل ما بين علامات تنصيص نص String ولو كان أرقامًا." },
+    { "id": "js-03-q2", "type": "mcq", "diff": "easy", "q": "النوع المنطقي Boolean له قيمتان هما:", "options": ["yes و no", "1 و 0 فقط", "true و false", "on و off"], "a": 2, "exp": "true و false أساس كل الشروط." },
+    { "id": "js-03-q3", "type": "mcq", "diff": "medium", "q": "ما ناتج \"5\" + 3 في JavaScript؟", "options": ["8", "\"53\"", "NaN", "خطأ"], "a": 1, "exp": "الجمع مع نص يلصق نصيًا: \"5\" + 3 = \"53\"." },
+    { "id": "js-03-q4", "type": "fill", "diff": "medium", "q": "العامل ____ يعيد اسم نوع القيمة كنص مثل \"number\" أو \"string\".", "a": ["typeof"], "exp": "مثال: typeof 42 يعيد \"number\"." },
+    { "id": "js-03-q5", "type": "mcq", "diff": "medium", "q": "متغير أعلن بـ let دون إسناد قيمة — قيمته:", "options": ["null", "0", "undefined", "\"\""], "a": 2, "exp": "undefined هي قيمة الغياب التلقائي." },
+    { "id": "js-03-q6", "type": "mcq", "diff": "hard", "q": "ماذا يعيد typeof null؟", "options": ["\"null\"", "\"undefined\"", "\"object\"", "\"empty\""], "a": 2, "exp": "غرابة تاريخية في اللغة بقيت للتوافق مع الأكواد القديمة." },
+    { "id": "js-03-q7", "type": "tf", "diff": "medium", "q": "النص الفارغ \"\" والصفر 0 من القيم الكاذبة Falsy.", "a": true, "exp": "Falsy الست: 0 و \"\" و null و undefined و NaN و false." }
+  ]
+}

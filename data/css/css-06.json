@@ -1,0 +1,87 @@
+{
+  "id": "css-06",
+  "title": "نموذج الصندوق: Margin و Padding",
+  "intro": "كل عنصر في الصفحة صندوق من أربع طبقات: المحتوى، ثم الحشوة Padding، ثم الحد Border، ثم الهامش Margin. فهم نموذج الصندوق (Box Model) هو مفتاح ضبط المسافات وحل معظم مشاكل التخطيط.",
+  "sections": [
+    {
+      "title": "نموذج الصندوق Box Model",
+      "text": [
+        "من الداخل للخارج: المحتوى (Content) هو النص أو الصورة، والحشوة (Padding) مسافة داخلية بين المحتوى والحد وتأخذ لون الخلفية، والحد (Border) الإطار، والهامش (Margin) مسافة خارجية شفافة تبعد العنصر عن جيرانه.",
+        "قاعدة التمييز الذهبية: Padding مسافة داخل العنصر (تكبّر الصندوق الملون)، وMargin مسافة خارجه (تباعد بينه وبين غيره)."
+      ],
+      "examples": [
+        {
+          "title": "الطبقات الأربع مرئية",
+          "lang": "css",
+          "source": ".box {\n  background: #a5b4fc;   /* يظهر خلف المحتوى والحشوة */\n  padding: 20px;          /* حشوة داخلية */\n  border: 4px solid #4338ca;\n  margin: 24px;           /* هامش خارجي شفاف */\n}",
+          "preview": true,
+          "previewHtml": "<div style=\"background:#fde68a\"><div class=\"box\">المحتوى هنا — لاحظ الحشوة الملونة حوله والهامش الأصفر (خلفية الأب) خارجه.</div></div>"
+        }
+      ]
+    },
+    {
+      "title": "قيم Margin و Padding المختصرة",
+      "text": [
+        "لكل جهة خاصية مستقلة: margin-top و margin-bottom و margin-left و margin-right (وكذلك padding). والاختصار يقبل من قيمة إلى أربع: قيمة واحدة لكل الجهات، وقيمتان (عمودي ثم أفقي)، وأربع قيم بعقارب الساعة: أعلى، يمين، أسفل، يسار.",
+        "مثال: margin: 10px 20px يعني 10 أعلى وأسفل و20 يمينًا ويسارًا. وmargin: 5px 10px 15px 20px يعني أعلى 5، يمين 10، أسفل 15، يسار 20."
+      ],
+      "examples": [
+        {
+          "title": "اختصارات المسافات",
+          "lang": "css",
+          "source": ".p1 { padding: 16px; }            /* كل الجهات */\n.p2 { padding: 8px 24px; }         /* عمودي | أفقي */\n.p3 { padding: 4px 8px 16px 32px; } /* ساعة: أعلى يمين أسفل يسار */",
+          "preview": true,
+          "previewHtml": "<div class=\"p1 d\">قيمة واحدة</div><div class=\"p2 d\">قيمتان</div><div class=\"p3 d\">أربع قيم</div>",
+          "previewCss": ".d{background:#bae6fd;margin:6px 0;border:1px dashed #0284c7}"
+        }
+      ],
+      "mistakes": [
+        "نسيان ترتيب عقارب الساعة في الأربع قيم (Top Right Bottom Left) وخلط الجهات."
+      ]
+    },
+    {
+      "title": "التوسيط بـ margin: auto وتداخل الهوامش",
+      "text": [
+        "لتوسيط عنصر كتلي أفقيًا: أعطه عرضًا محددًا ثم margin: 0 auto — فيتقاسم المتصفح المساحة المتبقية بالتساوي يمينًا ويسارًا. هذه أشهر طريقة لتوسيط حاويات الصفحات.",
+        "ظاهرة تداخل الهوامش (Margin Collapse): الهامشان العموديان المتلاصقان لعنصرين لا يجتمعان بل يعتمد الأكبر منهما فقط. عنصران بهامش 20px بينهما مسافة 20px لا 40px — وهذا سلوك عمودي فقط لا يحدث أفقيًا."
+      ],
+      "examples": [
+        {
+          "title": "توسيط حاوية",
+          "lang": "css",
+          "source": ".container {\n  width: 60%;\n  margin: 0 auto;\n  background: #bbf7d0;\n  padding: 12px;\n  text-align: center;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"container\">حاوية متوسطة أفقيًا بـ margin: 0 auto</div>"
+        }
+      ],
+      "notes": [
+        "margin يقبل قيمًا سالبة لسحب العناصر باتجاه بعضها — أما padding فلا يقبل السالب."
+      ]
+    },
+    {
+      "title": "خاصية box-sizing",
+      "text": [
+        "افتراضيًا (content-box) width تحدد عرض المحتوى فقط، ثم يضاف الـ padding والـ border فوقها — فعنصر width:200px مع padding:20px يشغل فعليًا 240px! القيمة border-box تجعل width تشمل المحتوى والحشوة والحد معًا، فيبقى العنصر بالحجم الذي حددته بالضبط.",
+        "لهذا يبدأ معظم المطورين مشاريعهم بالقاعدة الشهيرة: * { box-sizing: border-box; }"
+      ],
+      "examples": [
+        {
+          "title": "الفرق بين النموذجين",
+          "lang": "css",
+          "source": ".a, .b { width: 200px; padding: 20px; border: 4px solid #333; }\n.a { box-sizing: content-box; } /* العرض الفعلي 248px */\n.b { box-sizing: border-box; }  /* العرض الفعلي 200px */",
+          "preview": true,
+          "previewHtml": "<div class=\"a\" style=\"background:#fecaca\">content-box: أعرض مما طلبت</div><br><div class=\"b\" style=\"background:#bbf7d0\">border-box: بالضبط 200px</div>"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-06-q1", "type": "mcq", "diff": "easy", "q": "المسافة الداخلية بين محتوى العنصر وحدوده تسمى:", "options": ["Margin", "Padding", "Border", "Outline"], "a": 1, "exp": "Padding داخلية وMargin خارجية." },
+    { "id": "css-06-q2", "type": "mcq", "diff": "medium", "q": "margin: 10px 30px تعني:", "options": ["10 لكل الجهات", "10 أعلى وأسفل و30 يمينًا ويسارًا", "10 يمين و30 يسار", "قيمة خاطئة"], "a": 1, "exp": "قيمتان: الأولى عمودية والثانية أفقية." },
+    { "id": "css-06-q3", "type": "fill", "diff": "medium", "q": "لتوسيط عنصر كتلي له عرض محدد أفقيًا نستخدم margin: 0 ____.", "a": ["auto"], "exp": "auto توزع المساحة المتبقية بالتساوي على الجانبين." },
+    { "id": "css-06-q4", "type": "mcq", "diff": "medium", "q": "في الاختصار الرباعي margin: 1px 2px 3px 4px — أي جهة تأخذ 4px؟", "options": ["الأعلى", "اليمين", "الأسفل", "اليسار"], "a": 3, "exp": "الترتيب بعقارب الساعة: أعلى، يمين، أسفل، يسار." },
+    { "id": "css-06-q5", "type": "mcq", "diff": "hard", "q": "عنصر width:300px و padding:25px و border:5px مع box-sizing: border-box — كم عرضه الفعلي؟", "options": ["300px", "350px", "360px", "330px"], "a": 0, "exp": "مع border-box يشمل العرض المحدد الحشوة والحد، فيبقى 300px." },
+    { "id": "css-06-q6", "type": "tf", "diff": "hard", "q": "الهامشان العموديان المتلاصقان لعنصرين يجمعان معًا (20 + 20 = 40px).", "a": false, "exp": "بسبب تداخل الهوامش Margin Collapse يعتمد الأكبر فقط: المسافة 20px." },
+    { "id": "css-06-q7", "type": "tf", "diff": "medium", "q": "يمكن إعطاء padding قيمة سالبة لسحب المحتوى للخارج.", "a": false, "exp": "padding لا يقبل السالب؛ أما margin فيقبله." }
+  ]
+}

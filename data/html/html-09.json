@@ -1,0 +1,103 @@
+{
+  "id": "html-09",
+  "title": "أنواع الإدخال Input Types",
+  "intro": "السمة type في وسم <input> تغير سلوك الحقل كليًا: نص، كلمة مرور، بريد، رقم، تاريخ، اختيارات... أضافت HTML5 أنواعًا ذكية تتحقق من البيانات وتعرض لوحات إدخال مناسبة على الجوال. هذا الدرس جولة شاملة فيها.",
+  "sections": [
+    {
+      "title": "الأنواع النصية: text و password و email و url و tel و search",
+      "text": [
+        "النوع text حقل نص عادي من سطر واحد وهو الافتراضي. النوع password يخفي الحروف بنقاط. النوع email يتحقق تلقائيًا من شكل البريد (وجود @ ونطاق) عند الإرسال، وurl يتحقق من شكل الرابط، وtel للأرقام الهاتفية (يعرض لوحة أرقام على الجوال)، وsearch حقل بحث بمظهر خاص وزر مسح في بعض المتصفحات."
+      ],
+      "examples": [
+        {
+          "title": "الحقول النصية",
+          "lang": "html",
+          "source": "<form>\n  <input type=\"text\" placeholder=\"نص عادي\"><br><br>\n  <input type=\"password\" placeholder=\"كلمة المرور\"><br><br>\n  <input type=\"email\" placeholder=\"بريد إلكتروني\"><br><br>\n  <input type=\"search\" placeholder=\"ابحث...\">\n</form>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الأنواع الذكية (email و url) تفعل تحققًا مجانيًا من المتصفح دون كتابة أي JavaScript — لكنه تحقق شكلي فقط."
+      ]
+    },
+    {
+      "title": "الاختيارات: checkbox و radio",
+      "text": [
+        "النوع checkbox مربع اختيار يقبل التحديد المتعدد — مناسب لسؤال (اختر كل ما ينطبق). أما radio فزر دائري لاختيار واحد فقط من مجموعة، وسر عمله: كل الأزرار التي تتشارك نفس قيمة name تشكل مجموعة واحدة لا يُختار منها إلا زر واحد.",
+        "السمة checked تجعل الخيار محددًا افتراضيًا. ولا تنس ربط كل خيار بـ label ليسهل النقر عليه."
+      ],
+      "examples": [
+        {
+          "title": "تحديد متعدد واختيار مفرد",
+          "lang": "html",
+          "source": "<p>اللغات التي تتقنها:</p>\n<input type=\"checkbox\" id=\"h\" name=\"langs\" value=\"html\" checked>\n<label for=\"h\">HTML</label>\n<input type=\"checkbox\" id=\"c\" name=\"langs\" value=\"css\">\n<label for=\"c\">CSS</label>\n\n<p>الجنس:</p>\n<input type=\"radio\" id=\"m\" name=\"gender\" value=\"male\">\n<label for=\"m\">ذكر</label>\n<input type=\"radio\" id=\"f\" name=\"gender\" value=\"female\">\n<label for=\"f\">أنثى</label>",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "إعطاء أزرار radio أسماء name مختلفة — تنفصل عن بعضها ويمكن اختيارها كلها معًا!"
+      ]
+    },
+    {
+      "title": "الأرقام والمدى: number و range",
+      "text": [
+        "النوع number يقبل الأرقام فقط مع سهمي زيادة ونقصان، والنوع range شريط تمرير لاختيار قيمة من مدى. كلاهما يدعم السمات: min الحد الأدنى، وmax الأعلى، وstep مقدار الخطوة."
+      ],
+      "examples": [
+        {
+          "title": "رقم وشريط تمرير",
+          "lang": "html",
+          "source": "<label>العمر:\n  <input type=\"number\" min=\"1\" max=\"120\" value=\"20\">\n</label><br><br>\n<label>مستوى الصوت:\n  <input type=\"range\" min=\"0\" max=\"100\" step=\"10\" value=\"50\">\n</label>",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "التاريخ والوقت واللون والملفات",
+      "text": [
+        "النوع date يعرض منتقي تاريخ (يوم/شهر/سنة)، وtime لاختيار وقت، وmonth لشهر وسنة. النوع color يفتح لوحة اختيار ألوان ويعيد اللون بصيغة سداسية مثل ‎#ff0000. والنوع file لرفع ملف، وسمته accept تقيد الأنواع المقبولة (مثل ‎image/*‎ للصور فقط) وسمة multiple تسمح برفع عدة ملفات."
+      ],
+      "examples": [
+        {
+          "title": "منتقيات جاهزة من المتصفح",
+          "lang": "html",
+          "source": "<label>تاريخ الميلاد: <input type=\"date\"></label><br><br>\n<label>لونك المفضل: <input type=\"color\" value=\"#6366f1\"></label><br><br>\n<label>صورة شخصية: <input type=\"file\" accept=\"image/*\"></label>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "شكل هذه المنتقيات يختلف بين المتصفحات وأنظمة التشغيل — وهذا طبيعي."
+      ]
+    },
+    {
+      "title": "الأزرار والحقول الخفية وسمات التحقق",
+      "text": [
+        "أنواع الأزرار: submit يرسل النموذج، وreset يمسحه، وbutton زر عادي، وhidden حقل خفي يرسل قيمة لا يراها المستخدم (كمعرف المنتج).",
+        "سمات تحقق تعمل مع معظم الأنواع: required تجعل الحقل إجباريًا فلا يُرسل النموذج فارغًا، وminlength و maxlength لحدود عدد الحروف، وpattern لنمط تعبير نمطي (Regular Expression) مخصص، وdisabled لتعطيل الحقل، وreadonly للقراءة فقط."
+      ],
+      "examples": [
+        {
+          "title": "حقل إجباري بطول محدد",
+          "lang": "html",
+          "source": "<form>\n  <label>اسم المستخدم (إجباري، 3 أحرف على الأقل):</label><br>\n  <input type=\"text\" name=\"user\" required minlength=\"3\">\n  <button type=\"submit\">تحقق وأرسل</button>\n</form>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الفرق بين disabled و readonly: كلاهما يمنع التعديل، لكن قيمة disabled لا تُرسل مع النموذج بينما readonly تُرسل."
+      ],
+      "mistakes": [
+        "الاعتماد على تحقق المتصفح وحده — يمكن تجاوزه بسهولة؛ التحقق الحقيقي يجب أن يتكرر في الخادم أو JavaScript."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-09-q1", "type": "mcq", "diff": "easy", "q": "أي نوع إدخال يخفي الحروف المكتوبة بنقاط؟", "options": ["text", "hidden", "password", "secret"], "a": 2, "exp": "type=\"password\" يخفي المدخلات بصريًا." },
+    { "id": "html-09-q2", "type": "mcq", "diff": "medium", "q": "ما الفرق الرئيسي بين checkbox و radio؟", "options": ["لا فرق", "checkbox يسمح بتحديد متعدد وradio باختيار واحد من المجموعة", "radio للتحديد المتعدد", "checkbox للأرقام فقط"], "a": 1, "exp": "أزرار radio المتشاركة في name تقبل اختيارًا واحدًا فقط." },
+    { "id": "html-09-q3", "type": "fill", "diff": "medium", "q": "لجعل حقل الإدخال إجباريًا لا يُرسل النموذج وهو فارغ نضيف السمة ____.", "a": ["required"], "exp": "required من سمات التحقق التلقائي في HTML5." },
+    { "id": "html-09-q4", "type": "mcq", "diff": "medium", "q": "كيف نجعل مجموعة أزرار radio تعمل معًا بحيث يُختار واحد فقط؟", "options": ["نعطيها نفس id", "نعطيها نفس name", "نضعها داخل div واحد", "نعطيها نفس value"], "a": 1, "exp": "الاسم المشترك name هو ما يجمعها في مجموعة واحدة." },
+    { "id": "html-09-q5", "type": "mcq", "diff": "easy", "q": "أي نوع يعرض شريط تمرير لاختيار قيمة من مدى؟", "options": ["number", "range", "slider", "meter"], "a": 1, "exp": "type=\"range\" مع السمات min و max و step." },
+    { "id": "html-09-q6", "type": "tf", "diff": "hard", "q": "قيمة الحقل المعطل بـ disabled تُرسل مع النموذج مثل الحقل readonly تمامًا.", "a": false, "exp": "قيم disabled لا تُرسل إطلاقًا، بينما readonly تُرسل قيمتها." },
+    { "id": "html-09-q7", "type": "mcq", "diff": "medium", "q": "لتقييد حقل رفع الملفات بالصور فقط نستخدم:", "options": ["type=\"image\"", "accept=\"image/*\"", "only=\"images\"", "filter=\"img\""], "a": 1, "exp": "السمة accept تحدد أنواع MIME المقبولة في type=\"file\"." }
+  ]
+}

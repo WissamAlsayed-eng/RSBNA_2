@@ -1,0 +1,66 @@
+{
+  "id": "js-17",
+  "title": "المؤقتات Timers",
+  "intro": "المؤقتات تجعل الكود يعمل بعد مهلة أو بشكل متكرر: setTimeout للتأجيل مرة واحدة، وsetInterval للتكرار الدوري، وإلغاؤهما — أساس الساعات والعدادات التنازلية والشرائح المتحركة.",
+  "sections": [
+    {
+      "title": "التأجيل مرة واحدة: setTimeout",
+      "text": [
+        "الدالة setTimeout(الدالة, المدة-بالميلي-ثانية) تنفذ دالتك مرة واحدة بعد انقضاء المدة (1000 ميلي ثانية = ثانية واحدة). تعيد معرفًا رقميًا تمرره لـ clearTimeout للإلغاء قبل التنفيذ.",
+        "ملاحظة مهمة: setTimeout لا توقف البرنامج — الكود بعدها يكمل فورًا، ودالتك تنفذ لاحقًا حين يحين وقتها (سلوك غير متزامن Asynchronous)."
+      ],
+      "examples": [
+        {
+          "title": "رسالة مؤجلة",
+          "lang": "js",
+          "source": "console.log(\"1) أنا أولًا\");\n\nsetTimeout(() => {\n  console.log(\"3) أنا بعد ثانيتين\");\n}, 2000);\n\nconsole.log(\"2) أنا لم أنتظر المؤقت!\");",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "كتابة setTimeout(fn(), 1000) بالأقواس — تستدعي الدالة فورًا؛ مرر المرجع بلا أقواس أو دالة سهمية."
+      ]
+    },
+    {
+      "title": "التكرار الدوري: setInterval و clearInterval",
+      "text": [
+        "الدالة setInterval(الدالة, المدة) تكرر تنفيذ دالتك كل مدة محددة إلى ما لا نهاية — حتى توقفها بـ clearInterval(المعرف). احفظ المعرف الذي تعيده دائمًا وإلا استحال الإيقاف.",
+        "قاعدة النظافة: أي setInterval يجب أن يقابله clearInterval في مكان ما — المؤقتات المنسية تستهلك الموارد وتسبب سلوكًا غريبًا."
+      ],
+      "examples": [
+        {
+          "title": "عداد تنازلي يوقف نفسه",
+          "lang": "js",
+          "source": "let remaining = 5;\n\nconst timerId = setInterval(() => {\n  console.log(\"باقي:\", remaining);\n  remaining--;\n  if (remaining < 0) {\n    clearInterval(timerId); // أوقف نفسك\n    console.log(\"🚀 انطلاق!\");\n  }\n}, 700);",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "تطبيق عملي: ساعة رقمية",
+      "text": [
+        "بدمج setInterval مع كائن التاريخ Date نبني ساعة حية: new Date() يعطي اللحظة الحالية، وgetHours وgetMinutes وgetSeconds مكوناتها، وpadStart تجمل الأرقام بصفر بادئ."
+      ],
+      "examples": [
+        {
+          "title": "ساعة تنبض كل ثانية",
+          "lang": "js",
+          "source": "function tick() {\n  const now = new Date();\n  const h = String(now.getHours()).padStart(2, \"0\");\n  const m = String(now.getMinutes()).padStart(2, \"0\");\n  const s = String(now.getSeconds()).padStart(2, \"0\");\n  document.querySelector(\"#clock\").textContent = `${h}:${m}:${s}`;\n}\n\ntick();                  // عرض فوري\nsetInterval(tick, 1000); // ثم تحديث كل ثانية",
+          "preview": true,
+          "previewHtml": "<div id=\"clock\" style=\"font-size:2rem;font-family:monospace;direction:ltr;text-align:center;background:#1e293b;color:#4ade80;padding:12px;border-radius:10px\"></div>"
+        }
+      ],
+      "notes": [
+        "استدعِ الدالة مرة يدويًا قبل setInterval كي لا يظهر فراغ في الثانية الأولى."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-17-q1", "type": "mcq", "diff": "easy", "q": "دالة تنفذ الكود مرة واحدة بعد مهلة محددة:", "options": ["setInterval", "setTimeout", "delay", "wait"], "a": 1, "exp": "setTimeout للتأجيل مرة واحدة وsetInterval للتكرار." },
+    { "id": "js-17-q2", "type": "mcq", "diff": "easy", "q": "المدة في المؤقتات تقاس بـ:", "options": ["الثواني", "الميلي ثانية", "الدقائق", "الإطارات"], "a": 1, "exp": "1000 ميلي ثانية = ثانية واحدة." },
+    { "id": "js-17-q3", "type": "fill", "diff": "medium", "q": "لإيقاف مؤقت متكرر أنشئ بـ setInterval نستخدم الدالة clear________ مع معرفه.", "a": ["Interval", "interval"], "exp": "clearInterval(timerId) — لذا احفظ المعرف دائمًا." },
+    { "id": "js-17-q4", "type": "tf", "diff": "medium", "q": "setTimeout توقف تنفيذ بقية الكود حتى انتهاء المدة.", "a": false, "exp": "غير متزامنة: الكود بعدها يكمل فورًا ودالتك تنفذ لاحقًا." },
+    { "id": "js-17-q5", "type": "mcq", "diff": "hard", "q": "ما مشكلة setInterval بلا clearInterval مقابل؟", "options": ["لا مشكلة", "يستمر للأبد مستهلكًا الموارد ومسببًا سلوكًا غريبًا", "يتوقف من تلقاء نفسه بعد 100 مرة", "يبطئ الإنترنت"], "a": 1, "exp": "المؤقتات المنسية من أشهر مصادر تسرب الموارد في الواجهات." },
+    { "id": "js-17-q6", "type": "mcq", "diff": "medium", "q": "new Date() تعيد:", "options": ["نصًا بالتاريخ", "كائن التاريخ والوقت للحظة الحالية", "عدد الثواني فقط", "التاريخ الهجري"], "a": 1, "exp": "كائن Date وله دوال getHours وgetMinutes وغيرها." }
+  ]
+}

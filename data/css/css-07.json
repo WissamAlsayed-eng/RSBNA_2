@@ -1,0 +1,69 @@
+{
+  "id": "css-07",
+  "title": "الأبعاد Width و Height",
+  "intro": "خصائص الأبعاد تتحكم بعرض العناصر وارتفاعها: القيم الثابتة والنسبية، والحدود الدنيا والقصوى min وmax التي تصنع تصميمات مرنة تتكيف مع كل الشاشات.",
+  "sections": [
+    {
+      "title": "width و height الأساسيتان",
+      "text": [
+        "الخاصية width تحدد عرض العنصر وheight ارتفاعه. القيمة الافتراضية auto: العنصر الكتلي يمتد بعرض أبيه كاملًا ويأخذ ارتفاع محتواه.",
+        "تنبيه مهم: هاتان الخاصيتان تعملان على العناصر الكتلية (Block) مثل div، ولا تؤثران على العناصر السطرية (Inline) مثل span إلا بعد تغيير display."
+      ],
+      "examples": [
+        {
+          "title": "أبعاد ثابتة ونسبية",
+          "lang": "css",
+          "source": ".fixed { width: 220px; height: 60px; background: #a5b4fc; }\n.fluid { width: 70%; height: 60px; background: #86efac; }",
+          "preview": true,
+          "previewHtml": "<div class=\"fixed\">220px ثابت</div><br><div class=\"fluid\">70% من الأب</div>"
+        }
+      ],
+      "notes": [
+        "النسبة المئوية في width تحسب من عرض العنصر الأب؛ وفي height تحتاج أن يكون للأب ارتفاع محدد وإلا فلن تعمل."
+      ]
+    },
+    {
+      "title": "الحدود المرنة: min-width و max-width",
+      "text": [
+        "الخاصية max-width تضع سقفًا للعرض: العنصر يتقلص مع الشاشات الصغيرة لكنه لا يتجاوز السقف على الشاشات الكبيرة. وmin-width أرضية لا يقل عنها. وكذلك min-height و max-height للارتفاع.",
+        "الوصفة الذهبية للحاويات المتجاوبة: width: 100% مع max-width: 800px مثلًا — تملأ الشاشة الصغيرة وتتوقف عند 800px على الكبيرة. وللصور المتجاوبة: max-width: 100% حتى لا تفيض عن حاويتها."
+      ],
+      "examples": [
+        {
+          "title": "حاوية متجاوبة",
+          "lang": "css",
+          "source": ".wrap {\n  width: 100%;\n  max-width: 320px;\n  margin: 0 auto;\n  background: #fcd34d;\n  padding: 10px;\n  text-align: center;\n}\nimg { max-width: 100%; }",
+          "preview": true,
+          "previewHtml": "<div class=\"wrap\">لن أتجاوز 320px مهما اتسعت الشاشة</div>"
+        }
+      ],
+      "mistakes": [
+        "تحديد width ثابت كبير بدل max-width — يسبب شريط تمرير أفقيًا على الجوال.",
+        "تحديد height ثابت لعنصر نصي — عند زيادة النص يفيض خارج الصندوق؛ استخدم min-height بدلًا منه."
+      ]
+    },
+    {
+      "title": "ملء الشاشة بـ vh و vw",
+      "text": [
+        "لعمل قسم افتتاحي (Hero) يملأ الشاشة كاملة نستخدم وحدات نافذة العرض: height: 100vh تجعل الارتفاع مساويًا لارتفاع النافذة تمامًا، وwidth: 100vw لعرضها."
+      ],
+      "examples": [
+        {
+          "title": "قسم بارتفاع النافذة",
+          "lang": "css",
+          "source": ".hero {\n  height: 50vh; /* نصف ارتفاع النافذة للتجربة */\n  background: linear-gradient(135deg, #6366f1, #06b6d4);\n  color: white;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"hero\"><h2>قسم افتتاحي</h2></div>"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-07-q1", "type": "mcq", "diff": "easy", "q": "أي خاصية تضع حدًا أقصى لعرض العنصر؟", "options": ["width-max", "max-width", "limit-width", "top-width"], "a": 1, "exp": "max-width سقف لا يتجاوزه العنصر." },
+    { "id": "css-07-q2", "type": "mcq", "diff": "medium", "q": "الوصفة الأنسب لحاوية متجاوبة تتوقف عند 900px:", "options": ["width: 900px", "width: 100%; max-width: 900px", "min-width: 900px", "height: 900px"], "a": 1, "exp": "تملأ الشاشات الصغيرة وتتوقف عند 900 على الكبيرة." },
+    { "id": "css-07-q3", "type": "fill", "diff": "medium", "q": "لجعل ارتفاع قسم مساويًا لارتفاع نافذة المتصفح كاملة نستخدم height: 100____.", "a": ["vh"], "exp": "vh اختصار Viewport Height وكل وحدة 1% من ارتفاع النافذة." },
+    { "id": "css-07-q4", "type": "tf", "diff": "medium", "q": "القاعدة max-width: 100% على الصور تمنعها من الفيضان خارج حاويتها.", "a": true, "exp": "أساس الصور المتجاوبة: تتقلص مع الحاوية ولا تتجاوز حجمها الأصلي." },
+    { "id": "css-07-q5", "type": "mcq", "diff": "hard", "q": "لماذا يفضل min-height على height الثابت للصناديق النصية؟", "options": ["أسرع في العرض", "عند زيادة النص يتمدد الصندوق بدل أن يفيض النص خارجه", "يدعم ألوانًا أكثر", "لا فرق بينهما"], "a": 1, "exp": "height الثابت يسبب فيضان المحتوى الزائد؛ min-height يسمح بالتمدد." },
+    { "id": "css-07-q6", "type": "tf", "diff": "medium", "q": "خاصية width تؤثر على عنصر span السطري مباشرة دون تغيير display.", "a": false, "exp": "العناصر السطرية تتجاهل width و height حتى تتحول إلى inline-block أو block." }
+  ]
+}

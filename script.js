@@ -128,10 +128,10 @@ function lectureQuestions(lecId) {
 async function loadData() {
   // المحاولة الأولى: fetch من ملفات JSON (يعمل على GitHub Pages وأي خادم)
   try {
-    const meta = await (await fetch("data/lectures.json")).json();
+    const meta = await (await fetch("data/question-bank/lectures.json")).json();
     const lecs = {};
     await Promise.all(meta.lectures.map(async l => {
-      lecs[l.id] = await (await fetch("data/" + l.id + ".json")).json();
+      lecs[l.id] = await (await fetch("data/question-bank/" + l.id + ".json")).json();
     }));
     STATE.meta = meta;
     STATE.lectures = lecs;
@@ -150,7 +150,7 @@ async function loadData() {
 /* ============================================================
    التوجيه (Router)
    ============================================================ */
-const VIEWS = ["home", "lectures", "lecture", "quiz", "exam", "search"];
+const VIEWS = ["home", "lectures", "lecture", "quiz", "exam", "search", "learn", "lesson", "playground"];
 
 function showView(name) {
   $("#loading").hidden = true;
@@ -158,7 +158,9 @@ function showView(name) {
   // تفعيل رابط التنقل
   $$("#main-nav a").forEach(a => {
     const nav = a.dataset.nav;
-    const active = nav === name || (name === "lecture" && nav === "lectures");
+    const active = nav === name ||
+      (name === "lecture" && nav === "lectures") ||
+      (name === "lesson" && nav === "learn");
     a.classList.toggle("active", active);
   });
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -195,6 +197,16 @@ function route() {
       break;
     case "exam": renderExamPage(parts[1] || ""); showView("exam"); break;
     case "search": renderSearchPage(); showView("search"); break;
+    case "learn":
+      if (parts[1]) renderCoursePage(parts[1]);
+      else renderLearnHub();
+      showView("learn");
+      break;
+    case "lesson":
+      if (parts[1]) { renderLessonPage(parts[1]); showView("lesson"); }
+      else { location.hash = "#/learn"; }
+      break;
+    case "playground": renderPlayground(); showView("playground"); break;
     default: location.hash = "#/home";
   }
 }
@@ -203,6 +215,8 @@ function route() {
    الصفحة الرئيسية
    ============================================================ */
 function renderHome() {
+  // إن تعذر تحميل بنك الأسئلة وحده نعرض صفحة الدورات
+  if (!STATE.meta) { renderLearnHub(); showView("learn"); return; }
   const lectures = STATE.meta.lectures;
   const questions = allQuestions();
   const totalQ = questions.length;
@@ -254,7 +268,20 @@ function renderHome() {
       </div>
     </div>
 
-    <h2 class="section-title">📚 المحاضرات</h2>
+    ${typeof LEARN !== "undefined" && LEARN.meta ? `
+    <h2 class="section-title">🎓 الدورات التعليمية — تعلم من الصفر</h2>
+    <div class="courses-grid">
+      ${LEARN.meta.courses.map(c => courseCardHTML(c)).join("")}
+    </div>
+    <div class="card playground-promo">
+      <div>
+        <h3>🧪 مختبر الأكواد</h3>
+        <p>محررات HTML و CSS و JavaScript مع معاينة فورية — جرب أي كود مباشرة في متصفحك.</p>
+      </div>
+      <a class="btn btn-primary" href="#/playground">افتح المختبر</a>
+    </div>` : ""}
+
+    <h2 class="section-title">📚 محاضرات بنك الأسئلة</h2>
     <div class="lectures-grid">${lectures.map(l => lectureCardHTML(l, progress)).join("")}</div>
   `;
 }
@@ -484,6 +511,7 @@ function bindBrowseCards(root, questions) {
    الاختبار التفاعلي
    ============================================================ */
 function renderQuizSetup(preselectLec) {
+  if (!STATE.meta) { location.hash = "#/learn"; return; }
   STATE.quiz = null;
   const lecOptions = STATE.meta.lectures.map(l =>
     `<option value="${l.id}" ${l.id === preselectLec ? "selected" : ""}>محاضرة ${l.num}: ${esc(l.title)}</option>`).join("");
@@ -568,6 +596,9 @@ function renderQuizSetup(preselectLec) {
 }
 
 function buildPool(cfg) {
+  // امتحانات الدورات التعليمية: مجموعة أسئلة مخصصة جاهزة
+  if (cfg.customPool) return shuffle(cfg.customPool).slice(0, cfg.count || cfg.customPool.length);
+
   let pool = cfg.scope === "all" || cfg.scope === "random"
     ? allQuestions()
     : lectureQuestions(cfg.scope);
@@ -633,6 +664,7 @@ function fmtTime(sec) {
 }
 
 function scopeLabel(cfg) {
+  if (cfg.label) return cfg.label;
   if (cfg.scope === "all") return "الاختبار الشامل";
   if (cfg.scope === "random") return "اختبار عشوائي";
   const l = STATE.meta.lectures.find(x => x.id === cfg.scope);
@@ -662,7 +694,7 @@ function renderQuizQuestion() {
       <div class="q-head">
         <span class="chip">${TYPE_LABELS[q.type]}</span>
         <span class="chip ${q.diff === "easy" ? "success" : q.diff === "hard" ? "danger" : "warn"}">${DIFF_LABELS[q.diff]}</span>
-        <span class="chip">📖 محاضرة ${q.lecNum}</span>
+        <span class="chip">📖 ${q.srcLabel ? esc(q.srcLabel) : "محاضرة " + q.lecNum}</span>
       </div>
       <div class="q-text">${blanks(esc(q.q))}</div>
       <div id="quiz-interaction"></div>
@@ -937,7 +969,7 @@ function renderQuizResults() {
             <div class="q-head">
               <span class="q-num">س${i + 1}</span>
               <span class="chip">${TYPE_LABELS[q.type]}</span>
-              <span class="chip">📖 محاضرة ${q.lecNum}</span>
+              <span class="chip">📖 ${q.srcLabel ? esc(q.srcLabel) : "محاضرة " + q.lecNum}</span>
               <span class="chip ${ans.status === "skipped" ? "warn" : "danger"}">${ans.status === "skipped" ? "متروك" : "خطأ"}</span>
             </div>
             <div class="q-text">${blanks(esc(q.q))}</div>
@@ -1074,8 +1106,40 @@ function highlightText(text, term) {
 }
 
 function renderSearchPage() {
+  const view = $("#view-search");
+  view.innerHTML = `
+    <div class="tabs glass search-mode-tabs">
+      <button class="tab-btn active" data-mode="qbank">❓ بنك الأسئلة</button>
+      <button class="tab-btn" data-mode="lessons">🎓 الدروس التعليمية</button>
+    </div>
+    <div id="search-panel"></div>
+  `;
+
+  const panel = $("#search-panel");
+  const renderMode = (mode) => {
+    if (mode === "lessons" && typeof renderLessonSearchPanel === "function" && LEARN.meta) {
+      renderLessonSearchPanel(panel);
+    } else if (STATE.meta) {
+      renderQbankSearchPanel(panel);
+    } else {
+      renderLessonSearchPanel(panel);
+    }
+  };
+
+  $$(".search-mode-tabs .tab-btn", view).forEach(btn => {
+    btn.addEventListener("click", () => {
+      $$(".search-mode-tabs .tab-btn", view).forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderMode(btn.dataset.mode);
+    });
+  });
+
+  renderMode("qbank");
+}
+
+function renderQbankSearchPanel(panel) {
   const types = Object.keys(TYPE_LABELS);
-  $("#view-search").innerHTML = `
+  panel.innerHTML = `
     <div class="card search-hero">
       <h2 class="section-title" style="margin-top:0">🔎 البحث في بنك الأسئلة</h2>
       <div class="search-row">
@@ -1154,19 +1218,25 @@ function initTheme() {
    ============================================================ */
 async function init() {
   initTheme();
-  try {
-    await loadData();
-  } catch (e) {
+  // تحميل بنك الأسئلة وفهرس الدورات معًا (فهرس الدورات خفيف —
+  // أما الدروس نفسها فتُحمّل تدريجيًا عند فتح كل درس فقط)
+  const [qbankOk, coursesOk] = await Promise.all([
+    loadData().then(() => true).catch(() => false),
+    loadCoursesMeta().then(() => true).catch(() => false)
+  ]);
+
+  if (!qbankOk && !coursesOk) {
     $("#loading").innerHTML = `
       <div class="empty-state">
         <div class="empty-icon">⚠️</div>
-        <p>تعذر تحميل بيانات بنك الأسئلة.</p>
-        <p style="font-size:.85rem">إذا كنت تفتح الملف مباشرة من جهازك فتأكد من وجود الملف data/embed.js،
-        أو ارفع المشروع على GitHub Pages / شغّل خادماً محلياً.</p>
+        <p>تعذر تحميل بيانات الموقع.</p>
+        <p style="font-size:.85rem">فتح الملف مباشرة (file://) يمنع تحميل ملفات JSON —
+        ارفع المشروع على GitHub Pages أو شغّل خادمًا محليًا
+        (مثال: <code dir="ltr">python -m http.server</code> داخل مجلد المشروع).</p>
       </div>`;
     return;
   }
-  $("#brand-name").textContent = STATE.meta.siteName;
+
   window.addEventListener("hashchange", route);
   route();
 }

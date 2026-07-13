@@ -1,0 +1,103 @@
+{
+  "id": "html-13",
+  "title": "وسوم Meta ورأس الصفحة",
+  "intro": "رأس الصفحة <head> يحمل معلومات عن الصفحة لا يراها الزائر لكنها حاسمة: الترميز، العنوان، وصف محركات البحث، التجاوب مع الجوال، الأيقونة، وربط ملفات CSS و JavaScript. هذا الدرس الأخير في HTML يجمعها كلها.",
+  "sections": [
+    {
+      "title": "وسم title وأهميته",
+      "text": [
+        "الوسم <title> يحدد عنوان الصفحة الظاهر في تبويب المتصفح، وفي نتائج البحث كعنوان النتيجة، وعند حفظ الصفحة في المفضلة. وهو وسم إجباري في كل مستند HTML سليم.",
+        "لتحسين SEO: اجعل العنوان وصفيًا فريدًا لكل صفحة، بطول 50-60 حرفًا تقريبًا، ويحوي الكلمة المفتاحية الرئيسية."
+      ],
+      "examples": [
+        {
+          "title": "عنوان صفحة جيد",
+          "lang": "html",
+          "source": "<head>\n  <title>وصفات حلويات سهلة — موقع مطبخنا</title>\n</head>",
+          "preview": false
+        }
+      ]
+    },
+    {
+      "title": "وسم meta: الترميز والوصف والمؤلف",
+      "text": [
+        "وسم <meta> ذاتي الإغلاق يحمل بيانات وصفية (Metadata). أهم استخداماته: <meta charset=\"UTF-8\"> لترميز الحروف ودعم العربية، و<meta name=\"description\" content=\"...\"> وصف الصفحة الذي يظهر تحت العنوان في نتائج البحث، و<meta name=\"author\"> اسم المؤلف، و<meta name=\"keywords\"> الكلمات المفتاحية (لم تعد Google تعتمدها لكن لا ضرر منها)."
+      ],
+      "examples": [
+        {
+          "title": "مجموعة meta الأساسية",
+          "lang": "html",
+          "source": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"description\" content=\"موقع تعليمي لشرح HTML و CSS و JavaScript بالعربية مع أمثلة تفاعلية.\">\n  <meta name=\"author\" content=\"وسام السيد محمد\">\n  <title>منصة تعلم الويب</title>\n</head>",
+          "preview": false
+        }
+      ],
+      "notes": [
+        "اجعل الوصف description بطول 150-160 حرفًا — أطول من ذلك يقتطع في نتائج البحث."
+      ],
+      "mistakes": [
+        "وضع <meta charset> متأخرًا في head — يجب أن يكون في أول سطرين حتى يقرأ المتصفح الترميز قبل أي نص."
+      ]
+    },
+    {
+      "title": "وسم viewport للتجاوب مع الجوال",
+      "text": [
+        "بدون وسم viewport يعرض الجوال الصفحة مصغرة كأنها شاشة حاسوب عرضها 980 بكسل. الوسم <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> يخبر المتصفح أن يجعل عرض الصفحة مساويًا لعرض الجهاز الفعلي وبتكبير 100% — وهو السطر الأول في أي تصميم متجاوب (Responsive)."
+      ],
+      "examples": [
+        {
+          "title": "وسم التجاوب القياسي",
+          "lang": "html",
+          "source": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+          "preview": false
+        }
+      ],
+      "mistakes": [
+        "نسيان هذا الوسم ثم الاستغراب من ظهور الموقع مصغرًا جدًا على الجوال رغم كتابة CSS متجاوب."
+      ]
+    },
+    {
+      "title": "وسم link: ملفات CSS والأيقونة",
+      "text": [
+        "الوسم <link> ذاتي الإغلاق يربط الصفحة بملفات خارجية. أشهر استخداماته: ربط ملف CSS بـ rel=\"stylesheet\" و href لمسار الملف، وتحديد أيقونة الموقع (Favicon) الظاهرة في التبويب بـ rel=\"icon\".",
+        "أما ملفات JavaScript فتربط بوسم <script src=\"...\"> — ويوضع عادة قبل نهاية </body> أو في head مع السمة defer كي لا يعطل تحميل الصفحة."
+      ],
+      "examples": [
+        {
+          "title": "ربط الملفات الخارجية",
+          "lang": "html",
+          "source": "<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n  <link rel=\"icon\" href=\"favicon.ico\">\n  <script src=\"script.js\" defer></script>\n</head>",
+          "preview": false
+        }
+      ],
+      "notes": [
+        "السمة defer تؤجل تنفيذ السكربت حتى اكتمال بناء الصفحة — بديل حديث عن وضعه آخر body."
+      ],
+      "mistakes": [
+        "كتابة <link> بوسم إغلاق </link> — هو ذاتي الإغلاق.",
+        "الخلط بين <link> لربط الملفات و<a> لروابط التنقل."
+      ]
+    },
+    {
+      "title": "قالب البداية الكامل",
+      "text": [
+        "هذا هو القالب القياسي الذي تبدأ به أي صفحة ويب عربية حديثة — احفظه فهو نقطة انطلاق كل مشاريعك:"
+      ],
+      "examples": [
+        {
+          "title": "قالب صفحة عربية جاهز",
+          "lang": "html",
+          "source": "<!DOCTYPE html>\n<html lang=\"ar\" dir=\"rtl\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"description\" content=\"وصف الصفحة لمحركات البحث\">\n  <title>عنوان الصفحة</title>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n  <header><h1>موقعي</h1></header>\n  <main><p>المحتوى الرئيسي</p></main>\n  <footer><small>© 2026</small></footer>\n  <script src=\"script.js\"></script>\n</body>\n</html>",
+          "preview": true
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-13-q1", "type": "mcq", "diff": "easy", "q": "أين يظهر نص وسم <title>؟", "options": ["أعلى محتوى الصفحة", "في تبويب المتصفح ونتائج البحث", "في التذييل", "لا يظهر أبدًا"], "a": 1, "exp": "يظهر في شريط التبويب وكعنوان النتيجة في محركات البحث." },
+    { "id": "html-13-q2", "type": "fill", "diff": "medium", "q": "وسم meta الذي يجعل الصفحة تتجاوب مع عرض شاشة الجوال هو <meta name=\"____\">.", "a": ["viewport"], "exp": "width=device-width يجعل عرض الصفحة مساويًا لعرض الجهاز." },
+    { "id": "html-13-q3", "type": "mcq", "diff": "medium", "q": "لربط ملف CSS خارجي بالصفحة نستخدم:", "options": ["<style src=\"style.css\">", "<link rel=\"stylesheet\" href=\"style.css\">", "<css href=\"style.css\">", "<script src=\"style.css\">"], "a": 1, "exp": "وسم link مع rel=\"stylesheet\" داخل head." },
+    { "id": "html-13-q4", "type": "mcq", "diff": "medium", "q": "ما وظيفة <meta name=\"description\">؟", "options": ["تغيير خط الصفحة", "وصف يظهر تحت عنوان الصفحة في نتائج البحث", "منع نسخ المحتوى", "تسريع التحميل"], "a": 1, "exp": "الوصف التعريفي مهم جدًا لتحسين الظهور في محركات البحث." },
+    { "id": "html-13-q5", "type": "tf", "diff": "medium", "q": "السمة defer في وسم script تؤجل تنفيذ الملف حتى اكتمال بناء الصفحة.", "a": true, "exp": "بذلك لا يعطل السكربت عرض المحتوى." },
+    { "id": "html-13-q6", "type": "mcq", "diff": "hard", "q": "لماذا يجب وضع <meta charset=\"UTF-8\"> في بداية head؟", "options": ["لأنه شرط لعمل CSS", "ليقرأ المتصفح الترميز قبل معالجة أي نص في الصفحة", "لأن المعيار يمنع وضعه في مكان آخر إطلاقًا", "لتسريع الإنترنت"], "a": 1, "exp": "لو تأخر قد يعالج المتصفح نصوصًا بترميز خاطئ فتظهر رموز مشوهة." }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "css-05",
+  "title": "الحدود Borders",
+  "intro": "الحدود (Borders) إطارات ترسم حول العناصر. تتعلم هنا خصائص النمط والسماكة واللون، والاختصار border، والحواف الدائرية border-radius، وخاصية outline المشابهة والمختلفة.",
+  "sections": [
+    {
+      "title": "خصائص الحد الثلاث",
+      "text": [
+        "يتكون الحد من ثلاث خصائص: border-style نمط الخط وهو الإجباري — بدونه لا يظهر حد إطلاقًا (solid متصل، dashed متقطع شرطات، dotted منقط، double مزدوج)، وborder-width السماكة، وborder-color اللون.",
+        "الاختصار الشائع يجمعها: border: 2px solid #333; بترتيب حر لكن المتعارف عليه: السماكة ثم النمط ثم اللون."
+      ],
+      "examples": [
+        {
+          "title": "أنماط الحدود",
+          "lang": "css",
+          "source": ".b1 { border: 2px solid #6366f1; }\n.b2 { border: 2px dashed #10b981; }\n.b3 { border: 2px dotted #f59e0b; }\n.b4 { border: 4px double #ef4444; }",
+          "preview": true,
+          "previewHtml": "<p class=\"b1\">solid متصل</p><p class=\"b2\">dashed متقطع</p><p class=\"b3\">dotted منقط</p><p class=\"b4\">double مزدوج</p>",
+          "previewCss": "p{padding:6px;margin:6px 0}"
+        }
+      ],
+      "mistakes": [
+        "ضبط العرض واللون ونسيان border-style فلا يظهر شيء — النمط شرط الظهور."
+      ]
+    },
+    {
+      "title": "حدود الجهات المنفردة",
+      "text": [
+        "يمكن رسم حد على جهة واحدة فقط: border-top للأعلى، وborder-bottom للأسفل، وborder-left لليسار، وborder-right لليمين — كل منها يقبل نفس الاختصار الثلاثي. أسلوب شائع لتمييز الاقتباسات والتنبيهات بخط جانبي سميك."
+      ],
+      "examples": [
+        {
+          "title": "تنبيه بحد جانبي",
+          "lang": "css",
+          "source": ".alert {\n  border-right: 5px solid #f59e0b;\n  background: #fef3c7;\n  padding: 10px;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"alert\">تنبيه مهم مميز بخط جانبي أيمن (المناسب لواجهة عربية RTL).</div>"
+        }
+      ],
+      "notes": [
+        "في الواجهات العربية RTL الخط المميز يوضع يمينًا (border-right) بعكس المواقع الإنجليزية."
+      ]
+    },
+    {
+      "title": "الحواف الدائرية border-radius",
+      "text": [
+        "الخاصية border-radius تدور زوايا العنصر: قيمة واحدة لكل الزوايا، أو أربع قيم (أعلى-يسار، أعلى-يمين، أسفل-يمين، أسفل-يسار). القيمة 50% على عنصر مربع تحوله لدائرة كاملة — أسلوب الصور الشخصية الدائرية.",
+        "تعمل border-radius حتى بلا حدود — تدور الخلفية والصورة أيضًا."
+      ],
+      "examples": [
+        {
+          "title": "من مربع إلى دائرة",
+          "lang": "css",
+          "source": ".r1 { border-radius: 8px; }\n.r2 { border-radius: 24px; }\n.r3 { border-radius: 50%; }",
+          "preview": true,
+          "previewHtml": "<div style=\"display:flex;gap:10px\"><div class=\"r1 box\">8px</div><div class=\"r2 box\">24px</div><div class=\"r3 box\">50%</div></div>",
+          "previewCss": ".box{width:80px;height:80px;background:#6366f1;color:#fff;display:flex;align-items:center;justify-content:center}"
+        }
+      ]
+    },
+    {
+      "title": "الخط الخارجي outline والظل box-shadow",
+      "text": [
+        "الخاصية outline ترسم خطًا خارج الحد ولا تحجز مساحة في التخطيط ولا تحرك العناصر المجاورة — يستخدمها المتصفح لإبراز العنصر المركز عليه (Focus). لا تحذفها بـ outline:none دون توفير بديل بصري، فذلك يضر مستخدمي لوحة المفاتيح.",
+        "الخاصية box-shadow تضيف ظلًا: الإزاحة الأفقية ثم العمودية ثم مقدار الضباب ثم اللون. مثال: box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+      ],
+      "examples": [
+        {
+          "title": "بطاقة بظل ناعم",
+          "lang": "css",
+          "source": ".card {\n  background: white;\n  padding: 14px;\n  border-radius: 10px;\n  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"card\">بطاقة عائمة بظل ناعم تحت العنصر.</div>",
+          "previewCss": "body{background:#f1f5f9;padding:16px}"
+        }
+      ],
+      "notes": [
+        "الفرق الجوهري: border يحجز مساحة ويؤثر على حجم العنصر، بينما outline و box-shadow لا يحجزان مساحة."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-05-q1", "type": "mcq", "diff": "easy", "q": "في الاختصار border: 2px solid red — ماذا تمثل كلمة solid؟", "options": ["اللون", "السماكة", "نمط الخط border-style", "الشفافية"], "a": 2, "exp": "solid نمط الخط المتصل، وهو الجزء الإجباري لظهور الحد." },
+    { "id": "css-05-q2", "type": "mcq", "diff": "medium", "q": "ضبطت border-width و border-color ولم يظهر الحد — ما السبب الأرجح؟", "options": ["السماكة صغيرة", "لم تضبط border-style", "اللون شفاف دائمًا", "الحدود تظهر للصور فقط"], "a": 1, "exp": "بلا نمط style لا يرسم المتصفح الحد مهما ضبطت الباقي." },
+    { "id": "css-05-q3", "type": "fill", "diff": "easy", "q": "لتحويل صورة مربعة إلى دائرة كاملة نضبط border-radius بالقيمة ____.", "a": ["50%", "٥٠٪"], "exp": "نصف قطر بنسبة 50% على عنصر مربع يعطي دائرة." },
+    { "id": "css-05-q4", "type": "mcq", "diff": "medium", "q": "أي خاصية ترسم خطًا حول العنصر دون أن تحجز مساحة في التخطيط؟", "options": ["border", "outline", "margin", "padding"], "a": 1, "exp": "outline لا يؤثر على أبعاد العنصر ولا مواضع جيرانه." },
+    { "id": "css-05-q5", "type": "mcq", "diff": "medium", "q": "في box-shadow: 0 4px 12px black — ماذا يمثل الرقم 12px؟", "options": ["الإزاحة الأفقية", "الإزاحة العمودية", "مقدار ضباب الظل Blur", "حجم العنصر"], "a": 2, "exp": "الترتيب: أفقي ثم عمودي ثم الضباب ثم اللون." },
+    { "id": "css-05-q6", "type": "tf", "diff": "medium", "q": "يمكن رسم حد على جهة واحدة فقط مثل border-bottom.", "a": true, "exp": "لكل جهة خاصيتها المستقلة: top و bottom و left و right." }
+  ]
+}

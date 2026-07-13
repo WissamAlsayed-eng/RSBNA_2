@@ -1,0 +1,79 @@
+{
+  "id": "js-14",
+  "title": "التعديل على عناصر الصفحة",
+  "intro": "بعد الوصول للعناصر، حان وقت تغييرها: تعديل النصوص والأنماط، إدارة الفئات بـ classList، إنشاء عناصر جديدة وإضافتها، وحذف الموجود — كل أدوات بناء واجهات ديناميكية.",
+  "sections": [
+    {
+      "title": "تعديل المحتوى والأنماط",
+      "text": [
+        "الكتابة في textContent تستبدل نص العنصر بأمان، وفي innerHTML تستبدل بنيته بوسوم تفسر فعلًا. وتعديل الأنماط عبر الخاصية style بأسماء الخصائص بصيغة سنام الجمل: backgroundColor بدل background-color.",
+        "تحذير أمني مهم: لا تضع نصًا من مستخدم داخل innerHTML أبدًا — قد يحقن وسومًا وسكربتات خبيثة (هجوم XSS). للنصوص استخدم textContent دائمًا."
+      ],
+      "examples": [
+        {
+          "title": "نص ونمط",
+          "lang": "js",
+          "source": "const box = document.querySelector(\"#target\");\nbox.textContent = \"نص جديد وضعه JavaScript\";\nbox.style.backgroundColor = \"#ddd6fe\";\nbox.style.padding = \"10px\";\nbox.style.borderRadius = \"8px\";",
+          "preview": true,
+          "previewHtml": "<div id=\"target\">النص الأصلي</div>"
+        }
+      ]
+    },
+    {
+      "title": "إدارة الفئات: classList",
+      "text": [
+        "بدل التلاعب بالأنماط المباشرة، الأفضل تجهيز فئات CSS وتبديلها من JavaScript عبر classList ودوالها: add تضيف فئة، وremove تحذف، وtoggle تضيف إن غابت وتحذف إن وجدت (مثالية للقوائم والوضع الليلي)، وcontains تفحص الوجود.",
+        "هذا الفصل بين المنطق (JS) والمظهر (CSS) هو الأسلوب الاحترافي."
+      ],
+      "examples": [
+        {
+          "title": "تبديل حالة بفئة",
+          "lang": "js",
+          "source": "const alertBox = document.querySelector(\"#alert\");\nalertBox.classList.add(\"active\");\nconsole.log(alertBox.classList.contains(\"active\")); // true\n\ndocument.querySelector(\"#btn\").addEventListener(\"click\", () => {\n  alertBox.classList.toggle(\"active\");\n});",
+          "preview": true,
+          "previewHtml": "<div id=\"alert\">تنبيه قابل للتفعيل</div><button id=\"btn\">بدّل الحالة</button>",
+          "previewCss": "#alert{padding:10px;border-radius:8px;transition:all .3s} #alert.active{background:#fecaca;border:1px solid #ef4444;font-weight:bold}"
+        }
+      ]
+    },
+    {
+      "title": "إنشاء العناصر وإضافتها",
+      "text": [
+        "ثلاث خطوات: document.createElement(\"الوسم\") ينشئ عنصرًا في الذاكرة، ثم تضبط محتواه وخصائصه، ثم تلحقه بالصفحة: appendChild أو الأحدث append تضيفه آخر الأبناء، وprepend أولهم، وbefore/after قبل أو بعد عنصر."
+      ],
+      "examples": [
+        {
+          "title": "إضافة عناصر لقائمة",
+          "lang": "js",
+          "source": "const list = document.querySelector(\"#list\");\n\nconst newItem = document.createElement(\"li\");\nnewItem.textContent = \"عنصر أنشأه JavaScript\";\nnewItem.style.color = \"green\";\nlist.append(newItem);\n\nconst topItem = document.createElement(\"li\");\ntopItem.textContent = \"وأنا أضفت في المقدمة\";\nlist.prepend(topItem);",
+          "preview": true,
+          "previewHtml": "<ul id=\"list\"><li>عنصر أصلي</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "الحذف والتنقل بين العناصر",
+      "text": [
+        "الدالة remove() تحذف العنصر نفسه من الصفحة. والتنقل في الشجرة: parentElement الأب، وchildren الأبناء، وnextElementSibling و previousElementSibling الأخ التالي والسابق، وclosest(\"محدد\") تصعد لأقرب أب مطابق — مفيدة جدًا مع الأزرار داخل البطاقات."
+      ],
+      "examples": [
+        {
+          "title": "حذف بطاقة بزرها",
+          "lang": "js",
+          "source": "document.querySelectorAll(\".del\").forEach(btn => {\n  btn.addEventListener(\"click\", () => {\n    btn.closest(\".card\").remove();\n  });\n});",
+          "preview": true,
+          "previewHtml": "<div class=\"card\">البطاقة الأولى <button class=\"del\">حذف ✗</button></div><div class=\"card\">البطاقة الثانية <button class=\"del\">حذف ✗</button></div>",
+          "previewCss": ".card{background:#e0e7ff;padding:10px;margin:6px 0;border-radius:8px}"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-14-q1", "type": "mcq", "diff": "easy", "q": "لإنشاء عنصر جديد في الذاكرة نستخدم document.____", "options": ["newElement", "createElement", "addElement", "makeElement"], "a": 1, "exp": "createElement(\"div\") ثم نلحقه بالصفحة بـ append." },
+    { "id": "js-14-q2", "type": "mcq", "diff": "medium", "q": "دالة classList التي تضيف الفئة إن غابت وتحذفها إن وجدت:", "options": ["add", "remove", "toggle", "contains"], "a": 2, "exp": "toggle مثالية لتبديل الحالات كالقوائم والوضع الليلي." },
+    { "id": "js-14-q3", "type": "mcq", "diff": "medium", "q": "في style من JavaScript تكتب خاصية background-color بصيغة:", "options": ["background-color", "backgroundColor", "BACKGROUND_COLOR", "bg-color"], "a": 1, "exp": "الشرطات تتحول إلى سنام جمل camelCase." },
+    { "id": "js-14-q4", "type": "mcq", "diff": "hard", "q": "لماذا يمنع وضع مدخلات المستخدم في innerHTML؟", "options": ["بطيء جدًا", "خطر حقن وسوم وسكربتات خبيثة (XSS)", "لا يدعم العربية", "يحذف الفئات"], "a": 1, "exp": "innerHTML يفسر الوسوم — استخدم textContent للنصوص الخارجية." },
+    { "id": "js-14-q5", "type": "fill", "diff": "medium", "q": "الدالة ____() تحذف العنصر نفسه من الصفحة مباشرة.", "a": ["remove", "remove()"], "exp": "element.remove() الطريقة الحديثة للحذف." },
+    { "id": "js-14-q6", "type": "mcq", "diff": "medium", "q": "closest(\".card\") على زر داخل بطاقة تعيد:", "options": ["أول بطاقة في الصفحة", "أقرب أب (أو ذات العنصر) يطابق المحدد", "كل البطاقات", "أبناء الزر"], "a": 1, "exp": "تصعد في الشجرة حتى أول مطابق — مثالية لأزرار البطاقات." }
+  ]
+}

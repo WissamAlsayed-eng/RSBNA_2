@@ -1,0 +1,24 @@
+{
+  "id": "exam-html",
+  "title": "الامتحان النهائي — HTML",
+  "desc": "امتحان شامل يغطي كل فصول دورة HTML: البنية، الوسوم، الروابط، الصور، الجداول، النماذج، الوسائط، والعناصر الدلالية.",
+  "minutes": 15,
+  "questions": [
+    { "id": "ex-html-01", "type": "mcq", "diff": "easy", "q": "الوسم الجذر الذي يحتضن كل محتويات مستند HTML هو:", "options": ["<body>", "<html>", "<head>", "<!DOCTYPE>"], "a": 1, "exp": "<html> يضم <head> و<body>، أما <!DOCTYPE html> فإعلان قبله." },
+    { "id": "ex-html-02", "type": "fill", "diff": "easy", "q": "وسم الفقرة النصية في HTML هو ____.", "a": ["p", "<p>"], "exp": "<p> اختصار Paragraph." },
+    { "id": "ex-html-03", "type": "mcq", "diff": "medium", "q": "أي سطر يصنع رابطًا يفتح في تبويب جديد؟", "options": ["<a href=\"x.com\" new>", "<a href=\"https://x.com\" target=\"_blank\">", "<a src=\"https://x.com\">", "<link href=\"https://x.com\">"], "a": 1, "exp": "href مع البروتوكول وtarget=\"_blank\" للتبويب الجديد." },
+    { "id": "ex-html-04", "type": "tf", "diff": "easy", "q": "يمكن استخدام أكثر من وسم <h1> بلا أي أثر سلبي على الصفحة.", "a": false, "exp": "الأفضل h1 واحد يصف موضوع الصفحة — تعدده يضعف البنية وSEO." },
+    { "id": "ex-html-05", "type": "mcq", "diff": "medium", "q": "لعرض قائمة خطوات مرتبة بالأرقام نستخدم:", "options": ["<ul>", "<ol>", "<dl>", "<menu>"], "a": 1, "exp": "Ordered List للترتيب المهم، وعناصرها <li>." },
+    { "id": "ex-html-06", "type": "mcq", "diff": "medium", "q": "في الجداول، السمة rowspan تدمج الخلية:", "options": ["أفقيًا عبر الأعمدة", "عموديًا عبر الصفوف", "قطريًا", "لا تدمج شيئًا"], "a": 1, "exp": "rowspan عبر الصفوف عموديًا؛ colspan عبر الأعمدة أفقيًا." },
+    { "id": "ex-html-07", "type": "fill", "diff": "medium", "q": "النص البديل الذي يظهر عند فشل تحميل الصورة يوضع في السمة ____.", "a": ["alt"], "exp": "alt مهمة للإتاحة ومحركات البحث." },
+    { "id": "ex-html-08", "type": "mcq", "diff": "medium", "q": "حقول radio تعمل كمجموعة واحدة (خيار واحد فقط) عندما تتشارك:", "options": ["نفس id", "نفس name", "نفس value", "نفس class"], "a": 1, "exp": "الاسم المشترك يجمعها في مجموعة اختيار مفرد." },
+    { "id": "ex-html-09", "type": "mcq", "diff": "medium", "q": "أي عنصر دلالي يمثل المحتوى المستقل القابل للنشر وحده كتدوينة أو خبر؟", "options": ["<section>", "<aside>", "<article>", "<main>"], "a": 2, "exp": "article محتوى مكتمل بذاته." },
+    { "id": "ex-html-10", "type": "tf", "diff": "medium", "q": "بدون السمة controls لا تظهر أزرار التحكم في مشغل <audio> و<video>.", "a": true, "exp": "controls شرط ظهور واجهة التشغيل." },
+    { "id": "ex-html-11", "type": "mcq", "diff": "hard", "q": "الفرق بين <input readonly> و <input disabled> عند إرسال النموذج:", "options": ["كلاهما تُرسل قيمته", "readonly تُرسل قيمته وdisabled لا تُرسل", "disabled تُرسل قيمته فقط", "كلاهما لا يُرسل"], "a": 1, "exp": "قيم الحقول المعطلة disabled تستثنى من الإرسال." },
+    { "id": "ex-html-12", "type": "mcq", "diff": "medium", "q": "وسم meta الذي يضبط التجاوب مع شاشة الجوال يحمل name بقيمة:", "options": ["charset", "viewport", "responsive", "mobile"], "a": 1, "exp": "viewport مع content=\"width=device-width, initial-scale=1.0\"." },
+    { "id": "ex-html-13", "type": "fill", "diff": "medium", "q": "لعرض أسطر كود متعددة بمسافاتها كما هي نستخدم الوسم ____ وبداخله code.", "a": ["pre", "<pre>"], "exp": "pre اختصار Preformatted يحفظ المسافات والأسطر." },
+    { "id": "ex-html-14", "type": "mcq", "diff": "hard", "q": "أي بنية صحيحة لقائمة متداخلة؟", "options": ["<ul><li>أ</li><ul><li>ب</li></ul></ul>", "<ul><li>أ<ul><li>ب</li></ul></li></ul>", "<ul><ul><li>ب</li></ul></ul>", "<li><ul>ب</ul></li>"], "a": 1, "exp": "القائمة الفرعية توضع داخل عنصر li الأب قبل إغلاقه." },
+    { "id": "ex-html-15", "type": "mcq", "diff": "medium", "q": "الوسم <label> يرتبط بحقل الإدخال عبر:", "options": ["سمة for تساوي id الحقل", "سمة link", "وضعهما بنفس اللون", "سمة name فقط"], "a": 0, "exp": "for=\"id-الحقل\" يجعل النقر على التسمية تنشيطًا للحقل." },
+    { "id": "ex-html-16", "type": "tf", "diff": "medium", "q": "وسم <figcaption> يجب أن يكون داخل عنصر <figure>.", "a": true, "exp": "الاثنان يعملان معًا: figure للمحتوى وfigcaption لوصفه." }
+  ]
+}

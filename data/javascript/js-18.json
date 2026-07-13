@@ -1,0 +1,83 @@
+{
+  "id": "js-18",
+  "title": "JSON والتخزين المحلي",
+  "intro": "الدرس الأخير: JSON صيغة تبادل البيانات القياسية، وLocal Storage مخزن دائم داخل المتصفح. معًا يتيحان حفظ إعدادات المستخدم وقوائمه وتقدمه — حتى بعد إغلاق المتصفح، وبلا أي خادم.",
+  "sections": [
+    {
+      "title": "ما هي JSON؟",
+      "text": [
+        "JSON (اختصار JavaScript Object Notation) صيغة نصية لتمثيل البيانات، تشبه كائنات JavaScript لكن بقواعد أصرم: المفاتيح بين علامات تنصيص مزدوجة إجباريًا، والنصوص بمزدوجة فقط، ولا تعليقات ولا فواصل زائدة في النهاية ولا دوال.",
+        "أصبحت JSON لغة تخاطب الأنظمة: بها ترسل الخوادم بياناتها وتخزن الإعدادات — وملفات دروس هذه المنصة نفسها ملفات JSON!"
+      ],
+      "examples": [
+        {
+          "title": "شكل JSON صالح",
+          "lang": "js",
+          "source": "const jsonText = `{\n  \"name\": \"سالم\",\n  \"age\": 25,\n  \"skills\": [\"HTML\", \"CSS\"],\n  \"active\": true\n}`;\nconsole.log(typeof jsonText); // string — نص وليس كائنًا بعد",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "التحويل: JSON.stringify و JSON.parse",
+      "text": [
+        "الاتجاهان: JSON.stringify(كائن) يحول كائنًا أو مصفوفة إلى نص JSON — للتخزين أو الإرسال. وJSON.parse(نص) يحول نص JSON عائدًا إلى كائن حي تتعامل معه.",
+        "تذكرة: stringify = كائن ← نص، وparse = نص ← كائن. وparse على نص غير صالح يرمي خطأ — غلفه بـ try/catch مع البيانات الخارجية."
+      ],
+      "examples": [
+        {
+          "title": "ذهاب وإياب",
+          "lang": "js",
+          "source": "const user = { name: \"ليلى\", scores: [90, 85] };\n\nconst text = JSON.stringify(user);\nconsole.log(text);          // نص JSON\n\nconst back = JSON.parse(text);\nconsole.log(back.name);     // ليلى — عاد كائنًا\nconsole.log(back.scores[0]); // 90",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "التخزين المحلي localStorage",
+      "text": [
+        "الكائن localStorage يخزن بيانات دائمة في متصفح المستخدم (تبقى بعد الإغلاق وإعادة التشغيل)، خاصة بنطاق موقعك، بسعة نحو 5 ميغابايت. دواله: setItem(المفتاح, القيمة) للحفظ، وgetItem للقراءة (تعيد null إن غاب المفتاح)، وremoveItem للحذف، وclear لمسح الكل.",
+        "قيده الوحيد: يخزن نصوصًا فقط — وهنا يأتي دور JSON: stringify قبل الحفظ وparse بعد القراءة. (يوجد شقيق sessionStorage بنفس الواجهة لكنه يمسح بإغلاق التبويب)."
+      ],
+      "examples": [
+        {
+          "title": "حفظ واسترجاع كائن",
+          "lang": "js",
+          "source": "const settings = { theme: \"dark\", fontSize: 18 };\n\n// الحفظ: كائن -> نص\nlocalStorage.setItem(\"settings\", JSON.stringify(settings));\n\n// الاسترجاع: نص -> كائن (مع قيمة احتياطية)\nconst saved = JSON.parse(localStorage.getItem(\"settings\")) || {};\nconsole.log(\"الوضع المحفوظ:\", saved.theme);\nconsole.log(\"حجم الخط:\", saved.fontSize);",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "تخزين كائن مباشرة بلا stringify فيحفظ النص عديم الفائدة \"[object Object]\".",
+        "نسيان أن getItem تعيد null لمفتاح غائب — وparse(null) يعيد null فتأمن، لكن الوصول لخصائصه يرمي خطأ؛ وفر قيمة احتياطية بـ ||."
+      ]
+    },
+    {
+      "title": "تطبيق ختامي: عداد زيارات محفوظ",
+      "text": [
+        "مثال يجمع كل شيء: قراءة قيمة محفوظة، وزيادتها، وحفظها من جديد، وعرضها — نفس النمط الذي تحفظ به هذه المنصة تقدمك في الدروس."
+      ],
+      "examples": [
+        {
+          "title": "عداد يتذكر",
+          "lang": "js",
+          "source": "let visits = Number(localStorage.getItem(\"visits\") || 0);\nvisits++;\nlocalStorage.setItem(\"visits\", visits);\n\ndocument.querySelector(\"#counter\").textContent =\n  `عدد تشغيلات هذا المثال: ${visits}`;\nconsole.log(\"أعد تشغيل المثال وشاهد الرقم يزيد!\");",
+          "preview": true,
+          "previewHtml": "<p id=\"counter\" style=\"font-weight:bold\"></p>"
+        }
+      ],
+      "notes": [
+        "تصفح خصوصي أو مسح بيانات الموقع يمسح localStorage — لا تعتمد عليه للبيانات الحرجة."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-18-q1", "type": "mcq", "diff": "easy", "q": "ما معنى الاختصار JSON؟", "options": ["Java Standard Object Names", "JavaScript Object Notation", "Joined Server Online Network", "JavaScript Online Nodes"], "a": 1, "exp": "صيغة تدوين الكائنات بجافاسكربت — معيار تبادل البيانات." },
+    { "id": "js-18-q2", "type": "mcq", "diff": "medium", "q": "لتحويل كائن إلى نص JSON قبل تخزينه نستخدم:", "options": ["JSON.parse", "JSON.stringify", "toString", "String()"], "a": 1, "exp": "stringify = كائن إلى نص؛ وparse العكس." },
+    { "id": "js-18-q3", "type": "fill", "diff": "medium", "q": "الدالة JSON.________ تحول نص JSON إلى كائن JavaScript حي.", "a": ["parse", "parse()"], "exp": "JSON.parse(text) — وترمي خطأ إن كان النص غير صالح." },
+    { "id": "js-18-q4", "type": "mcq", "diff": "medium", "q": "ماذا تعيد localStorage.getItem لمفتاح غير موجود؟", "options": ["نصًا فارغًا", "undefined", "null", "خطأ"], "a": 2, "exp": "null — لذا وفر قيمة احتياطية عند القراءة." },
+    { "id": "js-18-q5", "type": "tf", "diff": "medium", "q": "بيانات localStorage تمسح تلقائيًا عند إغلاق المتصفح.", "a": false, "exp": "تبقى دائمة حتى تمسح يدويًا؛ الذي يمسح بالإغلاق هو sessionStorage." },
+    { "id": "js-18-q6", "type": "mcq", "diff": "hard", "q": "خزنت كائنًا بـ setItem(\"u\", user) مباشرة — ماذا حفظ فعليًا؟", "options": ["الكائن كاملًا", "النص \"[object Object]\" عديم الفائدة", "لا شيء", "مفاتيح الكائن فقط"], "a": 1, "exp": "localStorage نصوص فقط — يجب JSON.stringify أولًا." },
+    { "id": "js-18-q7", "type": "tf", "diff": "medium", "q": "في صيغة JSON يجب وضع المفاتيح بين علامات تنصيص مزدوجة.", "a": true, "exp": "من قواعد JSON الصارمة التي تخالف مرونة JavaScript." }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "courses": [
+    {
+      "id": "html",
+      "name": "HTML",
+      "title": "دورة HTML — من الصفر إلى المستوى المتوسط",
+      "icon": "🧡",
+      "color": "#e34f26",
+      "desc": "لغة بناء هيكل صفحات الويب: الوسوم، الروابط، الصور، الجداول، النماذج، الوسائط، والعناصر الدلالية — مع أمثلة عملية واختبار بعد كل فصل.",
+      "lessons": [
+        { "id": "html-01", "title": "مقدمة إلى HTML وبنية الصفحة", "icon": "🏁" },
+        { "id": "html-02", "title": "العناوين Headings", "icon": "🔠" },
+        { "id": "html-03", "title": "الفقرات وتنسيق النصوص", "icon": "✍️" },
+        { "id": "html-04", "title": "الروابط Links", "icon": "🔗" },
+        { "id": "html-05", "title": "الصور Images", "icon": "🖼️" },
+        { "id": "html-06", "title": "القوائم Lists", "icon": "📋" },
+        { "id": "html-07", "title": "الجداول Tables", "icon": "📊" },
+        { "id": "html-08", "title": "النماذج Forms", "icon": "📝" },
+        { "id": "html-09", "title": "أنواع الإدخال Input Types", "icon": "⌨️" },
+        { "id": "html-10", "title": "الوسائط Audio و Video", "icon": "🎬" },
+        { "id": "html-11", "title": "العناصر الدلالية Semantic", "icon": "🧭" },
+        { "id": "html-12", "title": "السمات Attributes", "icon": "🏷️" },
+        { "id": "html-13", "title": "وسوم Meta ورأس الصفحة", "icon": "🧠" }
+      ]
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "title": "دورة CSS — من الصفر إلى المستوى المتوسط",
+      "icon": "💙",
+      "color": "#2965f1",
+      "desc": "لغة تنسيق صفحات الويب: الألوان، الخلفيات، الحدود، نموذج الصندوق، التموضع، Flexbox، الخطوط، والانتقالات — بأمثلة مرئية مباشرة.",
+      "lessons": [
+        { "id": "css-01", "title": "مقدمة إلى CSS", "icon": "🏁" },
+        { "id": "css-02", "title": "المحددات Selectors", "icon": "🎯" },
+        { "id": "css-03", "title": "الألوان Colors", "icon": "🎨" },
+        { "id": "css-04", "title": "الخلفيات Backgrounds", "icon": "🖌️" },
+        { "id": "css-05", "title": "الحدود Borders", "icon": "🔲" },
+        { "id": "css-06", "title": "نموذج الصندوق: Margin و Padding", "icon": "📦" },
+        { "id": "css-07", "title": "الأبعاد Width و Height", "icon": "📏" },
+        { "id": "css-08", "title": "خاصية Display", "icon": "🧱" },
+        { "id": "css-09", "title": "التموضع Position", "icon": "📍" },
+        { "id": "css-10", "title": "أساسيات Flexbox", "icon": "🧲" },
+        { "id": "css-11", "title": "الخطوط Typography", "icon": "🔤" },
+        { "id": "css-12", "title": "تنسيق النصوص Text", "icon": "✏️" },
+        { "id": "css-13", "title": "تنسيق القوائم والجداول", "icon": "🗂️" },
+        { "id": "css-14", "title": "Overflow و Opacity و Cursor", "icon": "🌀" },
+        { "id": "css-15", "title": "الانتقالات Transitions والتأثيرات", "icon": "✨" }
+      ]
+    },
+    {
+      "id": "js",
+      "name": "JavaScript",
+      "title": "دورة JavaScript — من الصفر إلى المستوى المتوسط",
+      "icon": "💛",
+      "color": "#f0b90b",
+      "desc": "لغة برمجة صفحات الويب: المتغيرات، الشروط، الحلقات، الدوال، المصفوفات، الكائنات، DOM، الأحداث، والتخزين المحلي — خطوة بخطوة.",
+      "lessons": [
+        { "id": "js-01", "title": "مقدمة إلى JavaScript", "icon": "🏁" },
+        { "id": "js-02", "title": "المتغيرات Variables", "icon": "📦" },
+        { "id": "js-03", "title": "أنواع البيانات Data Types", "icon": "🧬" },
+        { "id": "js-04", "title": "العمليات Operators", "icon": "➕" },
+        { "id": "js-05", "title": "الشروط Conditions", "icon": "🚦" },
+        { "id": "js-06", "title": "الحلقات Loops", "icon": "🔁" },
+        { "id": "js-07", "title": "الدوال Functions", "icon": "🧩" },
+        { "id": "js-08", "title": "المصفوفات Arrays", "icon": "📚" },
+        { "id": "js-09", "title": "دوال المصفوفات الحديثة", "icon": "🛠️" },
+        { "id": "js-10", "title": "الكائنات Objects", "icon": "🗃️" },
+        { "id": "js-11", "title": "النصوص Strings", "icon": "🔡" },
+        { "id": "js-12", "title": "الأرقام والرياضيات Numbers و Math", "icon": "🔢" },
+        { "id": "js-13", "title": "مقدمة DOM والوصول إلى العناصر", "icon": "🌳" },
+        { "id": "js-14", "title": "التعديل على عناصر الصفحة", "icon": "🎛️" },
+        { "id": "js-15", "title": "الأحداث Events", "icon": "🖱️" },
+        { "id": "js-16", "title": "النماذج والتحقق Forms و Validation", "icon": "✅" },
+        { "id": "js-17", "title": "المؤقتات Timers", "icon": "⏱️" },
+        { "id": "js-18", "title": "JSON والتخزين المحلي", "icon": "💾" }
+      ]
+    }
+  ],
+  "exams": [
+    { "id": "exam-html", "lang": "html", "title": "الامتحان النهائي — HTML", "icon": "🧡", "file": "data/exams/exam-html.json", "minutes": 15 },
+    { "id": "exam-css", "lang": "css", "title": "الامتحان النهائي — CSS", "icon": "💙", "file": "data/exams/exam-css.json", "minutes": 15 },
+    { "id": "exam-js", "lang": "js", "title": "الامتحان النهائي — JavaScript", "icon": "💛", "file": "data/exams/exam-js.json", "minutes": 15 },
+    { "id": "exam-final", "lang": "all", "title": "الامتحان الشامل: HTML + CSS + JavaScript", "icon": "🏆", "file": "data/exams/exam-final.json", "minutes": 30 }
+  ]
+}

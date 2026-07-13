@@ -1,0 +1,83 @@
+{
+  "id": "css-12",
+  "title": "تنسيق النصوص Text",
+  "intro": "بعد اختيار الخط تأتي خصائص النص نفسه: المحاذاة text-align، والزخرفة text-decoration، وتحويل الحالة text-transform، والمسافات بين الحروف والكلمات، والإزاحة، وظل النص text-shadow.",
+  "sections": [
+    {
+      "title": "المحاذاة text-align والاتجاه direction",
+      "text": [
+        "الخاصية text-align تحاذي النص داخل عنصره: right يمين، وleft يسار، وcenter وسط، وjustify ضبط كامل بمساواة طرفي الأسطر (كالصحف). وتوجد قيمتان منطقيتان: start بداية الاتجاه و end نهايته — تتكيفان مع لغة الصفحة.",
+        "الخاصية direction بقيمة rtl أو ltr تضبط اتجاه النص من CSS — لكن الأفضل ضبط الاتجاه من سمة dir في HTML لأنه شأن بنيوي."
+      ],
+      "examples": [
+        {
+          "title": "قيم المحاذاة",
+          "lang": "css",
+          "source": ".t-right  { text-align: right; }\n.t-center { text-align: center; }\n.t-just   { text-align: justify; }",
+          "preview": true,
+          "previewHtml": "<p class=\"t-right\">محاذاة يمين — الافتراضي في الصفحات العربية.</p><p class=\"t-center\">توسيط — للعناوين والاقتباسات.</p><p class=\"t-just\">ضبط كامل يساوي أطراف الأسطر الطويلة فيمنح النص مظهرًا منظمًا كالصحف والكتب المطبوعة عند تعدد الأسطر في الفقرة الواحدة.</p>",
+          "previewCss": "p{background:#f1f5f9;padding:6px;margin:4px 0}"
+        }
+      ]
+    },
+    {
+      "title": "الزخرفة text-decoration",
+      "text": [
+        "الخاصية text-decoration تضيف خطوطًا على النص: underline تحته، وoverline فوقه، وline-through شطب، وnone لإزالة أي خط — وأشهر استخدام لها إزالة الخط السفلي الافتراضي من الروابط.",
+        "يمكن التحكم بتفاصيل الخط: text-decoration: underline wavy red; يرسم خطًا متموجًا أحمر (النمط: solid و double و dotted و dashed و wavy)."
+      ],
+      "examples": [
+        {
+          "title": "أنواع الزخرفة",
+          "lang": "css",
+          "source": ".u { text-decoration: underline; }\n.l { text-decoration: line-through; }\n.w { text-decoration: underline wavy crimson; }\na  { text-decoration: none; }",
+          "preview": true,
+          "previewHtml": "<p class=\"u\">خط سفلي</p><p class=\"l\">نص مشطوب</p><p class=\"w\">خط متموج أحمر</p><a href=\"#\">رابط بلا خط سفلي</a>"
+        }
+      ],
+      "mistakes": [
+        "إزالة الخط السفلي من الروابط دون تمييزها بلون واضح — يفقد الزائر القدرة على معرفة الروابط."
+      ]
+    },
+    {
+      "title": "تحويل الحالة text-transform والمسافات",
+      "text": [
+        "الخاصية text-transform تحول حالة الأحرف اللاتينية: uppercase كلها كبيرة، وlowercase كلها صغيرة، وcapitalize أول حرف من كل كلمة كبير. (لا تؤثر على العربية).",
+        "خصائص المسافات: letter-spacing بين الحروف، وword-spacing بين الكلمات، وtext-indent إزاحة أول سطر من الفقرة، وwhite-space: nowrap تمنع النص من الالتفاف لسطر جديد."
+      ],
+      "examples": [
+        {
+          "title": "تحويل ومباعدة",
+          "lang": "css",
+          "source": ".up { text-transform: uppercase; letter-spacing: 3px; }\n.indent { text-indent: 40px; }",
+          "preview": true,
+          "previewHtml": "<p class=\"up\">web development</p><p class=\"indent\">فقرة بإزاحة في أول سطر منها فقط، كما في الكتب المطبوعة التقليدية حيث تبدأ الفقرات بإزاحة تميزها عن سابقتها.</p>"
+        }
+      ]
+    },
+    {
+      "title": "ظل النص text-shadow والتعامل مع الفائض",
+      "text": [
+        "الخاصية text-shadow تضيف ظلًا للنص: الإزاحة الأفقية ثم العمودية ثم الضباب ثم اللون. ظل خفيف يحسن مقروئية النص فوق الصور، ويمكن تكديس عدة ظلال بفواصل.",
+        "لقص النص الطويل بأناقة تستخدم ثلاثية شهيرة: overflow: hidden مع white-space: nowrap و text-overflow: ellipsis — فيظهر النص المقصوص منتهيًا بثلاث نقاط (…)."
+      ],
+      "examples": [
+        {
+          "title": "ظل وقص بثلاث نقاط",
+          "lang": "css",
+          "source": ".shadow {\n  font-size: 1.6rem;\n  font-weight: bold;\n  color: #4f46e5;\n  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);\n}\n.ellipsis {\n  width: 200px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  background: #f1f5f9;\n}",
+          "preview": true,
+          "previewHtml": "<p class=\"shadow\">نص بظل ناعم</p><p class=\"ellipsis\">هذا نص طويل جدًا سيقص وتظهر بدل بقيته ثلاث نقاط أنيقة</p>"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-12-q1", "type": "mcq", "diff": "easy", "q": "لتوسيط نص عنوان داخل عنصره نستخدم:", "options": ["align: middle", "text-align: center", "margin: auto", "justify-content: center"], "a": 1, "exp": "text-align: center توسط النص داخل العنصر الكتلي." },
+    { "id": "css-12-q2", "type": "mcq", "diff": "easy", "q": "لإزالة الخط السفلي الافتراضي من الروابط:", "options": ["text-decoration: none", "underline: false", "text-style: clean", "border: none"], "a": 0, "exp": "none تزيل كل زخارف الخطوط." },
+    { "id": "css-12-q3", "type": "fill", "diff": "medium", "q": "الخاصية text-________ بقيمة uppercase تحول الأحرف اللاتينية إلى كبيرة.", "a": ["transform"], "exp": "text-transform: uppercase / lowercase / capitalize." },
+    { "id": "css-12-q4", "type": "mcq", "diff": "medium", "q": "الخاصية letter-spacing تتحكم بالمسافة بين:", "options": ["الأسطر", "الكلمات", "الحروف", "الفقرات"], "a": 2, "exp": "letter للحروف وword-spacing للكلمات وline-height للأسطر." },
+    { "id": "css-12-q5", "type": "mcq", "diff": "hard", "q": "أي ثلاثية تقص النص الطويل وتظهر ثلاث نقاط؟", "options": ["display:none + overflow + width", "overflow:hidden + white-space:nowrap + text-overflow:ellipsis", "text-align + direction + rtl", "font-size:0 + padding + margin"], "a": 1, "exp": "الثلاثة معًا شرط: منع الالتفاف، إخفاء الفائض، واستبداله بنقاط." },
+    { "id": "css-12-q6", "type": "tf", "diff": "medium", "q": "في text-shadow: 2px 4px 6px black — الرقم 6px هو مقدار ضباب الظل.", "a": true, "exp": "الترتيب: إزاحة أفقية، عمودية، ضباب، لون." }
+  ]
+}

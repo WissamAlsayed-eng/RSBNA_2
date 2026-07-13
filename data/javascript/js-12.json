@@ -1,0 +1,79 @@
+{
+  "id": "js-12",
+  "title": "الأرقام والرياضيات Numbers و Math",
+  "intro": "كل ما يخص الأرقام: التحويل من نص، والتقريب، والتحقق من الصلاحية NaN، وكائن Math بدواله الجاهزة، وتوليد الأرقام العشوائية — أساس الألعاب والاختبارات العشوائية.",
+  "sections": [
+    {
+      "title": "التحويل والتقريب",
+      "text": [
+        "التحويل من نص: Number() تحول النص كاملًا (وتفشل بـ NaN إن احتوى غير رقمي)، وparseInt تستخرج العدد الصحيح من بداية النص وتتجاهل الباقي (مثالية لـ \"12px\")، وparseFloat مثلها للعشري.",
+        "التقريب على الأعداد: toFixed(n) تقرب لعدد منازل عشرية وتعيد نصًا — الأشهر لعرض الأسعار."
+      ],
+      "examples": [
+        {
+          "title": "تحويلات",
+          "lang": "js",
+          "source": "console.log(Number(\"42.5\"));    // 42.5\nconsole.log(parseInt(\"12px\"));  // 12\nconsole.log(parseFloat(\"3.14 متر\")); // 3.14\nconsole.log((19.987).toFixed(2)); // \"19.99\" نص!",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "احذر دقة الفاصلة العائمة: 0.1 + 0.2 يعطي 0.30000000000000004 — قارن الأعداد العشرية بعد toFixed أو بفارق صغير."
+      ]
+    },
+    {
+      "title": "القيمة NaN والتحقق",
+      "text": [
+        "NaN (اختصار Not a Number) ناتج عملية رقمية فاشلة، ومن غرائبها أنها لا تساوي نفسها: NaN === NaN يعطي false! لذا نفحصها بالدالة Number.isNaN() أو نفحص صلاحية الرقم بـ Number.isFinite()."
+      ],
+      "examples": [
+        {
+          "title": "فحص صحة الأرقام",
+          "lang": "js",
+          "source": "const bad = Number(\"abc\");\nconsole.log(bad);                    // NaN\nconsole.log(bad === NaN);            // false — مفاجأة!\nconsole.log(Number.isNaN(bad));      // true الفحص الصحيح\nconsole.log(Number.isFinite(42));    // true رقم صالح",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "كائن Math",
+      "text": [
+        "كائن Math جاهز بدوال رياضية: Math.round تقريب لأقرب صحيح، وMath.floor للأسفل دائمًا، وMath.ceil للأعلى دائمًا، وMath.abs القيمة المطلقة، وMath.pow الأس وMath.sqrt الجذر، وMath.min/Math.max أصغر وأكبر مجموعة أرقام، وثابت Math.PI."
+      ],
+      "examples": [
+        {
+          "title": "جولة في Math",
+          "lang": "js",
+          "source": "console.log(Math.round(4.5));  // 5\nconsole.log(Math.floor(4.9));  // 4 أرضية\nconsole.log(Math.ceil(4.1));   // 5 سقف\nconsole.log(Math.abs(-7));     // 7\nconsole.log(Math.max(3, 9, 1)); // 9\nconsole.log(Math.sqrt(81));    // 9",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "الأرقام العشوائية Math.random",
+      "text": [
+        "الدالة Math.random() تعيد عشوائيًا عشريًا من 0 (مشمول) إلى 1 (غير مشمول). الوصفة الذهبية لعدد صحيح عشوائي بين min و max شاملًا الطرفين: Math.floor(Math.random() * (max - min + 1)) + min."
+      ],
+      "examples": [
+        {
+          "title": "نرد إلكتروني",
+          "lang": "js",
+          "source": "function rollDice() {\n  return Math.floor(Math.random() * 6) + 1;\n}\n\nconsole.log(\"رمية 1:\", rollDice());\nconsole.log(\"رمية 2:\", rollDice());\nconsole.log(\"رمية 3:\", rollDice());",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "نسيان Math.floor فتحصل على عشري مثل 3.7 بدل عدد صحيح.",
+        "نسيان +1 فلا يظهر الحد الأعلى أبدًا (النرد لا يعطي 6)."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-12-q1", "type": "mcq", "diff": "easy", "q": "Math.floor(7.9) يعيد:", "options": ["8", "7", "7.9", "0.9"], "a": 1, "exp": "floor أرضية: للأسفل دائمًا مهما كان الكسر." },
+    { "id": "js-12-q2", "type": "mcq", "diff": "medium", "q": "parseInt(\"25km\") يعيد:", "options": ["NaN", "25", "\"25km\"", "خطأ"], "a": 1, "exp": "parseInt تستخرج العدد من البداية وتتجاهل الباقي." },
+    { "id": "js-12-q3", "type": "mcq", "diff": "medium", "q": "الفحص الصحيح لكون القيمة NaN:", "options": ["x === NaN", "Number.isNaN(x)", "x == \"NaN\"", "typeof x === \"nan\""], "a": 1, "exp": "NaN لا تساوي نفسها فلا تنفع المقارنة المباشرة." },
+    { "id": "js-12-q4", "type": "fill", "diff": "easy", "q": "الدالة Math.________() تعيد رقمًا عشوائيًا بين 0 و 1.", "a": ["random", "random()"], "exp": "الصفر مشمول والواحد غير مشمول." },
+    { "id": "js-12-q5", "type": "mcq", "diff": "hard", "q": "لعدد صحيح عشوائي من 1 إلى 10 شاملًا:", "options": ["Math.random() * 10", "Math.floor(Math.random() * 10) + 1", "Math.round(10)", "Math.ceil(Math.random())"], "a": 1, "exp": "floor(random × 10) يعطي 0-9 ثم +1 يعطي 1-10." },
+    { "id": "js-12-q6", "type": "tf", "diff": "medium", "q": "الدالة toFixed(2) تعيد رقمًا من نوع Number.", "a": false, "exp": "تعيد نصًا String — حوله بـ Number() إن أردت الحساب به." }
+  ]
+}

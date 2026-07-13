@@ -1,0 +1,69 @@
+{
+  "id": "js-16",
+  "title": "النماذج والتحقق Forms و Validation",
+  "intro": "قراءة قيم الحقول، واعتراض الإرسال، والتحقق من صحة البيانات وعرض رسائل خطأ واضحة — مهارة يحتاجها كل موقع فيه تسجيل أو تواصل. هذا الدرس يبني نموذجًا متكامل التحقق.",
+  "sections": [
+    {
+      "title": "قراءة قيم الحقول",
+      "text": [
+        "الخاصية value تقرأ وتكتب قيمة الحقول النصية والقوائم select و textarea. أما مربع الاختيار checkbox وزر radio فحالتهما في الخاصية checked (منطقية true/false)."
+      ],
+      "examples": [
+        {
+          "title": "قراءة أنواع مختلفة",
+          "lang": "js",
+          "source": "document.querySelector(\"#show\").addEventListener(\"click\", () => {\n  const name = document.querySelector(\"#name\").value;\n  const level = document.querySelector(\"#level\").value;\n  const agreed = document.querySelector(\"#agree\").checked;\n  console.log(`الاسم: ${name} | المستوى: ${level} | موافق: ${agreed}`);\n});",
+          "preview": true,
+          "previewHtml": "<input id=\"name\" placeholder=\"الاسم\"><select id=\"level\"><option value=\"مبتدئ\">مبتدئ</option><option value=\"متوسط\">متوسط</option></select><label><input type=\"checkbox\" id=\"agree\"> أوافق</label><button id=\"show\">اعرض القيم</button>"
+        }
+      ],
+      "notes": [
+        "قيمة value نص دائمًا حتى في type=\"number\" — حولها بـ Number() قبل الحساب."
+      ]
+    },
+    {
+      "title": "اعتراض الإرسال: حدث submit و preventDefault",
+      "text": [
+        "الحدث submit يقع على النموذج <form> نفسه (لا على الزر) عند محاولة الإرسال. السلوك الافتراضي إعادة تحميل الصفحة وإرسال البيانات — نعترضه بـ e.preventDefault() لنتحقق أولًا، ثم نقرر الإكمال أو إظهار الأخطاء.",
+        "ميزة الاستماع على submit بدل click على الزر: يلتقط أيضًا الإرسال بمفتاح Enter."
+      ],
+      "examples": [
+        {
+          "title": "اعتراض النموذج",
+          "lang": "js",
+          "source": "document.querySelector(\"#f\").addEventListener(\"submit\", (e) => {\n  e.preventDefault(); // لا تعد تحميل الصفحة\n  const email = document.querySelector(\"#em\").value.trim();\n  document.querySelector(\"#msg\").textContent =\n    email ? `تم الاستلام: ${email}` : \"الحقل فارغ!\";\n});",
+          "preview": true,
+          "previewHtml": "<form id=\"f\"><input id=\"em\" placeholder=\"بريدك\"><button type=\"submit\">أرسل</button></form><p id=\"msg\"></p>"
+        }
+      ]
+    },
+    {
+      "title": "قواعد التحقق الشائعة",
+      "text": [
+        "أشهر الفحوصات: الحقل غير فارغ بعد trim، وطول أدنى للكلمات السرية، وتطابق كلمة المرور مع تأكيدها، وصيغة البريد (أبسط فحص عملي: يحتوي @ ونقطة بعدها، أو تعبير نمطي Regular Expression جاهز)، وكون القيمة رقمية ضمن مدى.",
+        "مبدأ حاسم: تحقق المتصفح وJavaScript تحسين لتجربة المستخدم فقط — يمكن تجاوزهما؛ التحقق الملزم يجب أن يحدث في الخادم أيضًا (في المواقع التي لها خادم)."
+      ],
+      "examples": [
+        {
+          "title": "نموذج تسجيل متكامل التحقق",
+          "lang": "js",
+          "source": "const form = document.querySelector(\"#reg\");\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const user = document.querySelector(\"#u\").value.trim();\n  const pass = document.querySelector(\"#p\").value;\n  const errors = [];\n\n  if (user.length < 3) errors.push(\"الاسم 3 أحرف على الأقل\");\n  if (pass.length < 6) errors.push(\"كلمة المرور 6 أحرف على الأقل\");\n\n  const out = document.querySelector(\"#errs\");\n  if (errors.length) {\n    out.style.color = \"crimson\";\n    out.textContent = \"⚠ \" + errors.join(\" — \");\n  } else {\n    out.style.color = \"green\";\n    out.textContent = \"✓ البيانات سليمة، تم التسجيل!\";\n  }\n});",
+          "preview": true,
+          "previewHtml": "<form id=\"reg\"><input id=\"u\" placeholder=\"اسم المستخدم\"><br><br><input id=\"p\" type=\"password\" placeholder=\"كلمة المرور\"><br><br><button type=\"submit\">سجل</button></form><p id=\"errs\"></p>"
+        }
+      ],
+      "mistakes": [
+        "نسيان preventDefault فتعاد الصفحة وتضيع رسائل الخطأ في لمح البصر.",
+        "مقارنة كلمة المرور قبل trim للاسم وبعده للتأكيد — كن متسقًا في التنظيف."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-16-q1", "type": "mcq", "diff": "easy", "q": "لقراءة نص حقل إدخال نستخدم الخاصية:", "options": ["text", "value", "content", "innerHTML"], "a": 1, "exp": "input.value للحقول النصية والقوائم." },
+    { "id": "js-16-q2", "type": "mcq", "diff": "medium", "q": "حالة مربع الاختيار checkbox تقرأ من الخاصية:", "options": ["value", "checked", "selected", "state"], "a": 1, "exp": "checked تعيد true إن كان محددًا." },
+    { "id": "js-16-q3", "type": "fill", "diff": "medium", "q": "لمنع النموذج من إعادة تحميل الصفحة عند الإرسال نستدعي e.____________().", "a": ["preventDefault", "preventdefault"], "exp": "داخل مستمع حدث submit." },
+    { "id": "js-16-q4", "type": "mcq", "diff": "medium", "q": "لماذا نستمع لحدث submit على النموذج بدل click على الزر؟", "options": ["أسرع", "يلتقط الإرسال بمفتاح Enter أيضًا", "click لا يعمل مع النماذج", "لا فرق"], "a": 1, "exp": "الإرسال يقع بطرق متعددة وsubmit يلتقطها كلها." },
+    { "id": "js-16-q5", "type": "tf", "diff": "hard", "q": "تحقق JavaScript في المتصفح كافٍ وحده لأمان البيانات.", "a": false, "exp": "يمكن تجاوزه بسهولة — التحقق الملزم يكون في الخادم؛ تحقق المتصفح لتحسين التجربة." },
+    { "id": "js-16-q6", "type": "mcq", "diff": "medium", "q": "قيمة حقل type=\"number\" التي تقرؤها بـ value نوعها:", "options": ["Number", "String نص يجب تحويله", "Boolean", "undefined"], "a": 1, "exp": "value نص دائمًا — حوله بـ Number() قبل العمليات الحسابية." }
+  ]
+}

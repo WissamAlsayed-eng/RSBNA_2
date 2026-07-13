@@ -1,0 +1,100 @@
+{
+  "id": "css-04",
+  "title": "الخلفيات Backgrounds",
+  "intro": "خصائص الخلفية تتحكم بما وراء محتوى العنصر: لون صافٍ، صورة، تدرج لوني، وكيفية تموضع الصورة وتكرارها وحجمها. كما تتعلم الاختصار background الذي يجمعها في سطر واحد.",
+  "sections": [
+    {
+      "title": "لون الخلفية background-color",
+      "text": [
+        "الخاصية background-color تعبئ خلفية العنصر بلون واحد بأي صيغة لون تعلمتها. الخلفية تغطي منطقة المحتوى والحشوة padding معًا حتى حدود العنصر."
+      ],
+      "examples": [
+        {
+          "title": "خلفيات ملونة",
+          "lang": "css",
+          "source": ".card {\n  background-color: #eef2ff;\n  padding: 12px;\n  border-radius: 8px;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"card\">بطاقة بخلفية بنفسجية فاتحة وحواف دائرية.</div>"
+        }
+      ]
+    },
+    {
+      "title": "صورة الخلفية background-image والتكرار",
+      "text": [
+        "الخاصية background-image تضع صورة خلف المحتوى بالصيغة url('المسار'). افتراضيًا تتكرر الصورة أفقيًا وعموديًا لملء العنصر، وتتحكم بذلك background-repeat: قيمة repeat (الافتراضية)، أو repeat-x أفقيًا فقط، أو repeat-y عموديًا فقط، أو no-repeat بلا تكرار."
+      ],
+      "examples": [
+        {
+          "title": "صورة بلا تكرار",
+          "lang": "css",
+          "source": ".hero {\n  background-image: url('https://picsum.photos/id/1015/400/150');\n  background-repeat: no-repeat;\n  height: 150px;\n  color: white;\n  padding: 10px;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"hero\"><b>نص فوق صورة خلفية</b></div>"
+        }
+      ],
+      "notes": [
+        "يمكن الجمع بين لون وصورة: يظهر اللون حيث لا تغطي الصورة أو أثناء تحميلها."
+      ]
+    },
+    {
+      "title": "الموضع والحجم: position و size و attachment",
+      "text": [
+        "الخاصية background-position تحدد موضع الصورة: كلمات مثل center و top و left أو قيم رقمية. والخاصية background-size تحدد حجمها: cover تكبر الصورة لتغطي العنصر كاملًا (مع قص الزائد) — الأشهر للخلفيات البارزة، وcontain تصغرها لتظهر كاملة داخل العنصر، أو قيم صريحة مثل 100px auto.",
+        "والخاصية background-attachment بقيمة fixed تثبت الصورة مكانها أثناء تمرير الصفحة فتصنع تأثير التمرير المتوازي (Parallax) البسيط."
+      ],
+      "examples": [
+        {
+          "title": "تغطية كاملة مع توسيط",
+          "lang": "css",
+          "source": ".banner {\n  background-image: url('https://picsum.photos/id/1018/600/300');\n  background-size: cover;\n  background-position: center;\n  background-repeat: no-repeat;\n  height: 140px;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"banner\"></div>"
+        }
+      ],
+      "mistakes": [
+        "استخدام cover مع نسيان background-position فتنقص أجزاء مهمة من الصورة عند القص."
+      ]
+    },
+    {
+      "title": "التدرجات اللونية Gradients",
+      "text": [
+        "التدرج اللوني صورة يولدها المتصفح: linear-gradient(الاتجاه, لون1, لون2, ...) تدرج خطي بزاوية أو اتجاه (to left، أو 45deg)، وradial-gradient تدرج دائري من المركز. تكتب كقيمة لخاصية background-image أو الاختصار background."
+      ],
+      "examples": [
+        {
+          "title": "تدرج خطي ودائري",
+          "lang": "css",
+          "source": ".g1 { background: linear-gradient(to left, #6366f1, #06b6d4); height: 60px; }\n.g2 { background: radial-gradient(circle, #fbbf24, #ef4444); height: 60px; }",
+          "preview": true,
+          "previewHtml": "<div class=\"g1\"></div><br><div class=\"g2\"></div>"
+        }
+      ]
+    },
+    {
+      "title": "الاختصار background",
+      "text": [
+        "تجمع خاصية background كل خصائص الخلفية في سطر واحد: اللون، الصورة، التكرار، الموضع، والحجم (الحجم يكتب بعد الموضع مفصولًا بشرطة مائلة). مثال: background: #333 url('bg.png') no-repeat center / cover;"
+      ],
+      "examples": [
+        {
+          "title": "سطر واحد يغني عن خمسة",
+          "lang": "css",
+          "source": ".compact {\n  background: #1e293b url('https://picsum.photos/id/1025/400/200') no-repeat center / cover;\n  color: white;\n  height: 120px;\n  padding: 10px;\n}",
+          "preview": true,
+          "previewHtml": "<div class=\"compact\">اختصار background الكامل</div>"
+        }
+      ],
+      "notes": [
+        "أي قيمة تحذفها من الاختصار تعود لقيمتها الافتراضية — انتبه فقد يمسح الاختصار خصائص ضبطتها سابقًا."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-04-q1", "type": "mcq", "diff": "easy", "q": "أي خاصية تضع صورة خلفية للعنصر؟", "options": ["background-color", "background-image", "img-src", "background-picture"], "a": 1, "exp": "background-image: url('المسار')." },
+    { "id": "css-04-q2", "type": "mcq", "diff": "easy", "q": "لمنع تكرار صورة الخلفية نستخدم:", "options": ["repeat: none", "background-repeat: no-repeat", "background-loop: off", "no-repeat: true"], "a": 1, "exp": "القيمة no-repeat تعرض الصورة مرة واحدة." },
+    { "id": "css-04-q3", "type": "mcq", "diff": "medium", "q": "ما الفرق بين cover و contain في background-size؟", "options": ["لا فرق", "cover تغطي العنصر كاملًا ولو اقتُص جزء، وcontain تظهر الصورة كاملة ولو بقي فراغ", "contain أكبر من cover", "cover للألوان فقط"], "a": 1, "exp": "cover ملء كامل مع احتمال القص، contain ظهور كامل مع احتمال الفراغ." },
+    { "id": "css-04-q4", "type": "fill", "diff": "medium", "q": "لإنشاء تدرج لوني خطي نستخدم الدالة ____-gradient.", "a": ["linear"], "exp": "linear-gradient للتدرج الخطي وradial-gradient للدائري." },
+    { "id": "css-04-q5", "type": "tf", "diff": "medium", "q": "القيمة fixed في background-attachment تثبت صورة الخلفية أثناء تمرير الصفحة.", "a": true, "exp": "وهي أساس تأثير Parallax البسيط." },
+    { "id": "css-04-q6", "type": "mcq", "diff": "hard", "q": "في الاختصار background: red url(a.png) no-repeat center / cover — ماذا يعني ما بعد الشرطة المائلة /؟", "options": ["الموضع", "الحجم background-size", "الشفافية", "التكرار"], "a": 1, "exp": "الصيغة: الموضع / الحجم — أي center للموضع وcover للحجم." }
+  ]
+}

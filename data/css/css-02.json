@@ -1,0 +1,92 @@
+{
+  "id": "css-02",
+  "title": "المحددات Selectors",
+  "intro": "المحدد (Selector) هو الجزء الذي يختار العناصر التي ستطبق عليها القاعدة. إتقان المحددات نصف إتقان CSS: محدد العنصر والفئة والمعرف، والتجميع والتداخل، والحالات مثل :hover، والعناصر الزائفة مثل ::before.",
+  "sections": [
+    {
+      "title": "المحددات الأساسية: العنصر والفئة والمعرف",
+      "text": [
+        "محدد العنصر (Element Selector) يكتب باسم الوسم مباشرة مثل p ويصيب كل عناصر ذلك النوع. محدد الفئة (Class Selector) يبدأ بنقطة مثل .card ويصيب كل عنصر يحمل class=\"card\". محدد المعرف (ID Selector) يبدأ بشباك مثل #header ويصيب العنصر الوحيد صاحب id=\"header\". والمحدد الشامل * يصيب كل العناصر."
+      ],
+      "examples": [
+        {
+          "title": "الأنواع الثلاثة",
+          "lang": "css",
+          "source": "p { color: #333; }\n.highlight { background: #fff59d; }\n#unique { border: 2px solid crimson; padding: 4px; }",
+          "preview": true,
+          "previewHtml": "<p>فقرة عادية بمحدد عنصر.</p><p class=\"highlight\">فقرة بفئة highlight.</p><p id=\"unique\">فقرة بمعرف unique.</p>"
+        }
+      ],
+      "notes": [
+        "قوة التحديد (Specificity): المعرف أقوى من الفئة، والفئة أقوى من العنصر — عند التعارض يفوز الأقوى.",
+        "يفضل الاعتماد على الفئات في التنسيق وترك المعرفات لـ JavaScript والروابط الداخلية."
+      ],
+      "mistakes": [
+        "نسيان النقطة قبل اسم الفئة في CSS: كتابة card بدل .card تجعل القاعدة تبحث عن وسم اسمه card."
+      ]
+    },
+    {
+      "title": "التجميع والتداخل",
+      "text": [
+        "محدد التجميع (Grouping): افصل عدة محددات بفاصلة لتطبيق نفس القاعدة عليها كلها: h1, h2, h3 { }.",
+        "محدد السليل (Descendant): مسافة بين محددين تعني (كل عنصر بداخل): div p تصيب كل فقرة داخل div مهما تعمقت. محدد الابن المباشر (Child): علامة > تصيب الأبناء المباشرين فقط: ul > li.",
+        "يمكن أيضًا دمج المحددات بلا مسافة: p.note تعني فقرة تحمل فئة note بالذات."
+      ],
+      "examples": [
+        {
+          "title": "سليل وابن مباشر",
+          "lang": "css",
+          "source": "div p { color: teal; }        /* أي فقرة داخل div */\nul > li { font-weight: bold; } /* أبناء ul المباشرون */",
+          "preview": true,
+          "previewHtml": "<div><p>فقرة داخل div — لونها teal.</p></div><p>فقرة خارج div — لون عادي.</p><ul><li>ابن مباشر غامق</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "الفئات الزائفة Pseudo-classes",
+      "text": [
+        "الفئة الزائفة (Pseudo-class) تبدأ بنقطتين : وتصيب العنصر في حالة معينة: :hover عند مرور الفأرة، و:active لحظة النقر، و:focus عند تركيز حقل الإدخال، و:visited للرابط المزار.",
+        "ومنها فئات موقعية: :first-child أول ابن لأبيه، و:last-child آخر ابن، و:nth-child(2) الابن الثاني، و:nth-child(odd/even) للفردي والزوجي — ممتازة لتلوين صفوف الجداول بالتناوب."
+      ],
+      "examples": [
+        {
+          "title": "تأثير التحويم وتلوين متناوب",
+          "lang": "css",
+          "source": "button:hover { background: #6366f1; color: white; }\nli:nth-child(odd) { background: #eef2ff; }\nli:first-child { font-weight: bold; }",
+          "preview": true,
+          "previewHtml": "<button>مرر الفأرة فوقي</button><ul style=\"margin-top:8px\"><li>العنصر الأول</li><li>الثاني</li><li>الثالث</li><li>الرابع</li></ul>"
+        }
+      ],
+      "notes": [
+        "ترتيب حالات الروابط في الكود مهم: link ثم visited ثم hover ثم active (قاعدة LVHA)."
+      ]
+    },
+    {
+      "title": "العناصر الزائفة Pseudo-elements",
+      "text": [
+        "العنصر الزائف (Pseudo-element) يبدأ بنقطتين مزدوجتين :: وينسق جزءًا من العنصر أو يضيف محتوى وهميًا: ::first-line أول سطر، و::first-letter أول حرف، و::before و ::after يضيفان محتوى (عبر خاصية content) قبل العنصر أو بعده دون لمس HTML، و::selection تنسيق النص المظلل."
+      ],
+      "examples": [
+        {
+          "title": "أول حرف ومحتوى مضاف",
+          "lang": "css",
+          "source": "p.fancy::first-letter { font-size: 2em; color: crimson; }\n.label::before { content: \"🔖 \"; }",
+          "preview": true,
+          "previewHtml": "<p class=\"fancy\">هذه فقرة يظهر أول حرف منها كبيرًا وملونًا.</p><p class=\"label\">عنوان تسبقه أيقونة مضافة من CSS.</p>"
+        }
+      ],
+      "mistakes": [
+        "نسيان خاصية content في ::before و ::after — بدونها لا يظهر العنصر الزائف إطلاقًا حتى لو أضفت خلفية وأبعادًا."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-02-q1", "type": "mcq", "diff": "easy", "q": "بأي رمز يبدأ محدد الفئة Class؟", "options": ["#", ".", "*", "@"], "a": 1, "exp": "النقطة للفئات (.card) والشباك للمعرفات (#header)." },
+    { "id": "css-02-q2", "type": "mcq", "diff": "medium", "q": "ماذا يصيب المحدد div p؟", "options": ["كل div وكل p في الصفحة", "كل فقرة داخل div مهما تعمقت", "أبناء div المباشرين فقط", "أول فقرة فقط"], "a": 1, "exp": "المسافة محدد سليل Descendant يشمل كل المستويات؛ للأبناء المباشرين نستخدم >." },
+    { "id": "css-02-q3", "type": "fill", "diff": "easy", "q": "الفئة الزائفة ____ تطبق التنسيق عند مرور مؤشر الفأرة فوق العنصر.", "a": [":hover", "hover"], "exp": "مثل button:hover { }." },
+    { "id": "css-02-q4", "type": "mcq", "diff": "medium", "q": "لتلوين الصفوف الزوجية من قائمة بالتناوب نستخدم:", "options": [":first-child", ":nth-child(even)", "::after", ":visited"], "a": 1, "exp": "nth-child(even) يصيب العناصر الزوجية و odd الفردية." },
+    { "id": "css-02-q5", "type": "mcq", "diff": "hard", "q": "عند تعارض قاعدة بمحدد فئة مع قاعدة بمحدد معرف على نفس العنصر:", "options": ["تفوز الفئة", "يفوز المعرف لأنه أعلى تحديدًا", "تفوز القاعدة الأولى في الملف", "يتجاهلهما المتصفح"], "a": 1, "exp": "ترتيب قوة التحديد: inline ثم id ثم class ثم element." },
+    { "id": "css-02-q6", "type": "tf", "diff": "medium", "q": "العنصران الزائفان ::before و ::after لا يظهران دون خاصية content.", "a": true, "exp": "content ولو فارغة \"\" شرط أساسي لظهورهما." },
+    { "id": "css-02-q7", "type": "mcq", "diff": "medium", "q": "المحدد h1, h2, h3 { color: navy; } يعني:", "options": ["h3 داخل h2 داخل h1", "تطبيق اللون على المستويات الثلاثة معًا", "أول ثلاثة عناوين فقط", "محدد خاطئ"], "a": 1, "exp": "الفاصلة تجمع عدة محددات في قاعدة واحدة." }
+  ]
+}

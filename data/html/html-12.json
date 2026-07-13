@@ -1,0 +1,104 @@
+{
+  "id": "html-12",
+  "title": "السمات Attributes",
+  "intro": "السمات (Attributes) معلومات إضافية توضع داخل وسم الفتح لتعديل سلوك العنصر أو وصفه. بعضها خاص بوسوم معينة (مثل href للروابط)، وبعضها عام (Global) يصلح لأي عنصر. هذا الدرس يغطي السمات العامة الأهم.",
+  "sections": [
+    {
+      "title": "شكل السمة وقواعد كتابتها",
+      "text": [
+        "تكتب السمة داخل وسم الفتح بصيغة: اسم=\"قيمة\" مع مسافة تفصلها عن اسم الوسم وعن السمات الأخرى. القيمة توضع بين علامتي تنصيص مزدوجتين عادة، وبعض السمات منطقية (Boolean) لا تحتاج قيمة أصلًا مثل required و disabled و checked — وجودها يعني التفعيل."
+      ],
+      "examples": [
+        {
+          "title": "سمات متعددة على وسم واحد",
+          "lang": "html",
+          "source": "<input type=\"text\" id=\"name\" class=\"field\" placeholder=\"اكتب اسمك\" required>",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "نسيان علامات التنصيص حول قيمة تحتوي مسافات — تنكسر السمة.",
+        "تكرار نفس السمة مرتين في وسم واحد — يعتمد المتصفح الأولى ويتجاهل الثانية."
+      ]
+    },
+    {
+      "title": "المعرف id والفئة class",
+      "text": [
+        "السمة id معرف فريد للعنصر — لا يجوز تكرار نفس القيمة في الصفحة. تستخدم للوصول للعنصر من JavaScript، وللربط الداخلي (#id)، ولربط label بالحقل.",
+        "السمة class تصنف العنصر ضمن فئة أو أكثر (تفصل بينها مسافات)، ويمكن لعدة عناصر مشاركة نفس الفئة — وهي الوسيلة الأساسية لتطبيق تنسيقات CSS على مجموعات من العناصر."
+      ],
+      "examples": [
+        {
+          "title": "الفرق بين id و class",
+          "lang": "html",
+          "source": "<p id=\"intro\" class=\"text highlight\">فقرة بمعرف فريد وفئتين.</p>\n<p class=\"text\">فقرة أخرى تشارك فئة text.</p>",
+          "preview": true,
+          "previewCss": ".text{font-size:16px} .highlight{background:#fff59d;padding:4px}"
+        }
+      ],
+      "notes": [
+        "القاعدة: id للعنصر الواحد الفريد، وclass للمجموعات القابلة للتكرار.",
+        "أسماء المعرفات والفئات حساسة لحالة الأحرف: Header غير header."
+      ],
+      "mistakes": [
+        "تكرار نفس id لعدة عناصر — يسبب سلوكًا غير متوقع في JavaScript والروابط الداخلية."
+      ]
+    },
+    {
+      "title": "سمات العرض: style و title و hidden",
+      "text": [
+        "السمة style تكتب تنسيقات CSS مباشرة على العنصر (Inline CSS) — مفيدة للتجارب السريعة لكن يفضل فصل التنسيق في ملف CSS. السمة title نص تلميح يظهر عند توقف مؤشر الفأرة فوق العنصر. والسمة hidden تخفي العنصر كليًا من العرض."
+      ],
+      "examples": [
+        {
+          "title": "تلميح وإخفاء وتنسيق مباشر",
+          "lang": "html",
+          "source": "<p style=\"color:teal; font-weight:bold\">فقرة منسقة مباشرة.</p>\n<abbr title=\"HyperText Markup Language\">HTML</abbr> — مرر الفأرة فوق الاختصار.\n<p hidden>هذه الفقرة مخفية ولن تظهر.</p>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الوسم <abbr> مع سمة title هو الطريقة القياسية لشرح الاختصارات."
+      ]
+    },
+    {
+      "title": "سمات اللغة والاتجاه: lang و dir",
+      "text": [
+        "السمة lang تحدد لغة محتوى العنصر (ar عربية، en إنجليزية) وتساعد محركات البحث وقارئات الشاشة على النطق الصحيح. السمة dir تحدد اتجاه النص: rtl من اليمين لليسار و ltr من اليسار لليمين — ويمكن تطبيقهما على عنصر واحد داخل صفحة بلغة أخرى."
+      ],
+      "examples": [
+        {
+          "title": "فقرة إنجليزية داخل صفحة عربية",
+          "lang": "html",
+          "source": "<p>هذه فقرة عربية عادية.</p>\n<p lang=\"en\" dir=\"ltr\">This paragraph is in English, left to right.</p>",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "سمات البيانات المخصصة data-*",
+      "text": [
+        "سمات data-* تخزن بيانات مخصصة على أي عنصر باسم تختاره بعد البادئة data-، مثل data-price أو data-user-id. لا تؤثر على العرض إطلاقًا، لكنها تقرأ بسهولة من JavaScript عبر الخاصية dataset — وهي الطريقة النظيفة لربط بيانات إضافية بالعناصر."
+      ],
+      "examples": [
+        {
+          "title": "بيانات مخصصة يقرؤها JavaScript",
+          "lang": "html",
+          "source": "<button data-product-id=\"42\" data-price=\"19.99\" onclick=\"alert('المعرف: ' + this.dataset.productId + ' — السعر: ' + this.dataset.price)\">\n  عرض بيانات المنتج\n</button>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الاسم data-product-id يقرأ في JavaScript بصيغة سنام الجمل: dataset.productId."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-12-q1", "type": "mcq", "diff": "easy", "q": "ما الفرق بين id و class؟", "options": ["لا فرق", "id فريد لعنصر واحد وclass تشاركها عدة عناصر", "class أسرع من id", "id للنصوص فقط"], "a": 1, "exp": "id معرف فريد لا يتكرر، وclass فئة تجمع عناصر متعددة." },
+    { "id": "html-12-q2", "type": "mcq", "diff": "easy", "q": "أي سمة تعرض تلميحًا نصيًا عند مرور الفأرة فوق العنصر؟", "options": ["alt", "title", "tooltip", "hint"], "a": 1, "exp": "title تظهر تلميحًا عند التحويم. أما alt فنص بديل للصور." },
+    { "id": "html-12-q3", "type": "tf", "diff": "medium", "q": "يمكن إعطاء العنصر الواحد أكثر من فئة class بفصلها بمسافات.", "a": true, "exp": "مثل class=\"card large shadow\" — ثلاث فئات على نفس العنصر." },
+    { "id": "html-12-q4", "type": "fill", "diff": "medium", "q": "لتخزين بيانات مخصصة على عنصر نستخدم سمات تبدأ بالبادئة ____.", "a": ["data-", "data"], "exp": "مثل data-id و data-price، وتقرأ من JavaScript عبر dataset." },
+    { "id": "html-12-q5", "type": "mcq", "diff": "medium", "q": "السمات المنطقية (Boolean) مثل required و checked:", "options": ["تحتاج قيمة true دائمًا", "وجودها وحده يكفي للتفعيل", "تكتب بأحرف كبيرة", "تعمل فقط مع JavaScript"], "a": 1, "exp": "مجرد كتابة اسم السمة يفعلها: <input required>." },
+    { "id": "html-12-q6", "type": "mcq", "diff": "hard", "q": "لعرض فقرة إنجليزية باتجاه صحيح داخل صفحة عربية نضيف لها:", "options": ["lang=\"en\" dir=\"ltr\"", "lang=\"ar\" dir=\"rtl\"", "style=\"english\"", "type=\"en\""], "a": 0, "exp": "lang للغة وdir=\"ltr\" لاتجاه اليسار إلى اليمين." }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "js-13",
+  "title": "مقدمة DOM والوصول إلى العناصر",
+  "intro": "هنا تبدأ المتعة الحقيقية: DOM (اختصار Document Object Model — نموذج كائن المستند) هو تمثيل الصفحة كشجرة كائنات يستطيع JavaScript قراءتها وتعديلها. تتعلم الوصول للعناصر بكل الطرق وقراءة محتواها.",
+  "sections": [
+    {
+      "title": "ما هو DOM؟",
+      "text": [
+        "عند تحميل الصفحة يبني المتصفح من HTML شجرة كائنات: كل وسم يصبح عقدة (Node) لها أب وأبناء. الكائن document هو جذر هذه الشجرة وبوابة JavaScript إليها — من خلاله تصل لأي عنصر وتقرؤه وتعدله وتحذفه وتنشئ غيره.",
+        "كل ما تراه من تفاعل في المواقع — إظهار القوائم، تحديث السلة، التحقق الفوري من النماذج — هو JavaScript يتلاعب بشجرة DOM."
+      ]
+    },
+    {
+      "title": "الوصول الكلاسيكي: getElementById وأخواتها",
+      "text": [
+        "أقدم الطرق وأسرعها: document.getElementById(\"المعرف\") تعيد العنصر الوحيد بهذا المعرف أو null. وgetElementsByClassName و getElementsByTagName تعيدان مجموعة حية HTMLCollection بكل العناصر المطابقة."
+      ],
+      "examples": [
+        {
+          "title": "وصول بالمعرف",
+          "lang": "js",
+          "source": "const title = document.getElementById(\"main-title\");\nconsole.log(title.textContent);\ntitle.style.color = \"crimson\";",
+          "preview": true,
+          "previewHtml": "<h3 id=\"main-title\">عنوان سيتلون بالأحمر عبر JS</h3>"
+        }
+      ],
+      "mistakes": [
+        "محاولة الوصول لعنصر قبل بناء الصفحة (script في head بلا defer) فتحصل على null."
+      ]
+    },
+    {
+      "title": "الطريقة الحديثة: querySelector و querySelectorAll",
+      "text": [
+        "الثنائي الحديث الذي يغنيك عن كل ما سبق: querySelector(\"محدد CSS\") تعيد أول عنصر يطابق أي محدد CSS تعرفه (#id أو .class أو وسم أو أي تركيبة)، وquerySelectorAll تعيد قائمة NodeList بكل المطابقين تمر عليها بـ forEach.",
+        "قوتها أنها تفهم محددات CSS كاملة: document.querySelector(\"ul li:first-child\") أو \".card.active > h3\"."
+      ],
+      "examples": [
+        {
+          "title": "محددات CSS في JavaScript",
+          "lang": "js",
+          "source": "const first = document.querySelector(\".item\");\nfirst.style.fontWeight = \"bold\";\n\nconst all = document.querySelectorAll(\".item\");\nconsole.log(\"عدد العناصر:\", all.length);\nall.forEach((el, i) => {\n  el.textContent += \" ✓\";\n});",
+          "preview": true,
+          "previewHtml": "<ul><li class=\"item\">عنصر أول</li><li class=\"item\">عنصر ثانٍ</li><li class=\"item\">عنصر ثالث</li></ul>"
+        }
+      ],
+      "notes": [
+        "إن لم يجد querySelector مطابقًا يعيد null — وأي محاولة للتعامل مع null ترمي خطأ؛ افحص أولًا."
+      ]
+    },
+    {
+      "title": "قراءة المحتوى: textContent و innerHTML والسمات",
+      "text": [
+        "الخاصية textContent تقرأ (وتكتب) النص الخام للعنصر متجاهلة الوسوم، بينما innerHTML تقرأ وتكتب بنية HTML الداخلية كاملة بوسومها. وللسمات: getAttribute تقرأ قيمة سمة، وsetAttribute تضبطها، وخصائص مباشرة مثل el.href و el.src و el.value لحقول الإدخال."
+      ],
+      "examples": [
+        {
+          "title": "قراءة نص وبنية وسمات",
+          "lang": "js",
+          "source": "const box = document.querySelector(\"#demo\");\nconsole.log(\"textContent:\", box.textContent);\nconsole.log(\"innerHTML:\", box.innerHTML);\n\nconst link = document.querySelector(\"a\");\nconsole.log(\"الرابط يشير إلى:\", link.getAttribute(\"href\"));",
+          "preview": true,
+          "previewHtml": "<div id=\"demo\">نص فيه <b>وسم غامق</b></div><a href=\"https://example.com\">رابط تجريبي</a>"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-13-q1", "type": "mcq", "diff": "easy", "q": "ما معنى الاختصار DOM؟", "options": ["Data Object Model", "Document Object Model", "Digital Order Machine", "Document Online Map"], "a": 1, "exp": "نموذج كائن المستند: تمثيل الصفحة شجرة كائنات." },
+    { "id": "js-13-q2", "type": "mcq", "diff": "easy", "q": "للوصول لعنصر بمعرفه id نستخدم document.____", "options": ["getElementById", "getElementsByClassName", "querySelectorAll", "createElement"], "a": 0, "exp": "getElementById تعيد العنصر الوحيد صاحب المعرف." },
+    { "id": "js-13-q3", "type": "mcq", "diff": "medium", "q": "querySelector(\".btn\") تعيد:", "options": ["كل العناصر بفئة btn", "أول عنصر يطابق المحدد فقط", "عدد العناصر", "نص العنصر"], "a": 1, "exp": "querySelector للأول فقط؛ querySelectorAll للجميع." },
+    { "id": "js-13-q4", "type": "mcq", "diff": "medium", "q": "الفرق بين textContent و innerHTML:", "options": ["لا فرق", "textContent نص خام وinnerHTML بنية HTML بوسومها", "innerHTML أسرع دائمًا", "textContent للصور"], "a": 1, "exp": "innerHTML يفسر الوسوم؛ textContent يتعامل مع كل شيء كنص." },
+    { "id": "js-13-q5", "type": "fill", "diff": "medium", "q": "querySelector تعيد ____ إذا لم تجد أي عنصر مطابق.", "a": ["null"], "exp": "والتعامل مع null دون فحص يرمي خطأ TypeError." },
+    { "id": "js-13-q6", "type": "tf", "diff": "medium", "q": "يمكن تمرير أي محدد CSS صالح إلى querySelectorAll مثل \"ul > li.active\".", "a": true, "exp": "هذه قوتها: كل خبرتك في محددات CSS تعمل هنا." }
+  ]
+}

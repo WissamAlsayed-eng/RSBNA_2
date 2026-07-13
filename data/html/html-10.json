@@ -1,0 +1,93 @@
+{
+  "id": "html-10",
+  "title": "الوسائط Audio و Video",
+  "intro": "قبل HTML5 كان تشغيل الصوت والفيديو يتطلب إضافات خارجية مثل Flash. اليوم يكفي وسمان: <audio> و <video>، مع وسم <source> للصيغ المتعددة و <iframe> لتضمين محتوى خارجي كفيديوهات YouTube والخرائط.",
+  "sections": [
+    {
+      "title": "وسم الصوت audio",
+      "text": [
+        "الوسم <audio> يشغل الملفات الصوتية. أهم سماته: controls لإظهار أزرار التحكم (تشغيل، إيقاف، مستوى الصوت) — وبدونها لا يظهر شيء للمستخدم، وautoplay للتشغيل التلقائي، وloop لإعادة التشغيل المستمرة، وmuted لكتم الصوت ابتداءً، وpreload للتحكم بالتحميل المسبق.",
+        "النص المكتوب بين وسمي الفتح والإغلاق يظهر فقط للمتصفحات القديمة التي لا تدعم الوسم."
+      ],
+      "examples": [
+        {
+          "title": "مشغل صوت",
+          "lang": "html",
+          "source": "<audio controls src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3\">\n  متصفحك لا يدعم تشغيل الصوت.\n</audio>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "أشهر صيغ الصوت المدعومة: MP3 (الأوسع دعمًا)، وOGG، وWAV."
+      ],
+      "mistakes": [
+        "نسيان السمة controls فلا يظهر المشغل نهائيًا ويظن المطور أن الملف لا يعمل."
+      ]
+    },
+    {
+      "title": "وسم الفيديو video",
+      "text": [
+        "الوسم <video> يعرض الفيديو ويشاركه <audio> نفس السمات (controls و autoplay و loop و muted)، ويضيف: width و height لأبعاد العرض، وposter لصورة غلاف تظهر قبل التشغيل.",
+        "ملاحظة مهمة: معظم المتصفحات الحديثة تمنع التشغيل التلقائي بالصوت — autoplay لا يعمل غالبًا إلا مع muted."
+      ],
+      "examples": [
+        {
+          "title": "مشغل فيديو بصورة غلاف",
+          "lang": "html",
+          "source": "<video controls width=\"320\"\n  poster=\"https://interactive-examples.mdn.mozilla.net/media/examples/flower.jpg\"\n  src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\">\n  متصفحك لا يدعم تشغيل الفيديو.\n</video>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "أشهر صيغ الفيديو: MP4 بترميز H.264 (الأوسع دعمًا)، وWebM الأحدث والأخف."
+      ]
+    },
+    {
+      "title": "تعدد الصيغ بوسم source",
+      "text": [
+        "بدلًا من سمة src واحدة، يمكن وضع عدة وسوم <source> داخل audio أو video بصيغ مختلفة، فيختار المتصفح أول صيغة يدعمها. كل source يحمل src للمسار وtype لنوع الملف (مثل video/mp4)."
+      ],
+      "examples": [
+        {
+          "title": "صيغ احتياطية",
+          "lang": "html",
+          "source": "<video controls width=\"320\">\n  <source src=\"movie.webm\" type=\"video/webm\">\n  <source src=\"movie.mp4\" type=\"video/mp4\">\n  متصفحك لا يدعم عرض الفيديو.\n</video>",
+          "preview": false
+        }
+      ],
+      "notes": [
+        "رتب الصيغ من الأخف للأثقل — المتصفح يعتمد أول صيغة مدعومة يصادفها."
+      ]
+    },
+    {
+      "title": "التضمين الخارجي iframe",
+      "text": [
+        "الوسم <iframe> (اختصار Inline Frame) يعرض صفحة ويب كاملة داخل صفحتك — وهو الطريقة القياسية لتضمين فيديوهات YouTube وخرائط Google. أهم سماته: src عنوان الصفحة المضمنة، وwidth و height للأبعاد، وallowfullscreen للسماح بملء الشاشة.",
+        "لتضمين فيديو YouTube: استخدم رابط التضمين بصيغة youtube.com/embed/معرف-الفيديو وليس رابط المشاهدة العادي."
+      ],
+      "examples": [
+        {
+          "title": "تضمين فيديو YouTube",
+          "lang": "html",
+          "source": "<iframe width=\"320\" height=\"180\"\n  src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\"\n  title=\"فيديو مضمن\" allowfullscreen>\n</iframe>",
+          "preview": false
+        }
+      ],
+      "notes": [
+        "بعض المواقع تمنع تضمينها داخل iframe لأسباب أمنية فتظهر مساحة فارغة.",
+        "أضف دائمًا سمة title لوصف محتوى الإطار — مهمة لقارئات الشاشة."
+      ],
+      "mistakes": [
+        "استخدام رابط المشاهدة العادي watch?v=... بدل رابط embed فلا يعمل التضمين."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-10-q1", "type": "mcq", "diff": "easy", "q": "أي سمة تُظهر أزرار التشغيل والإيقاف في مشغل الصوت والفيديو؟", "options": ["buttons", "controls", "player", "show"], "a": 1, "exp": "بدون controls لا تظهر واجهة تحكم للمستخدم." },
+    { "id": "html-10-q2", "type": "mcq", "diff": "medium", "q": "ما وظيفة السمة poster في وسم <video>؟", "options": ["إضافة ترجمة للفيديو", "صورة غلاف تظهر قبل التشغيل", "تكرار الفيديو تلقائيًا", "رفع جودة الفيديو"], "a": 1, "exp": "poster تحدد صورة العرض المسبق قبل بدء التشغيل." },
+    { "id": "html-10-q3", "type": "fill", "diff": "medium", "q": "لتوفير عدة صيغ للفيديو يختار المتصفح المدعومة منها نستخدم وسم ____ داخل video.", "a": ["source", "<source>"], "exp": "توضع عدة وسوم source ويعتمد المتصفح أول صيغة يدعمها." },
+    { "id": "html-10-q4", "type": "mcq", "diff": "medium", "q": "لتضمين فيديو من YouTube داخل صفحتك نستخدم:", "options": ["<video src=\"رابط اليوتيوب\">", "<iframe src=\"رابط embed\">", "<audio controls>", "<embed-youtube>"], "a": 1, "exp": "فيديوهات YouTube تضمن عبر iframe برابط youtube.com/embed/…" },
+    { "id": "html-10-q5", "type": "tf", "diff": "medium", "q": "السمة loop تجعل ملف الوسائط يعيد التشغيل من جديد كلما انتهى.", "a": true, "exp": "loop للتكرار المستمر." },
+    { "id": "html-10-q6", "type": "tf", "diff": "hard", "q": "التشغيل التلقائي autoplay مع الصوت يعمل دائمًا في المتصفحات الحديثة.", "a": false, "exp": "المتصفحات الحديثة تمنع التشغيل التلقائي المسموع؛ يعمل غالبًا فقط مع muted." }
+  ]
+}

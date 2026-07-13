@@ -1,0 +1,68 @@
+{
+  "id": "css-13",
+  "title": "تنسيق القوائم والجداول",
+  "intro": "القوائم والجداول لها خصائص CSS مخصصة: شكل علامات القائمة وموضعها واستبدالها بصور، وحدود الجداول ودمجها وتلوين الصفوف بالتناوب وتأثيرات التحويم.",
+  "sections": [
+    {
+      "title": "علامات القوائم list-style",
+      "text": [
+        "الخاصية list-style-type تغير شكل العلامة: للقوائم النقطية disc قرص مملوء (الافتراضي) و circle دائرة مفرغة و square مربع و none بلا علامة؛ وللمرقمة decimal أرقام و lower-alpha أحرف صغيرة و upper-roman أرقام رومانية كبيرة وغيرها.",
+        "الخاصية list-style-position تحدد موضع العلامة: outside خارج صندوق النص (الافتراضي) أو inside داخله. وlist-style-image تستبدل العلامة بصورة. والاختصار list-style يجمعها.",
+        "أهم استخدام عملي: list-style: none مع إزالة padding — لتحويل القائمة إلى قائمة تنقل أفقية أو عمودية نظيفة."
+      ],
+      "examples": [
+        {
+          "title": "أشكال العلامات",
+          "lang": "css",
+          "source": ".sq { list-style-type: square; }\n.rom { list-style-type: upper-roman; }\n.clean { list-style: none; padding: 0; }\n.clean li { background: #e0e7ff; margin: 4px 0; padding: 6px 10px; border-radius: 6px; }",
+          "preview": true,
+          "previewHtml": "<ul class=\"sq\"><li>مربعات</li><li>مربعات</li></ul><ol class=\"rom\"><li>روماني</li><li>روماني</li></ol><ul class=\"clean\"><li>قائمة نظيفة بلا علامات</li><li>جاهزة لتصبح قائمة تنقل</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "حدود الجداول ودمجها",
+      "text": [
+        "الجدول بلا حدود مرئية افتراضيًا؛ نضيفها بـ border على table و th و td. لكن حينها يظهر خطان متجاوران بين كل خليتين (حد الخلية وحد جارتها) — تحلها الخاصية border-collapse: collapse على الجدول فتدمج الحدود المزدوجة في خط واحد.",
+        "وأضف padding داخل الخلايا فالافتراضي صفر والنص ملاصق للحدود."
+      ],
+      "examples": [
+        {
+          "title": "جدول أنيق الحدود",
+          "lang": "css",
+          "source": "table { border-collapse: collapse; width: 100%; }\nth, td { border: 1px solid #94a3b8; padding: 8px; text-align: center; }\nth { background: #6366f1; color: white; }",
+          "preview": true,
+          "previewHtml": "<table><tr><th>المادة</th><th>الدرجة</th></tr><tr><td>رياضيات</td><td>95</td></tr><tr><td>فيزياء</td><td>88</td></tr></table>"
+        }
+      ],
+      "mistakes": [
+        "نسيان border-collapse فيظهر فراغ مزدوج قبيح بين حدود الخلايا."
+      ]
+    },
+    {
+      "title": "تلوين الصفوف بالتناوب وتأثير التحويم",
+      "text": [
+        "الجداول الطويلة تتعب العين — الحل الكلاسيكي: تلوين الصفوف الزوجية بلون مغاير عبر tr:nth-child(even)، وإبراز الصف تحت مؤشر الفأرة عبر tr:hover. لمستان تجعلان أي جدول احترافيًا."
+      ],
+      "examples": [
+        {
+          "title": "جدول مخطط تفاعلي",
+          "lang": "css",
+          "source": "table { border-collapse: collapse; width: 100%; }\nth, td { border: 1px solid #cbd5e1; padding: 8px; }\nth { background: #0ea5e9; color: white; }\ntbody tr:nth-child(even) { background: #f1f5f9; }\ntbody tr:hover { background: #bae6fd; }",
+          "preview": true,
+          "previewHtml": "<table><thead><tr><th>الاسم</th><th>المدينة</th></tr></thead><tbody><tr><td>أحمد</td><td>دمشق</td></tr><tr><td>سارة</td><td>حلب</td></tr><tr><td>خالد</td><td>حمص</td></tr><tr><td>ليلى</td><td>اللاذقية</td></tr></tbody></table><p style=\"font-size:12px;color:#64748b\">مرر الفأرة فوق الصفوف.</p>"
+        }
+      ],
+      "notes": [
+        "لجدول عريض على شاشة ضيقة: غلّفه بحاوية لها overflow-x: auto ليتمرر أفقيًا بدل كسر التصميم."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-13-q1", "type": "mcq", "diff": "easy", "q": "لإزالة العلامات النقطية من قائمة ul نستخدم:", "options": ["list-style: none", "bullets: off", "display: none", "marker: hidden"], "a": 0, "exp": "list-style: none تحذف العلامات — أول خطوة في بناء قوائم التنقل." },
+    { "id": "css-13-q2", "type": "fill", "diff": "medium", "q": "لدمج الحدود المزدوجة بين خلايا الجدول في خط واحد نستخدم border-________: collapse.", "a": ["collapse"], "exp": "border-collapse: collapse على عنصر table." },
+    { "id": "css-13-q3", "type": "mcq", "diff": "medium", "q": "لتلوين الصفوف الزوجية من الجدول بالتناوب:", "options": ["tr:hover", "tr:nth-child(even)", "tr:first-child", "tr.even-auto"], "a": 1, "exp": "nth-child(even) يصيب الصفوف الزوجية 2 و4 و6..." },
+    { "id": "css-13-q4", "type": "mcq", "diff": "medium", "q": "الخاصية list-style-type بقيمة upper-roman تعرض:", "options": ["مربعات", "أرقامًا رومانية كبيرة I II III", "أحرفًا لاتينية صغيرة", "دوائر مفرغة"], "a": 1, "exp": "upper-roman للترقيم الروماني الكبير في القوائم المرتبة." },
+    { "id": "css-13-q5", "type": "tf", "diff": "medium", "q": "الخلايا في الجداول تأتي بحشوة padding مريحة افتراضيًا.", "a": false, "exp": "الحشوة الافتراضية شبه معدومة والنص ملاصق للحدود — أضف padding بنفسك." }
+  ]
+}

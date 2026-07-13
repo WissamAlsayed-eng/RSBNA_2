@@ -1,0 +1,82 @@
+{
+  "id": "css-09",
+  "title": "التموضع Position",
+  "intro": "خاصية position تحرر العنصر من التدفق الطبيعي للصفحة وتضعه أينما تريد: نسبةً لمكانه الأصلي، أو لأب محدد، أو للنافذة نفسها. مع الجهات الأربع top و right و bottom و left وترتيب الطبقات z-index.",
+  "sections": [
+    {
+      "title": "القيمة الافتراضية static والنسبية relative",
+      "text": [
+        "كل العناصر تولد بـ position: static — تتموضع حسب التدفق الطبيعي وتتجاهل خصائص الجهات top/right/bottom/left.",
+        "القيمة relative تزيح العنصر نسبةً لمكانه الأصلي بالجهات الأربع، مع بقاء مساحته الأصلية محجوزة في التدفق. واستخدامها الأهم عمليًا: جعل العنصر مرجعًا لأبنائه المطلقين absolute."
+      ],
+      "examples": [
+        {
+          "title": "إزاحة نسبية",
+          "lang": "css",
+          "source": ".moved {\n  position: relative;\n  top: 12px;\n  right: 24px;\n  background: #fca5a5;\n}",
+          "preview": true,
+          "previewHtml": "<div style=\"background:#e5e7eb;padding:4px\">عنصر عادي</div><div class=\"moved\">أزيح 12px لأسفل و24px لليسار (من جهة right)</div><div style=\"background:#e5e7eb;padding:4px\">لاحظ أن مكاني لم يتغير — مساحة العنصر المزاح محجوزة.</div>"
+        }
+      ]
+    },
+    {
+      "title": "المطلق absolute",
+      "text": [
+        "القيمة absolute تخرج العنصر من التدفق كليًا (لا يحجز مساحة) وتموضعه نسبةً لأقرب أب له position غير static — فإن لم يوجد، فنسبةً للصفحة كلها.",
+        "الوصفة الشهيرة: الأب position: relative والابن position: absolute — هكذا تصنع شارة فوق زاوية بطاقة، أو أيقونة داخل حقل بحث."
+      ],
+      "examples": [
+        {
+          "title": "شارة فوق بطاقة",
+          "lang": "css",
+          "source": ".card {\n  position: relative;\n  background: #e0e7ff;\n  padding: 20px;\n  width: 220px;\n}\n.badge {\n  position: absolute;\n  top: -10px;\n  left: -10px;\n  background: #ef4444;\n  color: white;\n  padding: 3px 10px;\n  border-radius: 999px;\n  font-size: 12px;\n}",
+          "preview": true,
+          "previewHtml": "<br><div class=\"card\">بطاقة منتج<span class=\"badge\">جديد</span></div>"
+        }
+      ],
+      "mistakes": [
+        "نسيان إعطاء الأب position: relative فيهرب العنصر المطلق ويتموضع نسبةً للصفحة كلها."
+      ]
+    },
+    {
+      "title": "الثابت fixed واللاصق sticky",
+      "text": [
+        "القيمة fixed تثبت العنصر نسبةً لنافذة المتصفح نفسها — يبقى مكانه حتى مع تمرير الصفحة. تستخدم لأشرطة التنقل الثابتة وأزرار (العودة للأعلى) وأزرار الدردشة.",
+        "القيمة sticky مزيج ذكي: يتصرف العنصر طبيعيًا حتى تصل حافة التمرير إلى الحد الذي حددته (مثل top: 0) فيلتصق هناك. مثالي لرؤوس الجداول والعناوين الملتصقة أثناء التمرير — ويشترط تحديد جهة (top مثلًا) ليعمل."
+      ],
+      "examples": [
+        {
+          "title": "عنوان لاصق أثناء التمرير",
+          "lang": "css",
+          "source": ".sticky-head {\n  position: sticky;\n  top: 0;\n  background: #6366f1;\n  color: white;\n  padding: 6px;\n}",
+          "preview": true,
+          "previewHtml": "<div style=\"height:130px;overflow-y:auto;border:1px solid #ccc\"><div class=\"sticky-head\">عنوان لاصق — مرر داخل الصندوق</div><p>سطر 1</p><p>سطر 2</p><p>سطر 3</p><p>سطر 4</p><p>سطر 5</p><p>سطر 6</p><p>سطر 7</p></div>"
+        }
+      ]
+    },
+    {
+      "title": "ترتيب الطبقات z-index",
+      "text": [
+        "عند تراكب العناصر المتموضعة تتحكم z-index بمن يظهر فوق من: الرقم الأكبر يعلو. لا تعمل إلا على العناصر التي لها position غير static (أو عناصر flex/grid).",
+        "نصيحة: استخدم أرقامًا متدرجة منطقية (10، 20، 30) بدل أرقام عشوائية ضخمة مثل 99999 يصعب تجاوزها لاحقًا."
+      ],
+      "examples": [
+        {
+          "title": "تراكب ثلاث طبقات",
+          "lang": "css",
+          "source": ".sq { position: absolute; width: 90px; height: 90px; }\n.z1 { background: #f87171; top: 0;    right: 0;    z-index: 1; }\n.z2 { background: #34d399; top: 25px; right: 25px; z-index: 3; }\n.z3 { background: #60a5fa; top: 50px; right: 50px; z-index: 2; }",
+          "preview": true,
+          "previewHtml": "<div style=\"position:relative;height:160px\"><div class=\"sq z1\">z:1</div><div class=\"sq z2\">z:3 (الأعلى)</div><div class=\"sq z3\">z:2</div></div>"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-09-q1", "type": "mcq", "diff": "easy", "q": "القيمة الافتراضية لخاصية position هي:", "options": ["relative", "static", "absolute", "fixed"], "a": 1, "exp": "static: التدفق الطبيعي مع تجاهل خصائص الجهات." },
+    { "id": "css-09-q2", "type": "mcq", "diff": "medium", "q": "عنصر position: absolute يتموضع نسبةً إلى:", "options": ["الصفحة دائمًا", "أقرب أب له position غير static، وإلا فالصفحة", "العنصر الذي يليه", "نافذة المتصفح دائمًا"], "a": 1, "exp": "لهذا نعطي الأب position: relative ليصبح المرجع." },
+    { "id": "css-09-q3", "type": "mcq", "diff": "medium", "q": "لزر (العودة للأعلى) يبقى ظاهرًا بزاوية الشاشة أثناء التمرير نستخدم:", "options": ["static", "relative", "absolute", "fixed"], "a": 3, "exp": "fixed يثبت نسبةً للنافذة ولا يتحرك مع التمرير." },
+    { "id": "css-09-q4", "type": "fill", "diff": "medium", "q": "خاصية ____ تتحكم بترتيب تراكب العناصر المتموضعة فوق بعضها.", "a": ["z-index"], "exp": "القيمة الأكبر تظهر فوق الأصغر." },
+    { "id": "css-09-q5", "type": "tf", "diff": "medium", "q": "عنصر relative المزاح يترك مساحته الأصلية محجوزة في التدفق.", "a": true, "exp": "الإزاحة بصرية فقط ومكانه الأصلي يبقى محجوزًا؛ بعكس absolute." },
+    { "id": "css-09-q6", "type": "mcq", "diff": "hard", "q": "ما شرط عمل position: sticky؟", "options": ["أن يكون العنصر داخل جدول", "تحديد جهة التصاق مثل top: 0", "استخدام z-index سالب", "أن يكون العنصر صورة"], "a": 1, "exp": "بلا top أو bottom محدد لا يعرف المتصفح متى يلصق العنصر." }
+  ]
+}

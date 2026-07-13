@@ -1,0 +1,25 @@
+{
+  "id": "exam-css",
+  "title": "الامتحان النهائي — CSS",
+  "desc": "امتحان شامل يغطي كل فصول دورة CSS: المحددات، الألوان، الصندوق، التموضع، Flexbox، الخطوط، والانتقالات.",
+  "minutes": 15,
+  "questions": [
+    { "id": "ex-css-01", "type": "mcq", "diff": "easy", "q": "المحدد الذي يصيب كل العناصر الحاملة class=\"note\" هو:", "options": ["#note", ".note", "note", "*note"], "a": 1, "exp": "النقطة لمحدد الفئة والشباك للمعرف." },
+    { "id": "ex-css-02", "type": "fill", "diff": "easy", "q": "خاصية لون خلفية العنصر هي background-________.", "a": ["color"], "exp": "background-color، أما color فللون النص." },
+    { "id": "ex-css-03", "type": "mcq", "diff": "medium", "q": "rgba(255, 0, 0, 0.3) يعطي:", "options": ["أزرق معتم", "أحمر بشفافية 30%", "أخضر فاتح", "رمادي"], "a": 1, "exp": "القنوات: أحمر بأقصى قيمة والقناة الرابعة alpha بنسبة 0.3." },
+    { "id": "ex-css-04", "type": "mcq", "diff": "medium", "q": "في نموذج الصندوق، المسافة بين حد العنصر والعناصر المجاورة له هي:", "options": ["padding", "margin", "border", "outline"], "a": 1, "exp": "margin خارجية وpadding داخلية." },
+    { "id": "ex-css-05", "type": "mcq", "diff": "hard", "q": "عنصر width:200px و padding:10px و border:5px بدون border-box — عرضه الفعلي:", "options": ["200px", "215px", "230px", "220px"], "a": 2, "exp": "200 + 10×2 + 5×2 = 230px في نموذج content-box الافتراضي." },
+    { "id": "ex-css-06", "type": "fill", "diff": "medium", "q": "لتوسيط حاوية كتلية لها عرض محدد نستخدم margin: 0 ____.", "a": ["auto"], "exp": "auto يوزع الفراغ المتبقي بالتساوي على الجانبين." },
+    { "id": "ex-css-07", "type": "mcq", "diff": "medium", "q": "أي قيمة display تجعل العنصر بجانب إخوته ويقبل الأبعاد؟", "options": ["inline", "block", "inline-block", "none"], "a": 2, "exp": "inline-block مزيج السلوكين." },
+    { "id": "ex-css-08", "type": "mcq", "diff": "medium", "q": "لتثبيت شريط تنقل أعلى الشاشة لا يتحرك مع التمرير:", "options": ["position: absolute", "position: fixed", "position: static", "display: flex"], "a": 1, "exp": "fixed يثبت نسبة لنافذة المتصفح." },
+    { "id": "ex-css-09", "type": "mcq", "diff": "medium", "q": "في Flexbox، خاصية محاذاة العناصر على المحور المتقاطع (العمودي في الصف):", "options": ["justify-content", "align-items", "flex-wrap", "gap"], "a": 1, "exp": "align-items للمحور المتقاطع وjustify-content للرئيسي." },
+    { "id": "ex-css-10", "type": "tf", "diff": "medium", "q": "بدون flex-wrap: wrap تبقى عناصر الحاوية المرنة في سطر واحد مهما ضاقت.", "a": true, "exp": "wrap هي ما يسمح بالنزول لأسطر جديدة." },
+    { "id": "ex-css-11", "type": "mcq", "diff": "medium", "q": "الوحدة rem تقاس نسبةً إلى:", "options": ["حجم خط العنصر الأب", "حجم خط جذر الصفحة html", "عرض النافذة", "حجم الشاشة بالبوصة"], "a": 1, "exp": "Root EM: جذر الصفحة، وهو 16px افتراضيًا." },
+    { "id": "ex-css-12", "type": "fill", "diff": "medium", "q": "الفئة الزائفة :________-child(even) تصيب العناصر الزوجية لتلوين الصفوف بالتناوب.", "a": ["nth"], "exp": ":nth-child(even) للزوجي وodd للفردي." },
+    { "id": "ex-css-13", "type": "mcq", "diff": "medium", "q": "لإظهار شريط تمرير على صندوق فقط عند فيضان محتواه:", "options": ["overflow: visible", "overflow: hidden", "overflow: auto", "overflow: none"], "a": 2, "exp": "auto يظهر التمرير عند الحاجة فقط." },
+    { "id": "ex-css-14", "type": "mcq", "diff": "hard", "q": "الفرق بين opacity: 0.4 وخلفية rgba بألفا 0.4:", "options": ["متطابقان", "opacity تشمل العنصر بمحتواه كاملًا وrgba الخلفية وحدها", "rgba أدق ألوانًا فقط", "opacity للنصوص فقط"], "a": 1, "exp": "opacity تورث لكل المحتوى؛ rgba تخص اللون المحدد." },
+    { "id": "ex-css-15", "type": "mcq", "diff": "medium", "q": "أين توضع transition لتعمل عند دخول التحويم وخروجه معًا؟", "options": ["داخل :hover فقط", "على العنصر الأصلي", "في وسم body", "لا فرق"], "a": 1, "exp": "على العنصر الأصلي كي تسري في الاتجاهين." },
+    { "id": "ex-css-16", "type": "mcq", "diff": "medium", "q": "transform: scale(1.2) تعني:", "options": ["إزاحة 1.2px", "تكبير العنصر 20%", "دوران 1.2 درجة", "شفافية 120%"], "a": 1, "exp": "scale مضاعف الحجم: 1.2 = 120% من الأصل." },
+    { "id": "ex-css-17", "type": "tf", "diff": "hard", "q": "محدد المعرف #x يتغلب على محدد الفئة .x عند تعارضهما على نفس العنصر.", "a": true, "exp": "قوة التحديد: inline ثم id ثم class ثم عنصر." }
+  ]
+}

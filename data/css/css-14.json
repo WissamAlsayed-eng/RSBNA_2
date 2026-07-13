@@ -1,0 +1,68 @@
+{
+  "id": "css-14",
+  "title": "Overflow و Opacity و Cursor",
+  "intro": "ثلاث خصائص صغيرة كثيرة الاستخدام: overflow تتحكم بالمحتوى الفائض عن حدود العنصر، وopacity بشفافية العنصر كاملًا، وcursor بشكل مؤشر الفأرة فوقه.",
+  "sections": [
+    {
+      "title": "المحتوى الفائض overflow",
+      "text": [
+        "حين يكون المحتوى أكبر من صندوقه المحدد الأبعاد، تقرر overflow المصير: visible يفيض خارج الصندوق (الافتراضي — غالبًا قبيح)، وhidden يقص الفائض ويخفيه، وscroll يظهر أشرطة تمرير دائمًا، وauto يظهرها فقط عند الحاجة (الخيار الأذكى).",
+        "ويمكن التحكم بكل محور وحده: overflow-x أفقيًا وoverflow-y عموديًا — مثل صندوق دردشة يتمرر عموديًا فقط."
+      ],
+      "examples": [
+        {
+          "title": "القيم الأربع",
+          "lang": "css",
+          "source": ".box { width: 140px; height: 70px; border: 2px solid #6366f1; display: inline-block; margin: 4px; vertical-align: top; font-size: 12px; }\n.v { overflow: visible; }\n.h { overflow: hidden; }\n.a { overflow: auto; }",
+          "preview": true,
+          "previewHtml": "<div class=\"box v\">visible: نص طويل يفيض خارج حدود الصندوق ويتجاوزه بشكل فوضوي غير مرغوب</div><div class=\"box h\">hidden: نص طويل يقص عند الحدود ويخفى الباقي منه تمامًا دون أثر</div><div class=\"box a\">auto: نص طويل يظهر شريط تمرير عند الحاجة فقط لقراءة بقية المحتوى بشكل مرتب</div>"
+        }
+      ],
+      "notes": [
+        "overflow: auto على حاوية جدول عريض يحل مشكلة كسر التصميم على الجوال."
+      ]
+    },
+    {
+      "title": "الشفافية opacity",
+      "text": [
+        "الخاصية opacity تضبط شفافية العنصر كاملًا بمحتواه: من 0 (غير مرئي تمامًا لكنه يحجز مكانه ويستجيب للنقر) إلى 1 (معتم تمامًا). القيم الوسطى مثل 0.5 نصف شفاف.",
+        "استخدام شائع: تعتيم الصور قليلًا ثم إعادتها كاملة الوضوح عند التحويم — تأثير أنيق لمعارض الصور. وتذكر: لجعل الخلفية وحدها شفافة دون المحتوى استخدم rgba بدل opacity."
+      ],
+      "examples": [
+        {
+          "title": "تدرج شفافية وتأثير تحويم",
+          "lang": "css",
+          "source": "img { width: 90px; margin: 4px; }\n.o3 { opacity: 0.3; }\n.o6 { opacity: 0.6; }\n.fade { opacity: 0.5; }\n.fade:hover { opacity: 1; }",
+          "preview": true,
+          "previewHtml": "<img class=\"o3\" src=\"https://picsum.photos/id/237/90/60\" alt=\"\"><img class=\"o6\" src=\"https://picsum.photos/id/237/90/60\" alt=\"\"><img src=\"https://picsum.photos/id/237/90/60\" alt=\"\"><br><img class=\"fade\" src=\"https://picsum.photos/id/1015/90/60\" alt=\"\"><span style=\"font-size:12px\">← مرر الفأرة فوقها</span>"
+        }
+      ]
+    },
+    {
+      "title": "مؤشر الفأرة cursor",
+      "text": [
+        "الخاصية cursor تغير شكل المؤشر فوق العنصر وتلمّح للمستخدم بما يمكنه فعله: pointer يد النقر (الأهم — ضعه على كل عنصر قابل للنقر ليس رابطًا أو زرًا أصليًا)، وgrab لعنصر قابل للسحب، وtext لتحديد النص، وwait انتظار، وnot-allowed ممنوع، وhelp علامة استفهام، وmove للتحريك."
+      ],
+      "examples": [
+        {
+          "title": "أشكال المؤشر",
+          "lang": "css",
+          "source": ".c { display: inline-block; background: #e0e7ff; padding: 8px 14px; margin: 4px; border-radius: 6px; }\n.p { cursor: pointer; }\n.w { cursor: wait; }\n.n { cursor: not-allowed; }\n.h { cursor: help; }",
+          "preview": true,
+          "previewHtml": "<span class=\"c p\">pointer</span><span class=\"c w\">wait</span><span class=\"c n\">not-allowed</span><span class=\"c h\">help</span><p style=\"font-size:12px;color:#64748b\">مرر الفأرة فوق كل صندوق.</p>"
+        }
+      ],
+      "notes": [
+        "الروابط والأزرار تظهر pointer تلقائيًا — الخاصية ضرورية فقط للعناصر المخصصة القابلة للنقر مثل div مبرمج بـ JavaScript."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-14-q1", "type": "mcq", "diff": "easy", "q": "أي قيمة لـ overflow تظهر شريط تمرير فقط عند الحاجة؟", "options": ["visible", "hidden", "scroll", "auto"], "a": 3, "exp": "auto الأذكى: تمرير عند الفيضان فقط. أما scroll فيظهر الشريط دائمًا." },
+    { "id": "css-14-q2", "type": "mcq", "diff": "easy", "q": "القيمة opacity: 0.5 تعني:", "options": ["إخفاء كامل", "شفافية 50% للعنصر بمحتواه", "تعتيم الخلفية فقط", "تصغير العنصر للنصف"], "a": 1, "exp": "opacity تطبق على العنصر كله بما فيه نصوصه وصوره." },
+    { "id": "css-14-q3", "type": "fill", "diff": "easy", "q": "لجعل مؤشر الفأرة يد نقر فوق عنصر مخصص نستخدم cursor: ____.", "a": ["pointer"], "exp": "pointer إشارة بصرية أن العنصر قابل للنقر." },
+    { "id": "css-14-q4", "type": "mcq", "diff": "medium", "q": "عنصر opacity: 0 مقارنة بـ display: none:", "options": ["متطابقان تمامًا", "opacity:0 يبقى محتلًا مكانه ويستجيب للنقر بعكس none", "opacity:0 يحذف العنصر", "none أكثر شفافية"], "a": 1, "exp": "الشفافية الصفرية إخفاء بصري فقط — العنصر موجود وقابل للتفاعل." },
+    { "id": "css-14-q5", "type": "tf", "diff": "medium", "q": "يمكن التحكم بالفيضان الأفقي وحده عبر overflow-x.", "a": true, "exp": "overflow-x للأفقي وoverflow-y للعمودي مستقلين." },
+    { "id": "css-14-q6", "type": "mcq", "diff": "medium", "q": "المؤشر المناسب لزر معطل لا يمكن النقر عليه:", "options": ["pointer", "wait", "not-allowed", "grab"], "a": 2, "exp": "not-allowed يظهر إشارة المنع فيفهم المستخدم أن الزر معطل." }
+  ]
+}

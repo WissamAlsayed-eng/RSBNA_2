@@ -1,0 +1,109 @@
+{
+  "id": "html-08",
+  "title": "النماذج Forms",
+  "intro": "النماذج (Forms) هي وسيلة جمع البيانات من المستخدم: تسجيل الدخول، البحث، الاستبيانات. تتعلم هنا وسم form وسماته، وحقول input و label و textarea والقوائم المنسدلة select وأزرار الإرسال وتجميع الحقول.",
+  "sections": [
+    {
+      "title": "وسم form وسماته action و method",
+      "text": [
+        "الوسم <form> حاوية تضم كل حقول الإدخال وزر الإرسال. السمة action تحدد عنوان الصفحة أو البرنامج الذي تُرسل إليه البيانات عند الضغط على زر الإرسال، والسمة method تحدد طريقة الإرسال: GET تلحق البيانات بعنوان URL (مناسبة للبحث)، وPOST ترسلها مخفية في جسم الطلب (مناسبة لكلمات المرور والبيانات الحساسة)."
+      ],
+      "examples": [
+        {
+          "title": "هيكل نموذج",
+          "lang": "html",
+          "source": "<form action=\"/submit\" method=\"post\">\n  <!-- الحقول توضع هنا -->\n  <input type=\"text\" name=\"username\" placeholder=\"اسم المستخدم\">\n  <button type=\"submit\">إرسال</button>\n</form>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "كل حقل يحتاج سمة name — بدونها لا تُرسل قيمته مع النموذج إطلاقًا.",
+        "GET تظهر البيانات في شريط العنوان ويمكن حفظها كإشارة مرجعية؛ POST لا تظهر وهي الأنسب للبيانات الحساسة أو الكبيرة."
+      ],
+      "mistakes": [
+        "نسيان السمة name في الحقول ثم الاستغراب من عدم وصول البيانات.",
+        "إرسال كلمة مرور بطريقة GET فتظهر في عنوان URL وسجل التصفح."
+      ]
+    },
+    {
+      "title": "حقل input و label",
+      "text": [
+        "الوسم <input> أشهر عناصر النماذج، وهو ذاتي الإغلاق، ونوعه يتحدد بالسمة type (نتوسع في الأنواع في الدرس القادم). أهم سماته: name اسم الحقل عند الإرسال، وvalue القيمة الابتدائية، وplaceholder نص إرشادي باهت يختفي عند الكتابة.",
+        "الوسم <label> يضع تسمية نصية مرتبطة بالحقل: اربطه بالسمة for التي تساوي id الحقل، فيصبح النقر على التسمية تنشيطًا للحقل — وهذا مهم لسهولة الاستخدام والإتاحة."
+      ],
+      "examples": [
+        {
+          "title": "حقل مع تسمية مرتبطة",
+          "lang": "html",
+          "source": "<form>\n  <label for=\"email\">البريد الإلكتروني:</label><br>\n  <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"you@example.com\">\n</form>",
+          "preview": true
+        }
+      ],
+      "notes": [
+        "الفرق بين value و placeholder: قيمة value حقيقية تُرسل مع النموذج، أما placeholder فتلميح شكلي يختفي عند الكتابة ولا يُرسل."
+      ],
+      "mistakes": [
+        "استخدام placeholder بديلًا عن label — عند الكتابة يختفي التلميح وينسى المستخدم وظيفة الحقل."
+      ]
+    },
+    {
+      "title": "منطقة النص textarea",
+      "text": [
+        "الوسم <textarea> لحقل نص متعدد الأسطر — مناسب للرسائل والتعليقات. له وسم إغلاق، والنص بين الوسمين هو قيمته الابتدائية. تتحكم السمتان rows و cols بعدد الأسطر والأعمدة الظاهرة، ويمكن للمستخدم عادة تغيير حجمه بالسحب."
+      ],
+      "examples": [
+        {
+          "title": "حقل رسالة",
+          "lang": "html",
+          "source": "<label for=\"msg\">رسالتك:</label><br>\n<textarea id=\"msg\" name=\"message\" rows=\"4\" cols=\"40\" placeholder=\"اكتب رسالتك هنا...\"></textarea>",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "كتابة <textarea value=\"نص\"> — القيمة الابتدائية توضع بين وسمي الفتح والإغلاق وليست في سمة value."
+      ]
+    },
+    {
+      "title": "القائمة المنسدلة select و option",
+      "text": [
+        "الوسم <select> ينشئ قائمة منسدلة، وكل خيار فيها وسم <option>. السمة value في option هي ما يُرسل مع النموذج (قد يختلف عن النص الظاهر)، والسمة selected تحدد الخيار الافتراضي، وسمة multiple تسمح باختيار أكثر من خيار.",
+        "لتجميع الخيارات المتشابهة داخل القائمة استخدم <optgroup label=\"اسم المجموعة\">."
+      ],
+      "examples": [
+        {
+          "title": "قائمة دول مجمعة",
+          "lang": "html",
+          "source": "<label for=\"country\">الدولة:</label>\n<select id=\"country\" name=\"country\">\n  <optgroup label=\"بلاد الشام\">\n    <option value=\"sy\">سوريا</option>\n    <option value=\"jo\" selected>الأردن</option>\n  </optgroup>\n  <optgroup label=\"الخليج\">\n    <option value=\"sa\">السعودية</option>\n    <option value=\"ae\">الإمارات</option>\n  </optgroup>\n</select>",
+          "preview": true
+        }
+      ]
+    },
+    {
+      "title": "الأزرار وتجميع الحقول: button و fieldset و legend",
+      "text": [
+        "الوسم <button> ينشئ زرًا، ونوعه يحدد سلوكه: type=\"submit\" يرسل النموذج (الافتراضي داخل form)، وtype=\"reset\" يمسح الحقول ويعيدها لقيمها الابتدائية، وtype=\"button\" زر عادي بلا سلوك تلقائي يُبرمج بـ JavaScript.",
+        "الوسم <fieldset> يرسم إطارًا يجمع الحقول المترابطة معًا، و<legend> يضع عنوانًا لهذه المجموعة على حافة الإطار — مفيدان للنماذج الطويلة."
+      ],
+      "examples": [
+        {
+          "title": "نموذج مكتمل بمجموعة حقول",
+          "lang": "html",
+          "source": "<form>\n  <fieldset>\n    <legend>البيانات الشخصية</legend>\n    <label for=\"n\">الاسم:</label>\n    <input type=\"text\" id=\"n\" name=\"name\"><br><br>\n    <label for=\"c\">المدينة:</label>\n    <input type=\"text\" id=\"c\" name=\"city\">\n  </fieldset>\n  <br>\n  <button type=\"submit\">إرسال</button>\n  <button type=\"reset\">مسح</button>\n</form>",
+          "preview": true
+        }
+      ],
+      "mistakes": [
+        "زر داخل نموذج بدون تحديد type يعمل submit تلقائيًا — قد يرسل النموذج دون قصد؛ حدد type=\"button\" للأزرار البرمجية."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "html-08-q1", "type": "mcq", "diff": "easy", "q": "أي وسم يغلف حقول الإدخال ويحدد وجهة إرسال البيانات؟", "options": ["<input>", "<form>", "<fieldset>", "<section>"], "a": 1, "exp": "<form> هو حاوية النموذج وسمته action تحدد الوجهة." },
+    { "id": "html-08-q2", "type": "mcq", "diff": "medium", "q": "أي طريقة إرسال تناسب البيانات الحساسة مثل كلمات المرور؟", "options": ["GET", "POST", "PUT", "SEND"], "a": 1, "exp": "POST ترسل البيانات في جسم الطلب فلا تظهر في عنوان URL." },
+    { "id": "html-08-q3", "type": "fill", "diff": "medium", "q": "لربط <label> بحقل إدخال نجعل قيمة السمة for مساوية لقيمة السمة ____ في الحقل.", "a": ["id"], "exp": "for في label تشير إلى id الحقل فيصبح النقر على التسمية تنشيطًا له." },
+    { "id": "html-08-q4", "type": "mcq", "diff": "medium", "q": "ما الفرق بين placeholder و value؟", "options": ["لا فرق بينهما", "placeholder تلميح يختفي عند الكتابة ولا يُرسل، وvalue قيمة فعلية تُرسل", "value يختفي عند الكتابة", "placeholder يُرسل مع النموذج"], "a": 1, "exp": "placeholder إرشاد شكلي فقط، أما value فهي القيمة الحقيقية للحقل." },
+    { "id": "html-08-q5", "type": "mcq", "diff": "easy", "q": "لإنشاء حقل نص متعدد الأسطر نستخدم:", "options": ["<input type=\"multiline\">", "<textarea>", "<textbox>", "<p contenteditable>"], "a": 1, "exp": "<textarea> حقل نص كبير له وسم فتح وإغلاق." },
+    { "id": "html-08-q6", "type": "tf", "diff": "medium", "q": "الحقل الذي لا يملك سمة name لا تُرسل قيمته عند إرسال النموذج.", "a": true, "exp": "name هو مفتاح القيمة عند الإرسال — بدونه تُهمل القيمة." },
+    { "id": "html-08-q7", "type": "mcq", "diff": "hard", "q": "زر <button> داخل نموذج بدون سمة type — ماذا يحدث عند النقر عليه؟", "options": ["لا شيء", "يمسح الحقول", "يرسل النموذج لأن النوع الافتراضي submit", "يعيد تحميل الصفحة دائمًا"], "a": 2, "exp": "النوع الافتراضي للأزرار داخل النماذج هو submit، لذا حدد type=\"button\" للأزرار البرمجية." }
+  ]
+}

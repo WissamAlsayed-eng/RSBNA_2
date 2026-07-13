@@ -1,0 +1,26 @@
+{
+  "id": "exam-js",
+  "title": "الامتحان النهائي — JavaScript",
+  "desc": "امتحان شامل يغطي كل فصول دورة JavaScript: المتغيرات، الأنواع، الشروط، الحلقات، الدوال، المصفوفات، الكائنات، DOM، الأحداث، والتخزين.",
+  "minutes": 15,
+  "questions": [
+    { "id": "ex-js-01", "type": "mcq", "diff": "easy", "q": "الإعلان الأنسب لقيمة لن تتغير أبدًا:", "options": ["var", "let", "const", "static"], "a": 2, "exp": "const للثوابت — القاعدة الحديثة: const أولًا." },
+    { "id": "ex-js-02", "type": "mcq", "diff": "medium", "q": "ناتج console.log(\"10\" + 5) هو:", "options": ["15", "\"105\"", "NaN", "خطأ"], "a": 1, "exp": "الجمع مع نص لصق نصي." },
+    { "id": "ex-js-03", "type": "mcq", "diff": "medium", "q": "المقارنة الموصى بها دائمًا في الشروط:", "options": ["==", "===", "=", "=>"], "a": 1, "exp": "الصارمة === تشترط تطابق النوع والقيمة وتجنبك مفاجآت التحويل." },
+    { "id": "ex-js-04", "type": "fill", "diff": "easy", "q": "الأمر ____ داخل الحلقة يخرج منها نهائيًا.", "a": ["break"], "exp": "break كسر كامل؛ continue تجاوز دورة واحدة." },
+    { "id": "ex-js-05", "type": "mcq", "diff": "medium", "q": "كم دورة تنفذ: for (let i = 2; i <= 8; i += 2)؟", "options": ["3", "4", "5", "8"], "a": 1, "exp": "القيم 2 و4 و6 و8 — أربع دورات." },
+    { "id": "ex-js-06", "type": "mcq", "diff": "medium", "q": "دالة بلا return صريح تعيد:", "options": ["null", "0", "undefined", "آخر متغير"], "a": 2, "exp": "الإرجاع الافتراضي undefined." },
+    { "id": "ex-js-07", "type": "mcq", "diff": "medium", "q": "const f = x => x * 3; — ناتج f(4):", "options": ["7", "12", "\"x*3\"", "undefined"], "a": 1, "exp": "سهمية بتعبير واحد يعاد تلقائيًا: 4×3 = 12." },
+    { "id": "ex-js-08", "type": "mcq", "diff": "medium", "q": "أي دالة تعيد مصفوفة جديدة بالعناصر المطابقة لشرط فقط؟", "options": ["map", "filter", "forEach", "join"], "a": 1, "exp": "filter تصفية؛ map تحويل؛ forEach تنفيذ فقط." },
+    { "id": "ex-js-09", "type": "fill", "diff": "medium", "q": "[1,2,3].________(n => n * 10) تعيد [10, 20, 30].", "a": ["map"], "exp": "map تحول كل عنصر عبر الدالة إلى مصفوفة جديدة." },
+    { "id": "ex-js-10", "type": "mcq", "diff": "medium", "q": "داخل تابع كائن، this تشير إلى:", "options": ["النافذة دائمًا", "الكائن صاحب الاستدعاء", "الدالة نفسها", "document"], "a": 1, "exp": "this في التوابع العادية = الكائن المستدعى عليه." },
+    { "id": "ex-js-11", "type": "mcq", "diff": "medium", "q": "\"أهلا بالعالم\".includes(\"عالم\") تعيد:", "options": ["فهرس الكلمة", "true", "الكلمة نفسها", "خطأ"], "a": 1, "exp": "includes فحص وجود يعيد true/false." },
+    { "id": "ex-js-12", "type": "mcq", "diff": "hard", "q": "لعدد صحيح عشوائي من 0 إلى 4:", "options": ["Math.random() * 4", "Math.floor(Math.random() * 5)", "Math.round(4)", "Math.ceil(Math.random() * 4)"], "a": 1, "exp": "random يعطي [0,1) فضربه في 5 مع floor يعطي 0-4." },
+    { "id": "ex-js-13", "type": "mcq", "diff": "medium", "q": "document.querySelector(\"#save\") تختار:", "options": ["كل عناصر فئة save", "العنصر ذا المعرف save", "أول وسم save", "لا شيء — صيغة خاطئة"], "a": 1, "exp": "الشباك # محدد معرف — بمحددات CSS نفسها." },
+    { "id": "ex-js-14", "type": "mcq", "diff": "medium", "q": "لتبديل فئة CSS على عنصر (إضافة إن غابت وحذف إن وجدت):", "options": ["classList.add", "classList.toggle", "className = \"\"", "style.toggle"], "a": 1, "exp": "toggle مثالية للقوائم والوضع الليلي." },
+    { "id": "ex-js-15", "type": "mcq", "diff": "medium", "q": "في مستمع submit، الاستدعاء الذي يمنع إعادة تحميل الصفحة:", "options": ["e.stopPropagation()", "e.preventDefault()", "return false فقط", "e.cancel()"], "a": 1, "exp": "preventDefault يمنع السلوك الافتراضي للنموذج." },
+    { "id": "ex-js-16", "type": "mcq", "diff": "medium", "q": "دالة تكرر التنفيذ كل 3 ثوانٍ:", "options": ["setTimeout(fn, 3)", "setInterval(fn, 3000)", "setTimeout(fn, 3000)", "repeat(fn, 3)"], "a": 1, "exp": "setInterval للتكرار والمدة بالميلي ثانية." },
+    { "id": "ex-js-17", "type": "fill", "diff": "medium", "q": "قبل حفظ كائن في localStorage نحوله نصًا بـ JSON.____________.", "a": ["stringify", "stringify()"], "exp": "localStorage يخزن نصوصًا فقط." },
+    { "id": "ex-js-18", "type": "tf", "diff": "medium", "q": "e.target داخل دالة الحدث هي العنصر الذي وقع عليه الحدث فعليًا.", "a": true, "exp": "أساس تفويض الأحداث Event Delegation." }
+  ]
+}

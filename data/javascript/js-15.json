@@ -1,0 +1,82 @@
+{
+  "id": "js-15",
+  "title": "الأحداث Events",
+  "intro": "الحدث (Event) هو أي شيء يقع في الصفحة: نقرة، كتابة، تمرير، تحميل. والاستماع للأحداث هو ما يجعل موقعك يستجيب للمستخدم. تتعلم هنا addEventListener وأنواع الأحداث وكائن الحدث event.",
+  "sections": [
+    {
+      "title": "الاستماع للأحداث: addEventListener",
+      "text": [
+        "الصيغة القياسية: element.addEventListener(\"نوع-الحدث\", الدالة) — تربط دالة تنفذ كلما وقع الحدث على العنصر. يمكن ربط عدة مستمعين لنفس الحدث، وإزالتهم بـ removeEventListener.",
+        "تجنب الأسلوب القديم onclick داخل HTML — خلط بنية بسلوك، وaddEventListener أكثر مرونة."
+      ],
+      "examples": [
+        {
+          "title": "عداد نقرات",
+          "lang": "js",
+          "source": "let count = 0;\nconst btn = document.querySelector(\"#counter\");\n\nbtn.addEventListener(\"click\", () => {\n  count++;\n  btn.textContent = `نقرت ${count} مرة`;\n});",
+          "preview": true,
+          "previewHtml": "<button id=\"counter\">اضغطني!</button>",
+          "previewCss": "button{padding:10px 24px;font-size:16px;cursor:pointer;border-radius:8px;border:1px solid #6366f1;background:#eef2ff}"
+        }
+      ],
+      "mistakes": [
+        "كتابة الأقواس عند التمرير: addEventListener(\"click\", myFn()) تستدعي الدالة فورًا! مرر الاسم بلا أقواس."
+      ]
+    },
+    {
+      "title": "أشهر أنواع الأحداث",
+      "text": [
+        "الفأرة: click نقرة، وdblclick مزدوجة، وmouseenter/mouseleave دخول وخروج المؤشر. لوحة المفاتيح: keydown ضغط زر وkeyup إفلاته. الحقول: input مع كل تغيير حرف (فوري)، وchange بعد انتهاء التعديل ومغادرة الحقل، وfocus/blur تركيز ومغادرة. والنافذة: load اكتمال التحميل، وscroll التمرير، وresize تغيير الحجم."
+      ],
+      "examples": [
+        {
+          "title": "أحداث الفأرة والحقول",
+          "lang": "js",
+          "source": "const box = document.querySelector(\"#hoverbox\");\nbox.addEventListener(\"mouseenter\", () => box.style.background = \"#bbf7d0\");\nbox.addEventListener(\"mouseleave\", () => box.style.background = \"#e0e7ff\");\n\nconst field = document.querySelector(\"#live\");\nconst out = document.querySelector(\"#out\");\nfield.addEventListener(\"input\", () => {\n  out.textContent = \"تكتب الآن: \" + field.value;\n});",
+          "preview": true,
+          "previewHtml": "<div id=\"hoverbox\" style=\"background:#e0e7ff;padding:14px;border-radius:8px\">مرر الفأرة فوقي</div><br><input id=\"live\" placeholder=\"اكتب هنا...\"><p id=\"out\"></p>"
+        }
+      ]
+    },
+    {
+      "title": "كائن الحدث event",
+      "text": [
+        "يمرر المتصفح لدالتك كائن حدث (يسمى عادة e أو event) مليء بالمعلومات: e.target العنصر الذي وقع عليه الحدث فعلًا، وe.key الزر المضغوط في أحداث لوحة المفاتيح، وe.clientX/clientY إحداثيات الفأرة، وe.preventDefault() تمنع السلوك الافتراضي (إرسال نموذج، فتح رابط)."
+      ],
+      "examples": [
+        {
+          "title": "قراءة معلومات الحدث",
+          "lang": "js",
+          "source": "document.querySelector(\"#kbd\").addEventListener(\"keydown\", (e) => {\n  document.querySelector(\"#keyout\").textContent = `ضغطت: ${e.key}`;\n  if (e.key === \"Enter\") {\n    console.log(\"تم الضغط على Enter!\");\n  }\n});",
+          "preview": true,
+          "previewHtml": "<input id=\"kbd\" placeholder=\"اضغط أي زر هنا\"><p id=\"keyout\"></p>"
+        }
+      ]
+    },
+    {
+      "title": "انتشار الأحداث وتفويضها Event Delegation",
+      "text": [
+        "الأحداث تنتشر صعودًا (Bubbling): نقرة على زر داخل بطاقة داخل قائمة تصل للثلاثة. نستغل ذلك في التفويض (Delegation): مستمع واحد على الأب يعالج نقرات كل أبنائه — حتى المضافين مستقبلًا — بفحص e.target. أنجع بكثير من ربط مستمع لكل عنصر.",
+        "وعند الحاجة توقف الانتشار بـ e.stopPropagation()."
+      ],
+      "examples": [
+        {
+          "title": "مستمع واحد لقائمة كاملة",
+          "lang": "js",
+          "source": "document.querySelector(\"#menu\").addEventListener(\"click\", (e) => {\n  if (e.target.tagName === \"LI\") {\n    document.querySelector(\"#sel\").textContent = \"اخترت: \" + e.target.textContent;\n  }\n});",
+          "preview": true,
+          "previewHtml": "<ul id=\"menu\"><li>الرئيسية</li><li>المقالات</li><li>من نحن</li></ul><p id=\"sel\"></p>",
+          "previewCss": "li{cursor:pointer;padding:4px} li:hover{background:#e0e7ff}"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "js-15-q1", "type": "fill", "diff": "easy", "q": "الدالة add________ تربط دالة تنفذ عند وقوع حدث على عنصر.", "a": ["EventListener", "eventlistener"], "exp": "addEventListener(\"click\", fn)." },
+    { "id": "js-15-q2", "type": "mcq", "diff": "medium", "q": "الفرق بين حدثي input و change على حقل نصي:", "options": ["لا فرق", "input مع كل حرف فوريًا وchange بعد المغادرة", "change أسرع", "input للأرقام فقط"], "a": 1, "exp": "input للتفاعل الفوري (بحث حي) وchange بعد الانتهاء." },
+    { "id": "js-15-q3", "type": "mcq", "diff": "medium", "q": "e.target داخل دالة الحدث تعني:", "options": ["النافذة", "العنصر الذي وقع عليه الحدث فعلًا", "الدالة نفسها", "نوع الحدث"], "a": 1, "exp": "target مصدر الحدث الحقيقي — أساس التفويض." },
+    { "id": "js-15-q4", "type": "mcq", "diff": "hard", "q": "ما ميزة تفويض الأحداث Event Delegation؟", "options": ["يجعل الأحداث أسرع مرتين", "مستمع واحد على الأب يغطي كل الأبناء حتى المضافين لاحقًا", "يمنع كل الأخطاء", "يعمل بلا JavaScript"], "a": 1, "exp": "نستغل انتشار الأحداث صعودًا بمستمع واحد بدل العشرات." },
+    { "id": "js-15-q5", "type": "mcq", "diff": "medium", "q": "أي خطأ في: btn.addEventListener(\"click\", handle())؟", "options": ["نوع الحدث خاطئ", "الأقواس تستدعي الدالة فورًا بدل تمريرها", "ينقص معامل ثالث", "لا خطأ"], "a": 1, "exp": "مرر مرجع الدالة handle بلا أقواس." },
+    { "id": "js-15-q6", "type": "tf", "diff": "medium", "q": "e.preventDefault() تمنع السلوك الافتراضي للحدث مثل إرسال النموذج.", "a": true, "exp": "أساسية في التحقق من النماذج قبل الإرسال." }
+  ]
+}

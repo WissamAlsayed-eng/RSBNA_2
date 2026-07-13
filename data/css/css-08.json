@@ -1,0 +1,70 @@
+{
+  "id": "css-08",
+  "title": "خاصية Display",
+  "intro": "الخاصية display تحدد كيف يشغل العنصر مساحته في الصفحة: كتلي يملأ السطر، أو سطري داخل النص، أو مزيج منهما، أو مخفٍ كليًا. فهمها أساس فهم أي تخطيط في CSS.",
+  "sections": [
+    {
+      "title": "القيمتان الأساسيتان: block و inline",
+      "text": [
+        "العنصر الكتلي block يبدأ في سطر جديد ويمتد بعرض أبيه كاملًا ويقبل width و height و margin من كل الجهات — أمثلته الافتراضية: div و p و h1 والقوائم.",
+        "العنصر السطري inline يجلس داخل سطر النص بعرض محتواه فقط، ويتجاهل width و height والهوامش العمودية — أمثلته: span و a و strong و img (الأخيرة inline لكنها تقبل الأبعاد لأنها عنصر مستبدل)."
+      ],
+      "examples": [
+        {
+          "title": "قلب السلوك الافتراضي",
+          "lang": "css",
+          "source": "span.blocky { display: block; background: #bfdbfe; margin: 4px 0; }\np.inliny { display: inline; background: #fecaca; }",
+          "preview": true,
+          "previewHtml": "<span class=\"blocky\">span تحول إلى كتلي — سطر كامل</span><p class=\"inliny\">فقرة تحولت إلى سطرية</p><p class=\"inliny\">وجارتها بجانبها في نفس السطر</p>"
+        }
+      ]
+    },
+    {
+      "title": "القيمة الوسط: inline-block",
+      "text": [
+        "القيمة inline-block تجمع الميزتين: العنصر يجلس بجانب إخوته في نفس السطر (كالسطري) لكنه يقبل width و height وكل الهوامش (كالكتلي). كانت الطريقة التقليدية لصف الأزرار والبطاقات جنبًا إلى جنب قبل انتشار Flexbox."
+      ],
+      "examples": [
+        {
+          "title": "أزرار متجاورة بأبعاد",
+          "lang": "css",
+          "source": ".btn {\n  display: inline-block;\n  width: 110px;\n  padding: 8px;\n  background: #6366f1;\n  color: white;\n  text-align: center;\n  border-radius: 8px;\n  margin: 4px;\n}",
+          "preview": true,
+          "previewHtml": "<a class=\"btn\" href=\"#\">زر أول</a><a class=\"btn\" href=\"#\">زر ثانٍ</a><a class=\"btn\" href=\"#\">زر ثالث</a>",
+          "previewCss": "a{text-decoration:none}"
+        }
+      ]
+    },
+    {
+      "title": "الإخفاء: none مقابل visibility: hidden",
+      "text": [
+        "القيمة display: none تزيل العنصر من التخطيط كليًا كأنه غير موجود — لا يشغل أي مساحة. بينما visibility: hidden تخفيه بصريًا لكن مساحته تبقى محجوزة فارغة.",
+        "display: none هي ما تستخدمه القوائم المنسدلة والتبويبات: العنصر موجود في HTML ويظهر ويختفي عبر JavaScript أو حالة :hover."
+      ],
+      "examples": [
+        {
+          "title": "الفرق بين طريقتي الإخفاء",
+          "lang": "css",
+          "source": ".gone { display: none; }\n.ghost { visibility: hidden; }",
+          "preview": true,
+          "previewHtml": "<p>قبل العنصرين</p><p class=\"gone\">مخفي بـ display:none</p><p class=\"ghost\">مخفي بـ visibility</p><p>بعدهما — لاحظ الفجوة الفارغة فوقي مكان عنصر visibility فقط.</p>",
+          "previewCss": "p{background:#e0e7ff;padding:6px;margin:4px 0}"
+        }
+      ],
+      "notes": [
+        "توجد قيم أخرى ستتعلمها لاحقًا: flex و grid لتخطيطات متقدمة، وtable لسلوك الجداول."
+      ],
+      "mistakes": [
+        "الخلط بين الطريقتين ثم الاستغراب من فجوة فارغة في الصفحة — تلك مساحة عنصر visibility: hidden."
+      ]
+    }
+  ],
+  "quiz": [
+    { "id": "css-08-q1", "type": "mcq", "diff": "easy", "q": "العنصر الذي يبدأ في سطر جديد ويمتد بعرض أبيه كاملًا يسمى:", "options": ["سطري Inline", "كتلي Block", "مرن Flex", "مخفي None"], "a": 1, "exp": "هذا سلوك block مثل div و p." },
+    { "id": "css-08-q2", "type": "mcq", "diff": "medium", "q": "أي قيمة تجعل العنصر بجانب إخوته ويقبل width و height معًا؟", "options": ["inline", "block", "inline-block", "none"], "a": 2, "exp": "inline-block مزيج الاثنين." },
+    { "id": "css-08-q3", "type": "mcq", "diff": "medium", "q": "ما الفرق بين display: none و visibility: hidden؟", "options": ["لا فرق", "none يزيل العنصر ومساحته، وhidden يخفيه مع بقاء مساحته محجوزة", "hidden يحذف العنصر من HTML", "none يخفي النص فقط"], "a": 1, "exp": "none إزالة كاملة من التخطيط؛ hidden إخفاء بصري فقط." },
+    { "id": "css-08-q4", "type": "tf", "diff": "medium", "q": "عنصر span السطري يتجاهل الهوامش العمودية margin-top و margin-bottom.", "a": true, "exp": "العناصر السطرية لا تتأثر بالأبعاد ولا الهوامش العمودية." },
+    { "id": "css-08-q5", "type": "fill", "diff": "easy", "q": "لإخفاء عنصر وإزالته من التخطيط كليًا نستخدم display: ____.", "a": ["none"], "exp": "none كأن العنصر غير موجود." },
+    { "id": "css-08-q6", "type": "mcq", "diff": "easy", "q": "القيمة الافتراضية لـ display في عنصر <p> هي:", "options": ["inline", "block", "inline-block", "flex"], "a": 1, "exp": "الفقرات والعناوين وdiv كلها block افتراضيًا." }
+  ]
+}
