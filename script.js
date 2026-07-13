@@ -150,7 +150,7 @@ async function loadData() {
 /* ============================================================
    التوجيه (Router)
    ============================================================ */
-const VIEWS = ["home", "lectures", "lecture", "quiz", "exam", "search", "learn", "lesson", "playground"];
+const VIEWS = ["home", "lectures", "lecture", "quiz", "exam", "search", "learn", "lesson", "playground", "reference"];
 
 function showView(name) {
   $("#loading").hidden = true;
@@ -207,6 +207,7 @@ function route() {
       else { location.hash = "#/learn"; }
       break;
     case "playground": renderPlayground(); showView("playground"); break;
+    case "reference": renderReference(parts[1] || "", parts[2] || ""); showView("reference"); break;
     default: location.hash = "#/home";
   }
 }
