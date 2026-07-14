@@ -1049,3 +1049,91 @@ mark { background: rgba(245, 158, 11, 0.35); color: inherit; border-radius: 3px;
 .fill-row input.ref-fill-no { border-color: var(--danger); color: var(--danger); }
 .ref-quiz-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
 .ref-result { margin-bottom: 18px; }
+
+/* ============================================================
+   قسم WSM — مرجع خصائص CSS القابل للإدارة
+   ============================================================ */
+.wsm-note {
+  border-inline-start: 4px solid var(--warning);
+  background: rgba(245, 158, 11, 0.08);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+/* شريط دلالة المصدر */
+.wsm-legend { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+
+/* شارة المصدر (من الـ PDF / مُضافة) */
+.wsm-badge {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.wsm-badge.pdf { background: rgba(41, 101, 241, 0.12); color: #2965f1; }
+.wsm-badge.added { background: rgba(16, 185, 129, 0.14); color: var(--success); }
+:root[data-theme="dark"] .wsm-badge.pdf { color: #7aa2ff; }
+
+/* جدول الإدارة */
+.wsm-table td { vertical-align: top; }
+.wsm-row-actions { white-space: nowrap; display: flex; gap: 4px; }
+.wsm-row-actions .icon-btn { width: 30px; height: 30px; font-size: 0.9rem; }
+.wsm-edit:hover { color: var(--primary); }
+.wsm-del:hover { color: var(--danger); }
+
+/* ---------- نافذة الإضافة/التعديل ---------- */
+.wsm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.wsm-modal[hidden] { display: none; }
+.wsm-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+}
+.wsm-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: wsmPop 0.18s ease;
+}
+@keyframes wsmPop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+.wsm-modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.wsm-modal-head h3 { font-size: 1.15rem; font-weight: 800; color: var(--primary); }
+
+/* حقول النموذج */
+.wsm-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.wsm-field > span { font-size: 0.86rem; font-weight: 700; color: var(--text-soft); }
+.wsm-field em { color: var(--danger); font-style: normal; }
+.wsm-field input,
+.wsm-field textarea,
+.wsm-field select {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+  background: var(--input-bg);
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.wsm-field textarea { resize: vertical; }
+.wsm-field input:focus,
+.wsm-field textarea:focus,
+.wsm-field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--chip-bg); }
+.wsm-modal-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }

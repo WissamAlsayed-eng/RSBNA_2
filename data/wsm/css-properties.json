@@ -1,0 +1,596 @@
+{
+  "title": "WSM — مرجع خصائص CSS",
+  "subtitle": "مرجع سريع لخصائص CSS مبني على ملف «Chapter 2 CSS» مع إضافات لإكماله من الأساسي إلى المتوسط",
+  "source": "Chapter 2 CSS.pdf",
+  "version": 1,
+  "categories": [
+    {
+      "id": "apply",
+      "name": "طرق ربط CSS",
+      "icon": "🔗",
+      "properties": [
+        {
+          "id": "inline-style",
+          "prop": "Inline (style)",
+          "desc": "كتابة التنسيق داخل العنصر نفسه عبر خاصية style.",
+          "values": "style=\"...\"",
+          "example": "<p style=\"color:red;\">نص</p>",
+          "source": "pdf"
+        },
+        {
+          "id": "internal-style",
+          "prop": "Internal (<style>)",
+          "desc": "كتابة التنسيق داخل الصفحة نفسها ضمن وسم style في head.",
+          "values": "<style> … </style>",
+          "example": "<style> p { color: red; } </style>",
+          "source": "pdf"
+        },
+        {
+          "id": "external-link",
+          "prop": "External (<link>)",
+          "desc": "ربط ملف CSS خارجي بالصفحة عبر وسم link (الأفضل للمشاريع).",
+          "values": "rel, href, type",
+          "example": "<link rel=\"stylesheet\" href=\"style.css\">",
+          "source": "pdf"
+        }
+      ]
+    },
+    {
+      "id": "text",
+      "name": "النصوص (Text)",
+      "icon": "🔤",
+      "properties": [
+        {
+          "id": "text-align",
+          "prop": "text-align",
+          "desc": "محاذاة النص أفقيًا داخل العنصر.",
+          "values": "right · left · center · justify",
+          "example": "p { text-align: center; }",
+          "source": "pdf"
+        },
+        {
+          "id": "text-decoration",
+          "prop": "text-decoration",
+          "desc": "إضافة خط تزييني للنص (وإزالة خط الروابط).",
+          "values": "none · underline · overline · line-through",
+          "example": "a { text-decoration: none; }",
+          "source": "pdf"
+        },
+        {
+          "id": "direction",
+          "prop": "direction",
+          "desc": "اتجاه كتابة النص.",
+          "values": "rtl · ltr",
+          "example": "body { direction: rtl; }",
+          "source": "pdf"
+        },
+        {
+          "id": "text-transform",
+          "prop": "text-transform",
+          "desc": "تحويل حالة الأحرف (للنص الإنجليزي).",
+          "values": "uppercase · lowercase · capitalize · none",
+          "example": "h1 { text-transform: uppercase; }",
+          "source": "pdf"
+        },
+        {
+          "id": "text-indent",
+          "prop": "text-indent",
+          "desc": "إزاحة بداية السطر الأول من الفقرة.",
+          "values": "20px · 2em · 5%",
+          "example": "p { text-indent: 30px; }",
+          "source": "pdf"
+        },
+        {
+          "id": "color",
+          "prop": "color",
+          "desc": "لون النص.",
+          "values": "red · #333 · rgb() · hsl()",
+          "example": "p { color: #2965f1; }",
+          "source": "pdf"
+        },
+        {
+          "id": "line-height",
+          "prop": "line-height",
+          "desc": "المسافة الرأسية بين الأسطر (تباعد الأسطر).",
+          "values": "1.5 · normal · 24px",
+          "example": "p { line-height: 1.7; }",
+          "source": "added"
+        },
+        {
+          "id": "letter-spacing",
+          "prop": "letter-spacing",
+          "desc": "المسافة بين الأحرف.",
+          "values": "normal · 1px · 0.1em",
+          "example": "h1 { letter-spacing: 2px; }",
+          "source": "added"
+        },
+        {
+          "id": "text-shadow",
+          "prop": "text-shadow",
+          "desc": "إضافة ظل للنص (أفقي رأسي تنعيم لون).",
+          "values": "2px 2px 4px #000",
+          "example": "h1 { text-shadow: 1px 1px 3px #555; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "font",
+      "name": "الخطوط (Fonts)",
+      "icon": "🔡",
+      "properties": [
+        {
+          "id": "font-family",
+          "prop": "font-family",
+          "desc": "نوع الخط، مع بدائل احتياطية تُفصل بفاصلة.",
+          "values": "Serif · Sans-serif · Monospace · Arial",
+          "example": "body { font-family: Arial, sans-serif; }",
+          "source": "pdf"
+        },
+        {
+          "id": "font-size",
+          "prop": "font-size",
+          "desc": "حجم الخط (1em ≈ 16px افتراضيًا).",
+          "values": "16px · 1em · 1.2rem · 14pt",
+          "example": "p { font-size: 1.1em; }",
+          "source": "pdf"
+        },
+        {
+          "id": "font-weight",
+          "prop": "font-weight",
+          "desc": "سماكة الخط.",
+          "values": "normal · bold · bolder · lighter · 100–900",
+          "example": "h2 { font-weight: bold; }",
+          "source": "pdf"
+        },
+        {
+          "id": "font-style",
+          "prop": "font-style",
+          "desc": "نمط الخط (عادي أو مائل).",
+          "values": "normal · italic · oblique",
+          "example": "em { font-style: italic; }",
+          "source": "pdf"
+        },
+        {
+          "id": "font",
+          "prop": "font",
+          "desc": "خاصية مختصرة تجمع نمط ووزن وحجم ونوع الخط معًا.",
+          "values": "italic bolder 14pt Arial",
+          "example": "p { font: italic bold 16px Arial; }",
+          "source": "pdf"
+        }
+      ]
+    },
+    {
+      "id": "background",
+      "name": "الخلفيات (Backgrounds)",
+      "icon": "🖌️",
+      "properties": [
+        {
+          "id": "background-color",
+          "prop": "background-color",
+          "desc": "لون خلفية العنصر.",
+          "values": "#fff · red · transparent",
+          "example": "div { background-color: #eef2ff; }",
+          "source": "pdf"
+        },
+        {
+          "id": "background-image",
+          "prop": "background-image",
+          "desc": "صورة أو تدرّج لونيّ كخلفية للعنصر.",
+          "values": "url(bg.jpg) · linear-gradient()",
+          "example": "body { background-image: url('bg.jpg'); }",
+          "source": "pdf"
+        },
+        {
+          "id": "background-repeat",
+          "prop": "background-repeat",
+          "desc": "طريقة تكرار صورة الخلفية.",
+          "values": "repeat · no-repeat · repeat-x · repeat-y",
+          "example": "body { background-repeat: no-repeat; }",
+          "source": "pdf"
+        },
+        {
+          "id": "background-position",
+          "prop": "background-position",
+          "desc": "موضع صورة الخلفية داخل العنصر.",
+          "values": "left top · center center · right bottom",
+          "example": "body { background-position: center top; }",
+          "source": "pdf"
+        },
+        {
+          "id": "background-size",
+          "prop": "background-size",
+          "desc": "حجم صورة الخلفية (cover يملأ العنصر كاملًا).",
+          "values": "cover · contain · 100px · auto",
+          "example": "body { background-size: cover; }",
+          "source": "added"
+        },
+        {
+          "id": "background",
+          "prop": "background",
+          "desc": "خاصية مختصرة تجمع كل خصائص الخلفية في سطر واحد.",
+          "values": "#fff url() no-repeat center",
+          "example": "div { background: #fff url('p.png') no-repeat center; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "lists",
+      "name": "القوائم (Lists)",
+      "icon": "📑",
+      "properties": [
+        {
+          "id": "list-style-type",
+          "prop": "list-style-type",
+          "desc": "شكل النقطة أو الترقيم في القائمة.",
+          "values": "disc · circle · square · decimal · lower-alpha · upper-roman · none",
+          "example": "ul { list-style-type: square; }",
+          "source": "pdf"
+        },
+        {
+          "id": "list-style-image",
+          "prop": "list-style-image",
+          "desc": "استخدام صورة كنقطة/علامة للقائمة.",
+          "values": "url(dot.png) · none",
+          "example": "ul { list-style-image: url('dot.png'); }",
+          "source": "pdf"
+        },
+        {
+          "id": "list-style-position",
+          "prop": "list-style-position",
+          "desc": "موضع علامة القائمة داخل أو خارج المحتوى.",
+          "values": "inside · outside",
+          "example": "li { list-style-position: inside; }",
+          "source": "added"
+        },
+        {
+          "id": "list-style",
+          "prop": "list-style",
+          "desc": "خاصية مختصرة تجمع خصائص القائمة الثلاث.",
+          "values": "square inside url()",
+          "example": "ul { list-style: square inside; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "border",
+      "name": "الحدود (Borders)",
+      "icon": "🔲",
+      "properties": [
+        {
+          "id": "border-style",
+          "prop": "border-style",
+          "desc": "نمط خط الحد.",
+          "values": "solid · dotted · dashed · double · none",
+          "example": "div { border-style: dashed; }",
+          "source": "pdf"
+        },
+        {
+          "id": "border-width",
+          "prop": "border-width",
+          "desc": "سماكة الحد (مع إمكانية تحديد كل جهة).",
+          "values": "thin · medium · thick · 2px",
+          "example": "div { border-width: 2px; }",
+          "source": "pdf"
+        },
+        {
+          "id": "border-color",
+          "prop": "border-color",
+          "desc": "لون الحد (مع إمكانية تحديد كل جهة على حدة).",
+          "values": "#000 · red · rgb()",
+          "example": "div { border-color: #2965f1; }",
+          "source": "pdf"
+        },
+        {
+          "id": "border",
+          "prop": "border",
+          "desc": "خاصية مختصرة تجمع سماكة ونمط ولون الحد معًا.",
+          "values": "1px solid #333",
+          "example": "div { border: 1px solid #333; }",
+          "source": "added"
+        },
+        {
+          "id": "border-radius",
+          "prop": "border-radius",
+          "desc": "تدوير زوايا العنصر (50% تصنع دائرة).",
+          "values": "8px · 50% · 12px 4px",
+          "example": "div { border-radius: 12px; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "boxmodel",
+      "name": "نموذج الصندوق (Box Model)",
+      "icon": "📦",
+      "properties": [
+        {
+          "id": "margin",
+          "prop": "margin",
+          "desc": "المسافة الخارجية حول العنصر (تقبل قيمًا سالبة، وauto للتوسيط).",
+          "values": "10px · 10px 20px · 0 auto · -5px",
+          "example": "div { margin: 0 auto; }",
+          "source": "pdf"
+        },
+        {
+          "id": "padding",
+          "prop": "padding",
+          "desc": "المسافة الداخلية بين حد العنصر ومحتواه.",
+          "values": "10px · 10px 20px · 5px 10px 15px 20px",
+          "example": "div { padding: 12px 20px; }",
+          "source": "added"
+        },
+        {
+          "id": "width",
+          "prop": "width",
+          "desc": "عرض العنصر.",
+          "values": "300px · 50% · auto",
+          "example": "div { width: 80%; }",
+          "source": "added"
+        },
+        {
+          "id": "height",
+          "prop": "height",
+          "desc": "ارتفاع العنصر.",
+          "values": "200px · 100vh · auto",
+          "example": "div { height: 200px; }",
+          "source": "added"
+        },
+        {
+          "id": "box-sizing",
+          "prop": "box-sizing",
+          "desc": "طريقة حساب الأبعاد (border-box يضم الحشو والحد داخل العرض).",
+          "values": "content-box · border-box",
+          "example": "* { box-sizing: border-box; }",
+          "source": "added"
+        },
+        {
+          "id": "overflow",
+          "prop": "overflow",
+          "desc": "التعامل مع المحتوى الزائد عن حجم العنصر.",
+          "values": "visible · hidden · scroll · auto",
+          "example": "div { overflow: scroll; }",
+          "source": "pdf"
+        }
+      ]
+    },
+    {
+      "id": "display",
+      "name": "العرض والتخطيط (Display)",
+      "icon": "🧱",
+      "properties": [
+        {
+          "id": "display-block",
+          "prop": "display: block",
+          "desc": "عنصر كتلي يأخذ سطرًا كاملًا (مثل div).",
+          "values": "block",
+          "example": "span { display: block; }",
+          "source": "pdf"
+        },
+        {
+          "id": "display-inline",
+          "prop": "display: inline",
+          "desc": "عنصر سطري بحجم محتواه لا يقبل width/height (مثل span).",
+          "values": "inline",
+          "example": "div { display: inline; }",
+          "source": "pdf"
+        },
+        {
+          "id": "display-inline-block",
+          "prop": "display: inline-block",
+          "desc": "سطري لكنه يقبل الأبعاد والحشو (مزيج بين الاثنين).",
+          "values": "inline-block",
+          "example": "a { display: inline-block; }",
+          "source": "added"
+        },
+        {
+          "id": "display-none",
+          "prop": "display: none",
+          "desc": "إخفاء العنصر تمامًا دون أن يشغل مساحة.",
+          "values": "none",
+          "example": ".hidden { display: none; }",
+          "source": "added"
+        },
+        {
+          "id": "display-flex",
+          "prop": "display: flex",
+          "desc": "تفعيل تخطيط مرن أحادي المحور على الحاوية.",
+          "values": "flex",
+          "example": ".box { display: flex; }",
+          "source": "added"
+        },
+        {
+          "id": "display-grid",
+          "prop": "display: grid",
+          "desc": "تفعيل تخطيط شبكي ثنائي الأبعاد (صفوف وأعمدة).",
+          "values": "grid",
+          "example": ".box { display: grid; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "flexbox",
+      "name": "المرونة (Flexbox)",
+      "icon": "🤸",
+      "properties": [
+        {
+          "id": "flex-direction",
+          "prop": "flex-direction",
+          "desc": "اتجاه ترتيب عناصر الحاوية المرنة.",
+          "values": "row · column · row-reverse",
+          "example": ".box { flex-direction: column; }",
+          "source": "added"
+        },
+        {
+          "id": "justify-content",
+          "prop": "justify-content",
+          "desc": "محاذاة العناصر على المحور الرئيسي.",
+          "values": "center · space-between · flex-start · space-around",
+          "example": ".box { justify-content: space-between; }",
+          "source": "added"
+        },
+        {
+          "id": "align-items",
+          "prop": "align-items",
+          "desc": "محاذاة العناصر على المحور المتقاطع.",
+          "values": "center · stretch · flex-start · flex-end",
+          "example": ".box { align-items: center; }",
+          "source": "added"
+        },
+        {
+          "id": "flex-wrap",
+          "prop": "flex-wrap",
+          "desc": "السماح للعناصر بالنزول لسطر جديد عند الضيق (للتجاوب).",
+          "values": "nowrap · wrap · wrap-reverse",
+          "example": ".box { flex-wrap: wrap; }",
+          "source": "added"
+        },
+        {
+          "id": "gap",
+          "prop": "gap",
+          "desc": "المسافة بين عناصر flex أو grid.",
+          "values": "10px · 1rem · 10px 20px",
+          "example": ".box { gap: 16px; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "position",
+      "name": "التموضع (Position)",
+      "icon": "📍",
+      "properties": [
+        {
+          "id": "position",
+          "prop": "position",
+          "desc": "طريقة تموضع العنصر داخل الصفحة.",
+          "values": "static · relative · absolute · fixed · sticky",
+          "example": ".box { position: relative; }",
+          "source": "added"
+        },
+        {
+          "id": "offsets",
+          "prop": "top / right / bottom / left",
+          "desc": "تحديد إزاحة العنصر المتموضع (لا تعمل مع static).",
+          "values": "0 · 10px · 50%",
+          "example": ".box { position: absolute; top: 10px; }",
+          "source": "added"
+        },
+        {
+          "id": "z-index",
+          "prop": "z-index",
+          "desc": "ترتيب التراكب؛ القيمة الأكبر تظهر فوق غيرها.",
+          "values": "1 · 10 · 999",
+          "example": ".modal { z-index: 100; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "selectors",
+      "name": "المحددات وحالات الروابط (Selectors)",
+      "icon": "🎯",
+      "properties": [
+        {
+          "id": "a-link",
+          "prop": "a:link",
+          "desc": "تنسيق الرابط الذي لم تتم زيارته بعد.",
+          "values": "color, text-decoration",
+          "example": "a:link { color: blue; }",
+          "source": "pdf"
+        },
+        {
+          "id": "a-visited",
+          "prop": "a:visited",
+          "desc": "تنسيق الرابط بعد زيارته.",
+          "values": "color",
+          "example": "a:visited { color: purple; }",
+          "source": "pdf"
+        },
+        {
+          "id": "a-hover",
+          "prop": "a:hover",
+          "desc": "تنسيق العنصر عند مرور مؤشر الفأرة فوقه.",
+          "values": "color, background",
+          "example": "a:hover { color: red; }",
+          "source": "pdf"
+        },
+        {
+          "id": "a-active",
+          "prop": "a:active",
+          "desc": "تنسيق العنصر لحظة النقر عليه (نشط).",
+          "values": "color, background",
+          "example": "button:active { background: #ccc; }",
+          "source": "pdf"
+        },
+        {
+          "id": "sel-class",
+          "prop": ".class",
+          "desc": "تحديد كل العناصر التي تحمل صنفًا (class) معيّنًا — الأكثر استخدامًا.",
+          "values": ".box",
+          "example": ".box { color: red; }",
+          "source": "added"
+        },
+        {
+          "id": "sel-id",
+          "prop": "#id",
+          "desc": "تحديد عنصر واحد فريد عبر معرّفه (id).",
+          "values": "#header",
+          "example": "#header { height: 60px; }",
+          "source": "added"
+        },
+        {
+          "id": "sel-universal",
+          "prop": "*",
+          "desc": "المحدّد الشامل الذي يطبّق على كل العناصر (يُستخدم للتصفير).",
+          "values": "*",
+          "example": "* { margin: 0; padding: 0; }",
+          "source": "added"
+        }
+      ]
+    },
+    {
+      "id": "pseudo",
+      "name": "العناصر الوهمية والتأثيرات (Pseudo & Effects)",
+      "icon": "✨",
+      "properties": [
+        {
+          "id": "before-after",
+          "prop": "::before / ::after",
+          "desc": "إدراج محتوى وهميّ قبل أو بعد محتوى العنصر (يتطلب content).",
+          "values": "content",
+          "example": ".box::before { content: '★'; }",
+          "source": "pdf"
+        },
+        {
+          "id": "transition",
+          "prop": "transition",
+          "desc": "تحريك تغيّر الخصائص بسلاسة (خاصية مدة نوع-التوقيت).",
+          "values": "all 0.3s ease · color 0.2s",
+          "example": "a { transition: all 0.3s ease; }",
+          "source": "added"
+        },
+        {
+          "id": "opacity",
+          "prop": "opacity",
+          "desc": "درجة شفافية العنصر كاملًا.",
+          "values": "0 (شفاف) → 1 (معتم)",
+          "example": ".box { opacity: 0.5; }",
+          "source": "added"
+        },
+        {
+          "id": "cursor",
+          "prop": "cursor",
+          "desc": "شكل مؤشر الفأرة فوق العنصر.",
+          "values": "pointer · default · text · not-allowed",
+          "example": "button { cursor: pointer; }",
+          "source": "added"
+        }
+      ]
+    }
+  ]
+}
