@@ -591,6 +591,85 @@
           "source": "added"
         }
       ]
+    },
+    {
+      "id": "filters",
+      "name": "المرشحات (Filter)",
+      "icon": "🎛️",
+      "properties": [
+        {
+          "id": "filter",
+          "prop": "filter",
+          "desc": "تطبيق مؤثرات بصرية على العنصر (تمويه، سطوع، ألوان…). يمكن جمع عدة دوال معًا بمسافة.",
+          "values": "grayscale() · blur() · brightness() · contrast() · saturate() · sepia() · opacity() · invert() · none",
+          "example": "h1 { filter: blur(2px) brightness(120%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-grayscale",
+          "prop": "filter: grayscale()",
+          "desc": "تحويل العنصر إلى تدرّج رمادي؛ 0% ألوان كاملة و100% رمادي تام.",
+          "values": "0% → 100%  (أو 0 → 1)",
+          "example": "img { filter: grayscale(100%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-opacity",
+          "prop": "filter: opacity()",
+          "desc": "التحكم بشفافية العنصر؛ 100% معتم تمامًا و0% شفاف بالكامل.",
+          "values": "0% → 100%  (أو 0 → 1)",
+          "example": "img { filter: opacity(50%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-blur",
+          "prop": "filter: blur()",
+          "desc": "تمويه العنصر؛ كلما زادت القيمة (بالبكسل) زاد التمويه.",
+          "values": "2px · 5px · 10px",
+          "example": "h1 { filter: blur(3px); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-saturate",
+          "prop": "filter: saturate()",
+          "desc": "التحكم بتشبّع الألوان؛ 100% طبيعي، أقل يبهت الألوان وأكثر يزيد حِدّتها.",
+          "values": "0% · 100% · 200%",
+          "example": "img { filter: saturate(200%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-sepia",
+          "prop": "filter: sepia()",
+          "desc": "إضفاء لون بنّي عتيق (تأثير الصور القديمة)؛ 0% بلا تأثير و100% كامل.",
+          "values": "0% → 100%  (أو 0 → 1)",
+          "example": "img { filter: sepia(80%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-brightness",
+          "prop": "filter: brightness()",
+          "desc": "التحكم بسطوع العنصر؛ 100% طبيعي، أقل يجعله أغمق وأكثر يجعله أفتح.",
+          "values": "0% · 100% · 150%",
+          "example": "img { filter: brightness(120%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-contrast",
+          "prop": "filter: contrast()",
+          "desc": "التحكم بتباين العنصر؛ 100% طبيعي، أقل يقلّل الفرق بين الفاتح والداكن وأكثر يزيده.",
+          "values": "0% · 100% · 200%",
+          "example": "img { filter: contrast(150%); }",
+          "source": "added"
+        },
+        {
+          "id": "filter-invert",
+          "prop": "filter: invert()",
+          "desc": "عكس ألوان العنصر (سلبية الصورة)؛ 0% بلا تغيير و100% عكس كامل.",
+          "values": "0% → 100%  (أو 0 → 1)",
+          "example": "img { filter: invert(100%); }",
+          "source": "added"
+        }
+      ]
     }
   ]
 }
